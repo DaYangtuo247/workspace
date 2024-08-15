@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "functional": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "unordered_set": "cpp"
     },
     "editor.fontFamily": "Consolas, 'Courier New', monospace"
 }

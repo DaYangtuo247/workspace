@@ -1,8 +1,8 @@
+#include <cstddef>  // For offsetof
 #include <iostream>
 #include <tuple>
-#include <cstddef> // For offsetof
 
-template<typename T>
+template <typename T>
 void printOffset(const std::string& name, const T& value) {
     std::cout << name << " offset: " << reinterpret_cast<const char*>(&value) - reinterpret_cast<const char*>(&value) << std::endl;
 }
@@ -22,4 +22,3 @@ int main() {
 
     return 0;
 }
-

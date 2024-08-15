@@ -5,8 +5,7 @@ typedef unsigned char UCHAR;
 typedef unsigned char UINT8;
 typedef unsigned short UINT16;
 #pragma pack(1)
-typedef struct protocol_msg_align
-{
+typedef struct protocol_msg_align {
     UINT8 msgType;
     UINT8 data1;
     UINT8 data2;
@@ -15,50 +14,41 @@ typedef struct protocol_msg_align
 } PRO_MSG_ALIGN;
 #pragma
 
-#define HL_TWK_RED_YEL "\033[1m\033[5;31;43m" // 闪烁高亮红字黄底
-#define HL_RED_WRT "\033[1;31;47m"            // 高亮红色白底
+#define HL_TWK_RED_YEL "\033[1m\033[5;31;43m"  // 闪烁高亮红字黄底
+#define HL_RED_WRT "\033[1;31;47m"             // 高亮红色白底
 
-#define HL_RED "\033[1;31m"  // 高亮红色
-#define HL_GRN "\033[1;32m"  // 高亮绿色
-#define HL_YEL "\033[1;33m"  // 高亮黄色
-#define HL_DGRN "\033[1;36m" // 高亮深绿
+#define HL_RED "\033[1;31m"   // 高亮红色
+#define HL_GRN "\033[1;32m"   // 高亮绿色
+#define HL_YEL "\033[1;33m"   // 高亮黄色
+#define HL_DGRN "\033[1;36m"  // 高亮深绿
 
-#define PF_CLR "\033[0m" // 清除
+#define PF_CLR "\033[0m"  // 清除
 
 #define myprintf(color, format, args...) \
-    do                                   \
-    {                                    \
+    do {                                 \
         \  
         printf(color);                   \
         printf(format, ##args);          \
         printf(PF_CLR);                  \
     } while (0)
 
-void dump_frm(char *title, UINT8 *data, int len)
-{
+void dump_frm(char *title, UINT8 *data, int len) {
     int i = 0;
 
     myprintf(HL_YEL, "%s\n", title);
-    for (i = 0; i < len; i++)
-    {
-        if (i == 0)
-        {
+    for (i = 0; i < len; i++) {
+        if (i == 0) {
             myprintf(HL_RED, "%02x ", data[i]);
-        }
-        else if (i == 3 || i == 4)
-        {
+        } else if (i == 3 || i == 4) {
             myprintf(HL_DGRN, "%02x ", data[i]);
-        }
-        else
-        {
+        } else {
             myprintf(HL_GRN, "%02x ", data[i]);
         }
     }
     putchar('\n');
 }
 
-int main(int args, char *argv[])
-{
+int main(int args, char *argv[]) {
     UCHAR frm[] = {0x12, 0x34, 0x56, 0x00, 0x07, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
     dump_frm("frm<<<", frm, sizeof(frm));
 
