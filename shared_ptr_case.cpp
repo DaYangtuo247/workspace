@@ -2,29 +2,29 @@
 
 class SafeIntPointer {
 public:
-    explicit SafeIntPointer(int v) : m_value(new int(v)), m_used(new int(1)) { }
+    explicit SafeIntPointer(int v) : m_value(new int(v)), m_used(new int(1)) {}
     ~SafeIntPointer() {
         cout << "~SafeIntPointer" << endl;
-        (*m_used) --; // 引用计数减1
-        if(*m_used <= 0){
+        (*m_used)--;  // 引用计数减1
+        if (*m_used <= 0) {
             delete m_used;
             delete m_value;
             cout << "real delete resources" << endl;
         }
     }
-    
+
     SafeIntPointer(const SafeIntPointer& other) {
         m_used = other.m_used;
         m_value = other.m_value;
-        (*m_used)++; // 引用计数加1
+        (*m_used)++;  // 引用计数加1
     }
-    SafeIntPointer& operator= (const SafeIntPointer& other) {
-        if (this == &other) // 避免自我赋值!!
-           return *this;
+    SafeIntPointer& operator=(const SafeIntPointer& other) {
+        if (this == &other)  // 避免自我赋值!!
+            return *this;
 
         m_used = other.m_used;
         m_value = other.m_value;
-        (*m_used)++; // 引用计数加1
+        (*m_used)++;  // 引用计数加1
         return *this;
     }
 
@@ -34,7 +34,7 @@ public:
     }
 
 private:
-    int* m_used; // 引用计数
+    int* m_used;  // 引用计数
     int* m_value;
 };
 
