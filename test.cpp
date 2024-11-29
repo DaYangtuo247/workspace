@@ -22,11 +22,14 @@ std::vector<std::pair<size_t, size_t>> findMatchingBrackets(const std::string& t
             }
         }
     }
-    reverse(matchingBrackets.begin(), matchingBrackets.end());
+    sort(matchingBrackets.begin(), matchingBrackets.end(), [](auto& a1, auto &a2){
+        return a1.first < a2.first;
+    });
 
     int i = 0;
     for (auto & t : matchingBrackets) {
-        // cout << type.substr(i, t.first - i);
+        int rt = type.rfind(t.first, '<');
+        cout << type.substr(i, t.first - rt);
         cout << "<" << t.first << ", " << t.second << ">, ";
     }
 
@@ -37,17 +40,17 @@ int main() {
     // 测试用例
     std::vector<std::string> testCases = {
         "std::unordered_map<std::map<double, int>, std::HSTVector<rt::nodegraph::Node>>",
-        // "std::set<HSTKeyValIter const *,HSTKeyValIterLess>",
-        // "std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        // "std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        // "std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        // "std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        // "std::map<std::tuple<std::set<std::set<short,int>>, std::string, int>,int,less>",
-        // "std::tuple<std::set<std::map<short, int>>, std::string, int>",
-        // "std::tuple<int,unsigned short,float>",
-        // "HASTMap<HASTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        // "std::tuple<std::set<std::set<short, int>>, std::string, int>",
-        // "std::map<std::tuple<std::set<std::set<short,int>>, std::string, int>, int>"
+        "std::set<HSTKeyValIter const *,HSTKeyValIterLess>",
+        "std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+        "std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+        "std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+        "std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+        "std::map<std::tuple<std::set<std::set<short,int>>, std::string, int>,int,less>",
+        "std::tuple<std::set<std::map<short, int>>, std::string, int>",
+        "std::tuple<int,unsigned short,float>",
+        "HASTMap<HASTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+        "std::tuple<std::set<std::set<short, int>>, std::string, int>",
+        "std::map<std::tuple<std::set<std::set<short,int>>, std::string, int>, int>"
     };
 
     for (const auto& type : testCases) {
