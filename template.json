@@ -1,0 +1,37 @@
+{
+    "one_tuple": [
+        {
+            "container": "HSTVector",
+            "struct": {
+                "inherit__0x0": "std::vector<T>"
+            }
+        },
+        {
+            "container": "std::vector",
+            "struct": {
+                "vector_begin_0x0": "T",
+                "vector_end_0x8": "T",
+                "vector_cap_end_0x10": "T"
+            }
+        }
+    ],
+    "two_tuple": [
+        {
+            "container": "std::unordered_map",
+            "struct": {
+                "next": "default",
+                "key": "T1",
+                "value": "T2"
+            }
+        },
+        {
+            "container": "std::map",
+            "struct": {
+                "next": "default",
+                "key": "T1",
+                "value": "T2"
+            }
+        }
+    ],
+    "mutil_tuple": []
+}
