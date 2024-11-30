@@ -1,37 +1,80 @@
 {
-    "one_tuple": [
-        {
-            "container": "HSTVector",
-            "struct": {
-                "inherit__0x0": "std::vector<T>"
-            }
-        },
-        {
-            "container": "std::vector",
-            "struct": {
-                "vector_begin_0x0": "T",
-                "vector_end_0x8": "T",
-                "vector_cap_end_0x10": "T"
-            }
+    "HSTVector": {
+        "level": 1,
+        "struct": {
+            "inherit__0x0": "std::vector",
+            "hash_0x8" : "hash_code"
         }
-    ],
-    "two_tuple": [
-        {
-            "container": "std::unordered_map",
-            "struct": {
-                "next": "default",
-                "key": "T1",
-                "value": "T2"
-            }
-        },
-        {
-            "container": "std::map",
-            "struct": {
-                "next": "default",
-                "key": "T1",
-                "value": "T2"
-            }
+    },
+    "std::vector": {
+        "level": 1,
+        "struct": {
+            "vector_begin_0x0": "T",
+            "vector_end_0x8": "T",
+            "vector_cap_end_0x10": "T"
         }
-    ],
-    "mutil_tuple": []
+    },
+    "std::set": {
+        "level": 1,
+        "struct": {
+            "next": "default",
+            "key": "T1"
+        }
+    },
+    "std::map": {
+        "level": 2,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    },
+    "std::unordered_map": {
+        "level": 2,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    },
+    "std::tuple": {
+        "level": -1,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    },
+    "HASTSet": {
+        "level": 1,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    },
+    "std::list": {
+        "level": 1,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    },
+    "std::unordered_set": {
+        "level": 1,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    },
+    "HASTMap": {
+        "level": 2,
+        "struct": {
+            "next": "default",
+            "key": "T1",
+            "value": "T2"
+        }
+    }
 }
