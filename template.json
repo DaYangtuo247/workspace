@@ -1,80 +1,80 @@
 {
     "HSTVector": {
         "level": 1,
+        "abbreviation" : "HVec",
+        "public" : "std::vector",
         "struct": {
-            "inherit__0x0": "std::vector",
-            "hash_0x8" : "hash_code"
+            "*inherit__0x0": "T",
+            "hash_code" : "int64_t"
         }
     },
     "std::vector": {
         "level": 1,
+        "abbreviation" : "vec",
         "struct": {
-            "vector_begin_0x0": "T",
-            "vector_end_0x8": "T",
-            "vector_cap_end_0x10": "T"
-        }
-    },
-    "std::set": {
-        "level": 1,
-        "struct": {
-            "next": "default",
-            "key": "T1"
-        }
-    },
-    "std::map": {
-        "level": 2,
-        "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
-        }
-    },
-    "std::unordered_map": {
-        "level": 2,
-        "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
-        }
-    },
-    "std::tuple": {
-        "level": -1,
-        "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
+            "*vector_begin_0x0": "T",
+            "*vector_end_0x8": "T",
+            "*vector_cap_end_0x10": "T"
         }
     },
     "HASTSet": {
         "level": 1,
+        "public" : "std::set",
+        "abbreviation" : "HSet",
         "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
+            "*inherit__0x0": "T"
         }
     },
-    "std::list": {
+    "std::set": {
         "level": 1,
+        "abbreviation" : "set",
         "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
+            "*next": "std::set",
+            "Key": "T"
         }
     },
     "std::unordered_set": {
         "level": 1,
+        "abbreviation" : "unset",
         "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
+            "Key": "T",
+            "hash_code" : "hash"
         }
     },
     "HASTMap": {
         "level": 2,
+        "public" : "std::map",
+        "abbreviation" : "HMap",
         "struct": {
-            "next": "default",
-            "key": "T1",
-            "value": "T2"
+            "*inherit__0x0": "T"
+        }
+    },
+    "std::map": {
+        "level": 2,
+        "abbreviation" : "map",
+        "struct": {
+            "*next": "std::map",
+            "Key": "T1",
+            "Value": "T2",
+            "hash_code": "hash"
+        }
+    },
+    "std::unordered_map": {
+        "level": 2,
+        "abbreviation" : "udmap",
+        "struct": {
+            "Key": "T1",
+            "Value": "T2",
+            "hash_code": "hash"
+        }
+    },
+    "std::tuple": {
+        "level": 9999,
+        "abbreviation" : "tpe",
+        "struct": {
+            "*Element_1": "T1",
+            "Element_2": "T2",
+            "Element_3": "T3"
         }
     }
 }
