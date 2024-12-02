@@ -38,7 +38,7 @@
         "level": 1,
         "abbreviation": "setItr",
         "struct": {
-            "*header_color_0x0": "uint64_t",
+            "header_color_0x0": "uint64_t",
             "*header_parent_0x8": "std::set",
             "*header_left_0x10": "std::set",
             "*header_right_0x18": "std::set",
@@ -65,10 +65,10 @@
         "level": 2,
         "abbreviation": "mapItr",
         "struct": {
-            "*header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "uint64_t",
-            "*header_left_0x10": "uint64_t",
-            "*header_right_0x18": "uint64_t",
+            "header_color_0x0": "uint64_t",
+            "*header_parent_0x8": "std::map",
+            "*header_left_0x10": "std::map",
+            "*header_right_0x18": "std::map",
             "Key": "T1",
             "Value": "T2"
         }

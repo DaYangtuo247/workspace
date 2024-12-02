@@ -58,10 +58,10 @@ struct sharedPtr_unsigned_int {
   __int64 *count;
 };
 struct mapItr_double_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_double_int *header_parent_0x8;
+  mapItr_double_int *header_left_0x10;
+  mapItr_double_int *header_right_0x18;
   double Key;
   int Value;
 };
@@ -94,7 +94,7 @@ struct sharedPtr_int32_t {
 }
 ------------------------------------------------------
 struct setItr_unsigned_int {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_unsigned_int *header_parent_0x8;
   setItr_unsigned_int *header_left_0x10;
   setItr_unsigned_int *header_right_0x18;
@@ -142,10 +142,10 @@ struct vec_pair_unsigned_int_HDRTNetGuide {
 }
 ------------------------------------------------------
 struct mapItr_double_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_double_int *header_parent_0x8;
+  mapItr_double_int *header_left_0x10;
+  mapItr_double_int *header_right_0x18;
   double* Key;
   int Value;
 };
@@ -165,10 +165,10 @@ struct udmapItr_mapItr_double_int {
 }
 ------------------------------------------------------
 struct mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_parent_0x8;
+  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_left_0x10;
+  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_right_0x18;
   HSTKeyValIter const ** Key;
   HSTKeyValIterLess Value;
 };
@@ -186,10 +186,10 @@ struct HSTMap_mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
 }
 ------------------------------------------------------
 struct mapItr_unsigned_int_double {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_unsigned_int_double *header_parent_0x8;
+  mapItr_unsigned_int_double *header_left_0x10;
+  mapItr_unsigned_int_double *header_right_0x18;
   unsigned int Key;
   double Value;
 };
@@ -225,7 +225,7 @@ struct HSTVector_vec_Node {
 }
 ------------------------------------------------------
 struct setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_HSTKeyValIter_const *header_parent_0x8;
   setItr_HSTKeyValIter_const *header_left_0x10;
   setItr_HSTKeyValIter_const *header_right_0x18;
@@ -235,10 +235,10 @@ struct HSTSet_setItr_HSTKeyValIter_const {
   setItr_HSTKeyValIter_const inherit__0x0;
 };
 struct mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_parent_0x8;
+  mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_left_0x10;
+  mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_right_0x18;
   HSTSet_setItr_HSTKeyValIter_const* Key;
   HSTKeyValIterLess Value;
 };
@@ -292,7 +292,7 @@ struct vec_vec_Node {
 }
 ------------------------------------------------------
 struct setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_HSTKeyValIter_const *header_parent_0x8;
   setItr_HSTKeyValIter_const *header_left_0x10;
   setItr_HSTKeyValIter_const *header_right_0x18;
@@ -312,14 +312,14 @@ struct setItr_HSTKeyValIter_const {
 }
 ------------------------------------------------------
 struct setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_HSTKeyValIter_const *header_parent_0x8;
   setItr_HSTKeyValIter_const *header_left_0x10;
   setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
 struct setItr_setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_setItr_HSTKeyValIter_const* *header_parent_0x8;
   setItr_setItr_HSTKeyValIter_const* *header_left_0x10;
   setItr_setItr_HSTKeyValIter_const* *header_right_0x18;
@@ -339,7 +339,7 @@ struct setItr_setItr_HSTKeyValIter_const {
 }
 ------------------------------------------------------
 struct setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_HSTKeyValIter_const *header_parent_0x8;
   setItr_HSTKeyValIter_const *header_left_0x10;
   setItr_HSTKeyValIter_const *header_right_0x18;
@@ -364,7 +364,7 @@ struct udsetItr_setItr_HSTKeyValIter_const {
 }
 ------------------------------------------------------
 struct setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_HSTKeyValIter_const *header_parent_0x8;
   setItr_HSTKeyValIter_const *header_left_0x10;
   setItr_HSTKeyValIter_const *header_right_0x18;
@@ -390,17 +390,17 @@ struct udmapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
 }
 ------------------------------------------------------
 struct setItr_HSTKeyValIter_const {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_HSTKeyValIter_const *header_parent_0x8;
   setItr_HSTKeyValIter_const *header_left_0x10;
   setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
 struct mapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_parent_0x8;
+  mapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_left_0x10;
+  mapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_right_0x18;
   setItr_HSTKeyValIter_const* Key;
   HSTKeyValIterLess Value;
 };
@@ -441,15 +441,15 @@ struct tuple_int_unsigned_short_float {
 }
 ------------------------------------------------------
 struct mapItr_short_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_short_int *header_parent_0x8;
+  mapItr_short_int *header_left_0x10;
+  mapItr_short_int *header_right_0x18;
   short Key;
   int Value;
 };
 struct setItr_mapItr_short_int {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_mapItr_short_int *header_parent_0x8;
   setItr_mapItr_short_int *header_left_0x10;
   setItr_mapItr_short_int *header_right_0x18;
@@ -486,15 +486,15 @@ struct tuple_setItr_mapItr_short_int_string_int {
 }
 ------------------------------------------------------
 struct mapItr_short_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_short_int *header_parent_0x8;
+  mapItr_short_int *header_left_0x10;
+  mapItr_short_int *header_right_0x18;
   short Key;
   int Value;
 };
 struct setItr_mapItr_short_int {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_mapItr_short_int *header_parent_0x8;
   setItr_mapItr_short_int *header_left_0x10;
   setItr_mapItr_short_int *header_right_0x18;
@@ -506,10 +506,10 @@ struct tuple_setItr_mapItr_short_int_string_int {
   int Element_3;
 };
 struct mapItr_tuple_setItr_mapItr_short_int_string_int_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_tuple_setItr_mapItr_short_int_string_int_int *header_parent_0x8;
+  mapItr_tuple_setItr_mapItr_short_int_string_int_int *header_left_0x10;
+  mapItr_tuple_setItr_mapItr_short_int_string_int_int *header_right_0x18;
   tuple_setItr_mapItr_short_int_string_int Key;
   int Value;
 };
@@ -559,10 +559,10 @@ struct vec_HSTVector_vec_Node {
 }
 ------------------------------------------------------
 struct mapItr_double_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_double_int *header_parent_0x8;
+  mapItr_double_int *header_left_0x10;
+  mapItr_double_int *header_right_0x18;
   double Key;
   int Value;
 };
@@ -600,15 +600,15 @@ struct udmapItr_mapItr_double_int_HSTVector_vec_Node {
 }
 ------------------------------------------------------
 struct mapItr_short_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_short_int *header_parent_0x8;
+  mapItr_short_int *header_left_0x10;
+  mapItr_short_int *header_right_0x18;
   short Key;
   int Value;
 };
 struct setItr_mapItr_short_int {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_mapItr_short_int *header_parent_0x8;
   setItr_mapItr_short_int *header_left_0x10;
   setItr_mapItr_short_int *header_right_0x18;
@@ -645,15 +645,15 @@ struct tuple_setItr_mapItr_short_int_string_int {
 }
 ------------------------------------------------------
 struct mapItr_short_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_short_int *header_parent_0x8;
+  mapItr_short_int *header_left_0x10;
+  mapItr_short_int *header_right_0x18;
   short Key;
   int Value;
 };
 struct setItr_mapItr_short_int {
-  uint64_t *header_color_0x0;
+  uint64_t header_color_0x0;
   setItr_mapItr_short_int *header_parent_0x8;
   setItr_mapItr_short_int *header_left_0x10;
   setItr_mapItr_short_int *header_right_0x18;
@@ -665,10 +665,10 @@ struct tuple_setItr_mapItr_short_int_string_int {
   int Element_3;
 };
 struct mapItr_tuple_setItr_mapItr_short_int_string_int_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_tuple_setItr_mapItr_short_int_string_int_int *header_parent_0x8;
+  mapItr_tuple_setItr_mapItr_short_int_string_int_int *header_left_0x10;
+  mapItr_tuple_setItr_mapItr_short_int_string_int_int *header_right_0x18;
   tuple_setItr_mapItr_short_int_string_int Key;
   int Value;
 };
@@ -708,10 +708,10 @@ struct tuple_unsigned_int_int_double {
 }
 ------------------------------------------------------
 struct mapItr_double_int {
-  uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  uint64_t header_color_0x0;
+  mapItr_double_int *header_parent_0x8;
+  mapItr_double_int *header_left_0x10;
+  mapItr_double_int *header_right_0x18;
   double Key;
   int Value;
 };
