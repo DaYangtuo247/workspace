@@ -39,9 +39,9 @@
         "abbreviation": "set",
         "struct": {
             "*header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "uint64_t",
-            "*header_left_0x10": "uint64_t",
-            "*header_right_0x18": "uint64_t",
+            "*header_parent_0x8": "std::set",
+            "*header_left_0x10": "std::set",
+            "*header_right_0x18": "std::set",
             "Key": "T"
         }
     },
@@ -99,12 +99,20 @@
         }
     },
     "std::tuple": {
-        "level": 9999,
+        "level": 3,
         "abbreviation": "tpe",
         "struct": {
             "*Element_1": "T1",
             "*Element_2": "T2",
             "*Element_3": "T3"
+        }
+    },
+    "std::shared_ptr" :{
+        "level": 1,
+        "abbreviation": "ptr",
+        "struct": {
+            "*ptr": "T",
+            "*count": "__int64"
         }
     }
 }

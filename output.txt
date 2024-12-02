@@ -1,4 +1,17 @@
 ##########################################################################################
+//Input Type: std::shared_ptr<unsigned int>
+{
+  "std::shared_ptr": {
+    "std::shared_ptr_T1": "unsigned int"
+  }
+}
+------------------------------------------------------
+struct custom_ptr_unsigned_int {
+  unsigned int *ptr;
+  __int64 *count;
+};
+
+##########################################################################################
 //Input Type: HSTSet<unsigned int>
 {
   "HSTSet": {
@@ -8,9 +21,9 @@
 ------------------------------------------------------
 struct custom_set_unsigned_int {
   uint64_t *header_color_0x0;
-  uint64_t *header_parent_0x8;
-  uint64_t *header_left_0x10;
-  uint64_t *header_right_0x18;
+  custom_set_unsigned_int *header_parent_0x8;
+  custom_set_unsigned_int *header_left_0x10;
+  custom_set_unsigned_int *header_right_0x18;
   unsigned int Key;
 };
 struct custom_HSet_custom_set_unsigned_int {
@@ -38,5 +51,593 @@ struct custom_vec_custom_pair_unsigned_int_rt_HDRTNetGuide {
   custom_pair_unsigned_int_rt_HDRTNetGuide *vector_begin_0x0;
   custom_pair_unsigned_int_rt_HDRTNetGuide *vector_end_0x8;
   custom_pair_unsigned_int_rt_HDRTNetGuide *vector_cap_end_0x10;
+};
+
+##########################################################################################
+//Input Type: std::unordered_map<std::map<double, int>, std::HSTVector<rt::nodegraph::Node>>
+{
+  "std::unordered_map": {
+    "std::unordered_map_T1": {
+      "std::map": {
+        "std::map_T1": "double",
+        "std::map_T2": "int"
+      }
+    },
+    "std::unordered_map_T2": null
+  }
+}
+------------------------------------------------------
+struct custom_map_double_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  double Key;
+  int Value;
+};
+struct custom_udmap_custom_map_double_int {
+  custom_udmap_custom_map_double_int *_M_nxt;
+  custom_map_double_int Key;
+  custom_map_double_int Value;
+};
+
+##########################################################################################
+//Input Type: HSTMap<HSTKeyValIter const &&,HSTKeyValIterLess>
+{
+  "HSTMap": {
+    "HSTMap_T1": "HSTKeyValIter const **",
+    "HSTMap_T2": "HSTKeyValIterLess"
+  }
+}
+------------------------------------------------------
+struct custom_map_HSTKeyValIter_const_HSTKeyValIterLess {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  HSTKeyValIter const ** Key;
+  HSTKeyValIterLess Value;
+};
+struct custom_Hmap_custom_map_HSTKeyValIter_const_HSTKeyValIterLess {
+  custom_map_HSTKeyValIter_const_HSTKeyValIterLess *inherit__0x0;
+};
+
+##########################################################################################
+//Input Type: std::map<unsigned int, double>
+{
+  "std::map": {
+    "std::map_T1": "unsigned int",
+    "std::map_T2": "double"
+  }
+}
+------------------------------------------------------
+struct custom_map_unsigned_int_double {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  unsigned int Key;
+  double Value;
+};
+
+##########################################################################################
+//Input Type: HSTVector<rt::nodegraph::Node*>
+{
+  "HSTVector": {
+    "HSTVector_T1": "rt::nodegraph::Node*"
+  }
+}
+------------------------------------------------------
+struct custom_vec_rt_nodegraph_Node {
+  rt::nodegraph::Node* *vector_begin_0x0;
+  rt::nodegraph::Node* *vector_end_0x8;
+  rt::nodegraph::Node* *vector_cap_end_0x10;
+};
+struct custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_vec_rt_nodegraph_Node inherit__0x0;
+};
+
+##########################################################################################
+//Input Type: HSTMap<HASTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>
+{
+  "HSTMap": {
+    "HSTMap_T1": null,
+    "HSTMap_T2": "HSTKeyValIterLess"
+  }
+}
+------------------------------------------------------
+struct custom_map_HSTKeyValIterLess {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+   Key;
+  HSTKeyValIterLess Value;
+};
+struct custom_Hmap_custom_map_HSTKeyValIterLess {
+  custom_map_HSTKeyValIterLess *inherit__0x0;
+};
+
+##########################################################################################
+//Input Type: std::vector<rt::nodegraph::Node*>
+{
+  "std::vector": {
+    "std::vector_T1": "rt::nodegraph::Node*"
+  }
+}
+------------------------------------------------------
+struct custom_vec_rt_nodegraph_Node {
+  rt::nodegraph::Node* *vector_begin_0x0;
+  rt::nodegraph::Node* *vector_end_0x8;
+  rt::nodegraph::Node* *vector_cap_end_0x10;
+};
+
+##########################################################################################
+//Input Type: std::vector<std::vector<rt::nodegraph::Node*>>
+{
+  "std::vector": {
+    "std::vector_T1": {
+      "std::vector": {
+        "std::vector_T1": "rt::nodegraph::Node*"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct custom_vec_rt_nodegraph_Node {
+  rt::nodegraph::Node* *vector_begin_0x0;
+  rt::nodegraph::Node* *vector_end_0x8;
+  rt::nodegraph::Node* *vector_cap_end_0x10;
+};
+struct custom_vec_custom_vec_rt_nodegraph_Node {
+  custom_vec_rt_nodegraph_Node *vector_begin_0x0;
+  custom_vec_rt_nodegraph_Node *vector_end_0x8;
+  custom_vec_rt_nodegraph_Node *vector_cap_end_0x10;
+};
+
+##########################################################################################
+//Input Type: std::set<HSTKeyValIter const *,HSTKeyValIterLess>
+{
+  "std::set": {
+    "std::set_T1": "HSTKeyValIter const *"
+  }
+}
+------------------------------------------------------
+struct custom_set_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  custom_set_HSTKeyValIter_const *header_parent_0x8;
+  custom_set_HSTKeyValIter_const *header_left_0x10;
+  custom_set_HSTKeyValIter_const *header_right_0x18;
+  HSTKeyValIter const * Key;
+};
+
+##########################################################################################
+//Input Type: std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
+{
+  "std::set": {
+    "std::set_T1": {
+      "std::set": {
+        "std::set_T1": "HSTKeyValIter const **"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct custom_set_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  custom_set_HSTKeyValIter_const *header_parent_0x8;
+  custom_set_HSTKeyValIter_const *header_left_0x10;
+  custom_set_HSTKeyValIter_const *header_right_0x18;
+  HSTKeyValIter const ** Key;
+};
+struct custom_set_custom_set_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  custom_set_custom_set_HSTKeyValIter_const *header_parent_0x8;
+  custom_set_custom_set_HSTKeyValIter_const *header_left_0x10;
+  custom_set_custom_set_HSTKeyValIter_const *header_right_0x18;
+  custom_set_HSTKeyValIter_const Key;
+};
+
+##########################################################################################
+//Input Type: std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
+{
+  "std::unordered_set": {
+    "std::unordered_set_T1": {
+      "std::set": {
+        "std::set_T1": "HSTKeyValIter const **"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct custom_set_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  custom_set_HSTKeyValIter_const *header_parent_0x8;
+  custom_set_HSTKeyValIter_const *header_left_0x10;
+  custom_set_HSTKeyValIter_const *header_right_0x18;
+  HSTKeyValIter const ** Key;
+};
+struct custom_unset_custom_set_HSTKeyValIter_const {
+  custom_unset_custom_set_HSTKeyValIter_const *_M_nxt;
+  int64_t Key;
+};
+
+##########################################################################################
+//Input Type: std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
+{
+  "std::unordered_map": {
+    "std::unordered_map_T1": {
+      "std::set": {
+        "std::set_T1": "HSTKeyValIter const **"
+      }
+    },
+    "std::unordered_map_T2": "HSTKeyValIterLess"
+  }
+}
+------------------------------------------------------
+struct custom_set_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  custom_set_HSTKeyValIter_const *header_parent_0x8;
+  custom_set_HSTKeyValIter_const *header_left_0x10;
+  custom_set_HSTKeyValIter_const *header_right_0x18;
+  HSTKeyValIter const ** Key;
+};
+struct custom_udmap_custom_set_HSTKeyValIter_const_HSTKeyValIterLess {
+  custom_udmap_custom_set_HSTKeyValIter_const_HSTKeyValIterLess *_M_nxt;
+  custom_set_HSTKeyValIter_const Key;
+  HSTKeyValIterLess Value;
+};
+
+##########################################################################################
+//Input Type: std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
+{
+  "std::map": {
+    "std::map_T1": {
+      "std::set": {
+        "std::set_T1": "HSTKeyValIter const **"
+      }
+    },
+    "std::map_T2": "HSTKeyValIterLess"
+  }
+}
+------------------------------------------------------
+struct custom_set_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  custom_set_HSTKeyValIter_const *header_parent_0x8;
+  custom_set_HSTKeyValIter_const *header_left_0x10;
+  custom_set_HSTKeyValIter_const *header_right_0x18;
+  HSTKeyValIter const ** Key;
+};
+struct custom_map_custom_set_HSTKeyValIter_const_HSTKeyValIterLess {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  custom_set_HSTKeyValIter_const Key;
+  HSTKeyValIterLess Value;
+};
+
+##########################################################################################
+//Input Type: std::tuple<int,unsigned short,float>
+{
+  "std::tuple": {
+    "std::tuple_T1": "int",
+    "std::tuple_T2": "unsigned short",
+    "std::tuple_T3": "float"
+  }
+}
+------------------------------------------------------
+struct custom_tpe_int_unsigned_short_float {
+  int *Element_1;
+  unsigned short *Element_2;
+  float *Element_3;
+};
+
+##########################################################################################
+//Input Type: std::tuple<std::set<std::map<short, int>>, std::string, int>
+{
+  "std::tuple": {
+    "std::tuple_T1": {
+      "std::set": {
+        "std::set_T1": {
+          "std::map": {
+            "std::map_T1": "short",
+            "std::map_T2": "int"
+          }
+        }
+      }
+    },
+    "std::tuple_T2": "std::string",
+    "std::tuple_T3": "int"
+  }
+}
+------------------------------------------------------
+struct custom_map_short_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  short Key;
+  int Value;
+};
+struct custom_set_custom_map_short_int {
+  uint64_t *header_color_0x0;
+  custom_set_custom_map_short_int *header_parent_0x8;
+  custom_set_custom_map_short_int *header_left_0x10;
+  custom_set_custom_map_short_int *header_right_0x18;
+  custom_map_short_int Key;
+};
+struct custom_tpe_custom_set_custom_map_short_int_std_string_int {
+  custom_set_custom_map_short_int *Element_1;
+  std::string *Element_2;
+  int *Element_3;
+};
+
+##########################################################################################
+//Input Type: std::map<std::tuple<std::set<std::map<short,int>>, std::string, int>,int,less>
+{
+  "std::map": {
+    "std::map_T1": {
+      "std::tuple": {
+        "std::tuple_T1": {
+          "std::set": {
+            "std::set_T1": {
+              "std::map": {
+                "std::map_T1": "short",
+                "std::map_T2": "int"
+              }
+            }
+          }
+        },
+        "std::tuple_T2": "std::string",
+        "std::tuple_T3": "int"
+      }
+    },
+    "std::map_T2": "int"
+  }
+}
+------------------------------------------------------
+struct custom_map_short_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  short Key;
+  int Value;
+};
+struct custom_set_custom_map_short_int {
+  uint64_t *header_color_0x0;
+  custom_set_custom_map_short_int *header_parent_0x8;
+  custom_set_custom_map_short_int *header_left_0x10;
+  custom_set_custom_map_short_int *header_right_0x18;
+  custom_map_short_int Key;
+};
+struct custom_tpe_custom_set_custom_map_short_int_std_string_int {
+  custom_set_custom_map_short_int *Element_1;
+  std::string *Element_2;
+  int *Element_3;
+};
+struct custom_map_custom_tpe_custom_set_custom_map_short_int_std_string_int_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  custom_tpe_custom_set_custom_map_short_int_std_string_int Key;
+  int Value;
+};
+
+##########################################################################################
+//Input Type: std::vector<HSTVector<rt::nodegraph::Node*>>
+{
+  "std::vector": {
+    "std::vector_T1": {
+      "HSTVector": {
+        "HSTVector_T1": "rt::nodegraph::Node*"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct custom_vec_rt_nodegraph_Node {
+  rt::nodegraph::Node* *vector_begin_0x0;
+  rt::nodegraph::Node* *vector_end_0x8;
+  rt::nodegraph::Node* *vector_cap_end_0x10;
+};
+struct custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_vec_rt_nodegraph_Node inherit__0x0;
+};
+struct custom_vec_custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_HVec_custom_vec_rt_nodegraph_Node *vector_begin_0x0;
+  custom_HVec_custom_vec_rt_nodegraph_Node *vector_end_0x8;
+  custom_HVec_custom_vec_rt_nodegraph_Node *vector_cap_end_0x10;
+};
+
+##########################################################################################
+//Input Type: std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node*>>
+{
+  "std::unordered_map": {
+    "std::unordered_map_T1": {
+      "std::map": {
+        "std::map_T1": "double",
+        "std::map_T2": "int"
+      }
+    },
+    "std::unordered_map_T2": {
+      "HSTVector": {
+        "HSTVector_T1": "rt::nodegraph::Node*"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct custom_map_double_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  double Key;
+  int Value;
+};
+struct custom_vec_rt_nodegraph_Node {
+  rt::nodegraph::Node* *vector_begin_0x0;
+  rt::nodegraph::Node* *vector_end_0x8;
+  rt::nodegraph::Node* *vector_cap_end_0x10;
+};
+struct custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_vec_rt_nodegraph_Node inherit__0x0;
+};
+struct custom_udmap_custom_map_double_int_custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_udmap_custom_map_double_int_custom_HVec_custom_vec_rt_nodegraph_Node *_M_nxt;
+  custom_map_double_int Key;
+  custom_HVec_custom_vec_rt_nodegraph_Node Value;
+};
+
+##########################################################################################
+//Input Type: std::tuple<std::set<std::map<short, int>>, std::string, int>
+{
+  "std::tuple": {
+    "std::tuple_T1": {
+      "std::set": {
+        "std::set_T1": {
+          "std::map": {
+            "std::map_T1": "short",
+            "std::map_T2": "int"
+          }
+        }
+      }
+    },
+    "std::tuple_T2": "std::string",
+    "std::tuple_T3": "int"
+  }
+}
+------------------------------------------------------
+struct custom_map_short_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  short Key;
+  int Value;
+};
+struct custom_set_custom_map_short_int {
+  uint64_t *header_color_0x0;
+  custom_set_custom_map_short_int *header_parent_0x8;
+  custom_set_custom_map_short_int *header_left_0x10;
+  custom_set_custom_map_short_int *header_right_0x18;
+  custom_map_short_int Key;
+};
+struct custom_tpe_custom_set_custom_map_short_int_std_string_int {
+  custom_set_custom_map_short_int *Element_1;
+  std::string *Element_2;
+  int *Element_3;
+};
+
+##########################################################################################
+//Input Type: std::map<std::tuple<std::set<std::map<short,int>>,std::string,int>,int>
+{
+  "std::map": {
+    "std::map_T1": {
+      "std::tuple": {
+        "std::tuple_T1": {
+          "std::set": {
+            "std::set_T1": {
+              "std::map": {
+                "std::map_T1": "short",
+                "std::map_T2": "int"
+              }
+            }
+          }
+        },
+        "std::tuple_T2": "std::string",
+        "std::tuple_T3": "int"
+      }
+    },
+    "std::map_T2": "int"
+  }
+}
+------------------------------------------------------
+struct custom_map_short_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  short Key;
+  int Value;
+};
+struct custom_set_custom_map_short_int {
+  uint64_t *header_color_0x0;
+  custom_set_custom_map_short_int *header_parent_0x8;
+  custom_set_custom_map_short_int *header_left_0x10;
+  custom_set_custom_map_short_int *header_right_0x18;
+  custom_map_short_int Key;
+};
+struct custom_tpe_custom_set_custom_map_short_int_std_string_int {
+  custom_set_custom_map_short_int *Element_1;
+  std::string *Element_2;
+  int *Element_3;
+};
+struct custom_map_custom_tpe_custom_set_custom_map_short_int_std_string_int_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  custom_tpe_custom_set_custom_map_short_int_std_string_int Key;
+  int Value;
+};
+
+##########################################################################################
+//Input Type: std::tuple<unsigned int, int, double>
+{
+  "std::tuple": {
+    "std::tuple_T1": "unsigned int",
+    "std::tuple_T2": "int",
+    "std::tuple_T3": "double"
+  }
+}
+------------------------------------------------------
+struct custom_tpe_unsigned_int_int_double {
+  unsigned int *Element_1;
+  int *Element_2;
+  double *Element_3;
+};
+
+##########################################################################################
+//Input Type: std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node>>
+{
+  "std::unordered_map": {
+    "std::unordered_map_T1": {
+      "std::map": {
+        "std::map_T1": "double",
+        "std::map_T2": "int"
+      }
+    },
+    "std::unordered_map_T2": {
+      "HSTVector": {
+        "HSTVector_T1": "rt::nodegraph::Node"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct custom_map_double_int {
+  uint64_t *header_color_0x0;
+  uint64_t *header_parent_0x8;
+  uint64_t *header_left_0x10;
+  uint64_t *header_right_0x18;
+  double Key;
+  int Value;
+};
+struct custom_vec_rt_nodegraph_Node {
+  rt::nodegraph::Node *vector_begin_0x0;
+  rt::nodegraph::Node *vector_end_0x8;
+  rt::nodegraph::Node *vector_cap_end_0x10;
+};
+struct custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_vec_rt_nodegraph_Node inherit__0x0;
+};
+struct custom_udmap_custom_map_double_int_custom_HVec_custom_vec_rt_nodegraph_Node {
+  custom_udmap_custom_map_double_int_custom_HVec_custom_vec_rt_nodegraph_Node *_M_nxt;
+  custom_map_double_int Key;
+  custom_HVec_custom_vec_rt_nodegraph_Node Value;
 };
 
