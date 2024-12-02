@@ -1,80 +1,110 @@
 {
     "HSTVector": {
         "level": 1,
-        "abbreviation" : "HVec",
-        "public" : "std::vector",
+        "abbreviation": "HVec",
+        "public": "std::vector",
+        "struct": {
+            "inherit__0x0": "T"
+        }
+    },
+    "HST2DVector": {
+        "level": 1,
+        "abbreviation": "H2DVec",
+        "public": "std::vector",
         "struct": {
             "*inherit__0x0": "T",
-            "hash_code" : "int64_t"
+            "csts_vector_row_size_0x18": "int64_t",
+            "csts_vector_col_size_0x20": "int64_t"
         }
     },
     "std::vector": {
         "level": 1,
-        "abbreviation" : "vec",
+        "abbreviation": "vec",
         "struct": {
             "*vector_begin_0x0": "T",
             "*vector_end_0x8": "T",
             "*vector_cap_end_0x10": "T"
         }
     },
-    "HASTSet": {
+    "HSTSet": {
         "level": 1,
-        "public" : "std::set",
-        "abbreviation" : "HSet",
+        "public": "std::set",
+        "abbreviation": "HSet",
         "struct": {
-            "*inherit__0x0": "T"
+            "inherit__0x0": "T"
         }
     },
     "std::set": {
         "level": 1,
-        "abbreviation" : "set",
+        "abbreviation": "set",
         "struct": {
-            "*next": "std::set",
+            "*header_color_0x0": "uint64_t",
+            "*header_parent_0x8": "uint64_t",
+            "*header_left_0x10": "uint64_t",
+            "*header_right_0x18": "uint64_t",
             "Key": "T"
         }
     },
     "std::unordered_set": {
         "level": 1,
-        "abbreviation" : "unset",
+        "abbreviation": "unset",
         "struct": {
-            "Key": "T",
-            "hash_code" : "hash"
+            "*_M_nxt": "std::unordered_set",
+            "Key": "int64_t"
         }
     },
-    "HASTMap": {
+    "HSTMap": {
         "level": 2,
-        "public" : "std::map",
-        "abbreviation" : "HMap",
+        "public": "std::map",
+        "abbreviation": "Hmap",
         "struct": {
             "*inherit__0x0": "T"
         }
     },
     "std::map": {
         "level": 2,
-        "abbreviation" : "map",
+        "abbreviation": "map",
         "struct": {
-            "*next": "std::map",
+            "*header_color_0x0": "uint64_t",
+            "*header_parent_0x8": "uint64_t",
+            "*header_left_0x10": "uint64_t",
+            "*header_right_0x18": "uint64_t",
             "Key": "T1",
-            "Value": "T2",
-            "hash_code": "hash"
+            "Value": "T2"
+        }
+    },
+    "HSTPtrHashMap": {
+        "level": 2,
+        "public": "std::unordered_map",
+        "abbreviation": "Hudmap",
+        "struct": {
+            "*inherit__0x0": "T"
         }
     },
     "std::unordered_map": {
         "level": 2,
-        "abbreviation" : "udmap",
+        "abbreviation": "udmap",
         "struct": {
+            "*_M_nxt": "std::unordered_map",
             "Key": "T1",
-            "Value": "T2",
-            "hash_code": "hash"
+            "Value": "T2"
+        }
+    },
+    "std::pair": {
+        "level": 2,
+        "abbreviation": "pair",
+        "struct": {
+            "first": "T1",
+            "second": "T2"
         }
     },
     "std::tuple": {
         "level": 9999,
-        "abbreviation" : "tpe",
+        "abbreviation": "tpe",
         "struct": {
             "*Element_1": "T1",
-            "Element_2": "T2",
-            "Element_3": "T3"
+            "*Element_2": "T2",
+            "*Element_3": "T3"
         }
     }
 }
