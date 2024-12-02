@@ -1,5 +1,6 @@
 #include "json.hpp"
 #include "utility.h"
+#define DEBUG 1
 
 // using json = nlohmann::json; // 无序
 using json = nlohmann::ordered_json;  // 有序
@@ -40,7 +41,7 @@ json parseContainer(std::string str) {
     }
 
     // 容器是几元组
-    int numParams = example[containerName]["level"].get<int>();
+    uint32_t numParams = example[containerName]["level"].get<int>(); // 注意，tuple为-1,这会让numParams无穷大
 
     if (pos < str.size() && str[pos] == '<') {
         pos++;
@@ -73,7 +74,10 @@ json parseContainer(std::string str) {
             }
             pos++;
         }
-
+        if (pos != str.size()) {
+            containerName += str.substr(pos);
+        }
+        cout << containerName << endl;
         currentType = trimAndReplace(currentType);
 
         // 最后一个类型
@@ -81,7 +85,7 @@ json parseContainer(std::string str) {
             innerTypes.push_back(currentType);
 
         // 解析 一元组，二元组，tuple容器
-        for (size_t i = 0; i < innerTypes.size() && i < numParams; ++i) {
+        for (uint32_t i = 0; i < innerTypes.size() && i < numParams; ++i) {
             string containerName_new = containerName + "_T" + to_string(i + 1);
             ans[containerName][containerName_new] = innerTypes[i];
             if (innerTypes[i].find('<') != string::npos) {
@@ -94,18 +98,12 @@ json parseContainer(std::string str) {
 
 // 获取结构体名称
 string getStructName(string str) {
-    // 移除结尾的 '*' 或 '&'
-    while (str.back() == '*' || str.back() == '&' || str.back() == ' ') {
+    while (str.back() == '*' || str.back() == '&' || str.back() == ' ')
         str.pop_back();
-    }
-    // 使用std::replace将空格替换为下划线
     std::replace(str.begin(), str.end(), ' ', '_');
-    // 替换 "::" 为 "_"
-    size_t pos = 0;
-    while ((pos = str.find("::", pos)) != std::string::npos) {
-        str.replace(pos, 2, "_");
-        pos += 1;
-    }
+    size_t pos = str.rfind("::");
+    if (pos != std::string::npos)
+        str = str.substr(pos + 2);
     return str;
 }
 
@@ -119,43 +117,63 @@ bool isTN(std::string str, int i) {
     return false;
 }
 
+string get_is_ptr(string & str) {
+    auto it = std::find_if(str.begin(), str.end(), [](char ch) {
+        return !(std::isalnum(static_cast<unsigned char>(ch)) || ch == ':' || ch == '_');
+    });
+
+    if (it != str.end()) {
+        std::string result(it, str.end());
+        str = str.substr(0, std::distance(str.begin(), it));
+        return result;
+    }
+
+    return "";
+}
+
 // json解析为结构体输出
-string generate_struct(const json& input, std::string prefix = "") {
+string generate_struct(const json& input, int level = 0) {
     // 获取类型名（如 "HSTVector"）
-    string type = input.begin().key();
+    string type = trimAndReplace(input.begin().key());
+    
+    // 判断type是否是指针结构
+    string is_ptr = get_is_ptr(type);
 
     // 确保类型在模板中存在
     if (!example.contains(type)) {
-        throw runtime_error("模板中未找到类型: \n" + input.dump(2));
+        throw runtime_error(input.dump(2) + "\nType not found in template.json.");
     }
 
     // 获取存储类型
     json value = input.begin().value();
 
+    json output;
+
+    // 如果存储类型是元组
+    if (type == "std::tuple") {
+        string el_key = example[type]["struct"].begin().key(), el_value = example[type]["struct"].begin().value();
+        for (int j = 1; j <= value.size(); j++)
+            output[el_key + to_string(j)] = el_value + to_string(j);
+    } else {
+        output = example[type]["struct"];
+    }
+
     // 容器中指向的结构体名称
     string sub_struct_name;
-
     // 生成的结构体名称
-    string struct_name = prefix + example[type]["abbreviation"].get<std::string>() + "_";
-
-    int i = 1;
-    json output = example[type]["struct"];
-    for (const auto& input_el : input.begin().value().items()) {
+    string struct_name = example[type]["abbreviation"].get<std::string>() + "_";
+    int i = 1; // Ti
+    // 按照template结构处理
+    for (const auto& input_el : value.items()) {
         json value_new = input_el.value();
-
+        
+        bool is_public = false;
         // 存在继承结构, 只执行一次，无需递归
         if (example[type].contains("public")) {
             json new_j = {{example[type]["public"], value}};
-            sub_struct_name = generate_struct(new_j, prefix);
+            sub_struct_name = generate_struct(new_j, level + 1);
             struct_name += sub_struct_name + "_";
-
-            // 修改输出类型
-            for (const auto& el : output.items()) {
-                // 如果是 T, T1, T2, T3...., 修改为实际存储的类型
-                if (isTN(el.value(), i))
-                    el.value() = sub_struct_name;
-            }
-            break;
+            is_public = true;
         }
         // 容器存储基本类型, 直接输出为 struct
         else if (value_new.is_string()) {
@@ -164,7 +182,7 @@ string generate_struct(const json& input, std::string prefix = "") {
         }
         // 容器存储对象
         else if (value_new.is_object()) {
-            sub_struct_name = generate_struct(value_new, prefix);
+            sub_struct_name = generate_struct(value_new, level + 1);
             struct_name += sub_struct_name + "_";
         }
 
@@ -174,6 +192,8 @@ string generate_struct(const json& input, std::string prefix = "") {
             if (isTN(el.value(), i))
                 el.value() = sub_struct_name;
         }
+        if (is_public)
+            break;
         i++;
     }
 
@@ -188,29 +208,26 @@ string generate_struct(const json& input, std::string prefix = "") {
     }
 
     // 输出结构
-    cout << "struct " << struct_name << " {\n";
-    file << "struct " << struct_name << " {\n";
-    for (const auto& el : output.items()) {
-        cout << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
+    file << "struct " << getStructName(struct_name) << " {\n";
+    for (const auto& el : output.items())
         file << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
-    }
-    cout << "};\n";
     file << "};\n";
-    return struct_name;
+
+    return struct_name + is_ptr;
 }
 
 int main(int argc, char* argv[]) {
-    // 测试案例
     vector<string> testCases = {
-        // "HSTVector<rt::HARTRouteNetWrapper*>",
-        "std::shared_ptr<unsigned int>",
+        "std::vector<std::pair<int ,int > *>",
+        "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
+        "std::shared_ptr<int32_t>",
         "HSTSet<unsigned int>",
         "std::vector<std::pair<unsigned int,rt::HDRTNetGuide*>>",
-        "std::unordered_map<std::map<double, int>, std::HSTVector<rt::nodegraph::Node>>",
+        "std::unordered_map<std::map<double*, int>, std::HSTVector<rt::nodegraph::Node>>",
         "HSTMap<HSTKeyValIter const &&,HSTKeyValIterLess>",
         "std::map<unsigned int, double>",
         "HSTVector<rt::nodegraph::Node*>",
-        "HSTMap<HASTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+        "HSTMap<HSTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
         "std::vector<rt::nodegraph::Node*>",
         "std::vector<std::vector<rt::nodegraph::Node*>>",
         "std::set<HSTKeyValIter const *,HSTKeyValIterLess>",
@@ -230,55 +247,41 @@ int main(int argc, char* argv[]) {
     };
 
     std::ifstream f("./template.json");
+    if (!f.is_open()) {
+        cout << "Error: template.json not found!!!" << endl;
+        exit(1);
+    }
     example = json::parse(f);
 
-    // 获取文件名和字符串
-    std::string output_file = "output.txt";
-    std::string content;
+    std::string output_file = "./container_convert.txt";
 
     // ./exe "需要解析的结构" "输出文件名"
-    if (argc == 3) {
-        output_file = argv[2];
-        testCases.clear();
-        testCases.push_back(argv[1]);
-    }
     // ./exe "需要解析的结构"
-    else if (argc == 2) {
+    if (argc == 3 || argc == 2) {
+        output_file = argc == 3 ? argv[2] : output_file;
         testCases.clear();
         testCases.push_back(argv[1]);
-        cout << "output Path: " << output_file << endl;
-    }
-
-    std::ofstream fd(output_file, std::ios::trunc);
-    if (!fd.is_open()) {
-        cout << "file open error !" << endl;
-        exit(1);
     }
 
     // 遍历每个测试案例进行解析
     for (const auto& type : testCases) {
-        cout << "##########################################################################################\n";
-        cout << "//Input Type: " << type << endl;
-        file << "##########################################################################################\n";
-        file << "//Input Type: " << type << endl;
-        // 获取解析的json对象
-        size_t pos = 0;
-        json res = parseContainer(type);  // 用于将输入解析为json对象，保证没有错误
-
-        cout << res.dump(2) << endl;
-        cout << "------------------------------------------------------\n";
-        file << res.dump(2) << endl;
-        file << "------------------------------------------------------\n";
-
-        // 将json对象解析为结构体
-        generate_struct(res, "custom_");
-        cout << endl;
+        json res = parseContainer(type);
+        if (DEBUG) {
+            file << "##########################################################################################\n";
+            file << "//Input Type: " << type << endl;
+            file << res.dump(2) << endl;
+            file << "------------------------------------------------------\n";
+        }
+        generate_struct(res);
         file << endl;
     }
 
+    std::ofstream fd(output_file, std::ios::trunc);
     fd << file.str();
-
     fd.close();
+
+    cout << file.str();
+    cout << "output Path: " << output_file << endl;
 
     return 0;
 }

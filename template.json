@@ -1,7 +1,7 @@
 {
     "HSTVector": {
         "level": 1,
-        "abbreviation": "HVec",
+        "abbreviation": "HSTVector",
         "public": "std::vector",
         "struct": {
             "inherit__0x0": "T"
@@ -9,7 +9,7 @@
     },
     "HST2DVector": {
         "level": 1,
-        "abbreviation": "H2DVec",
+        "abbreviation": "HST2DVector",
         "public": "std::vector",
         "struct": {
             "*inherit__0x0": "T",
@@ -29,14 +29,14 @@
     "HSTSet": {
         "level": 1,
         "public": "std::set",
-        "abbreviation": "HSet",
+        "abbreviation": "HSTSet",
         "struct": {
             "inherit__0x0": "T"
         }
     },
     "std::set": {
         "level": 1,
-        "abbreviation": "set",
+        "abbreviation": "setItr",
         "struct": {
             "*header_color_0x0": "uint64_t",
             "*header_parent_0x8": "std::set",
@@ -47,7 +47,7 @@
     },
     "std::unordered_set": {
         "level": 1,
-        "abbreviation": "unset",
+        "abbreviation": "udsetItr",
         "struct": {
             "*_M_nxt": "std::unordered_set",
             "Key": "int64_t"
@@ -56,14 +56,14 @@
     "HSTMap": {
         "level": 2,
         "public": "std::map",
-        "abbreviation": "Hmap",
+        "abbreviation": "HSTMap",
         "struct": {
             "*inherit__0x0": "T"
         }
     },
     "std::map": {
         "level": 2,
-        "abbreviation": "map",
+        "abbreviation": "mapItr",
         "struct": {
             "*header_color_0x0": "uint64_t",
             "*header_parent_0x8": "uint64_t",
@@ -76,14 +76,14 @@
     "HSTPtrHashMap": {
         "level": 2,
         "public": "std::unordered_map",
-        "abbreviation": "Hudmap",
+        "abbreviation": "HSTPtrHashMap",
         "struct": {
             "*inherit__0x0": "T"
         }
     },
     "std::unordered_map": {
         "level": 2,
-        "abbreviation": "udmap",
+        "abbreviation": "udmapItr",
         "struct": {
             "*_M_nxt": "std::unordered_map",
             "Key": "T1",
@@ -99,17 +99,15 @@
         }
     },
     "std::tuple": {
-        "level": 3,
-        "abbreviation": "tpe",
+        "level": -1,
+        "abbreviation": "tuple",
         "struct": {
-            "*Element_1": "T1",
-            "*Element_2": "T2",
-            "*Element_3": "T3"
+            "Element_": "T"
         }
     },
     "std::shared_ptr" :{
         "level": 1,
-        "abbreviation": "ptr",
+        "abbreviation": "sharedPtr",
         "struct": {
             "*ptr": "T",
             "*count": "__int64"

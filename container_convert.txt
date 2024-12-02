@@ -1,4 +1,27 @@
 ##########################################################################################
+//Input Type: std::vector<std::pair<int ,int > *>
+{
+  "std::vector": {
+    "std::vector_T1": {
+      "std::pair *": {
+        "std::pair *_T1": "int",
+        "std::pair *_T2": "int"
+      }
+    }
+  }
+}
+------------------------------------------------------
+struct pair_int_int {
+  int first;
+  int second;
+};
+struct vec_pair_int_int {
+  pair_int_int * *vector_begin_0x0;
+  pair_int_int * *vector_end_0x8;
+  pair_int_int * *vector_cap_end_0x10;
+};
+
+##########################################################################################
 //Input Type: std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>
 {
   "std::tuple": {
@@ -27,7 +50,7 @@ struct vec_HARTRouteNetWrapper {
   rt::HARTRouteNetWrapper* *vector_end_0x8;
   rt::HARTRouteNetWrapper* *vector_cap_end_0x10;
 };
-struct HVec_vec_HARTRouteNetWrapper {
+struct HSTVector_vec_HARTRouteNetWrapper {
   vec_HARTRouteNetWrapper inherit__0x0;
 };
 struct sharedPtr_unsigned_int {
@@ -42,28 +65,11 @@ struct mapItr_double_int {
   double Key;
   int Value;
 };
-struct tuple_mapItr_sharedPtr_HVec {
-  int Element_1;
-  mapItr_double_int Element_2;
-  sharedPtr_unsigned_int Element_3;
-  HVec_vec_HARTRouteNetWrapper Element_4;
-};
-
-##########################################################################################
-//Input Type: HSTVector<rt::HARTRouteNetWrapper*>
-{
-  "HSTVector": {
-    "HSTVector_T1": "rt::HARTRouteNetWrapper*"
-  }
-}
-------------------------------------------------------
-struct vec_HARTRouteNetWrapper {
-  rt::HARTRouteNetWrapper* *vector_begin_0x0;
-  rt::HARTRouteNetWrapper* *vector_end_0x8;
-  rt::HARTRouteNetWrapper* *vector_cap_end_0x10;
-};
-struct HVec_vec {
-  vec_HARTRouteNetWrapper inherit__0x0;
+struct tuple_HSTVector_vec_HARTRouteNetWrapper_sharedPtr_unsigned_int_mapItr_double_int_int {
+  HSTVector_vec_HARTRouteNetWrapper Element_1;
+  sharedPtr_unsigned_int Element_2;
+  mapItr_double_int Element_3;
+  int Element_4;
 };
 
 ##########################################################################################
@@ -74,7 +80,7 @@ struct HVec_vec {
   }
 }
 ------------------------------------------------------
-struct sharedPtr_int32_ {
+struct sharedPtr_int32_t {
   int32_t *ptr;
   __int64 *count;
 };
@@ -94,7 +100,7 @@ struct setItr_unsigned_int {
   setItr_unsigned_int *header_right_0x18;
   unsigned int Key;
 };
-struct HSet_setItr {
+struct HSTSet_setItr_unsigned_int {
   setItr_unsigned_int inherit__0x0;
 };
 
@@ -115,19 +121,19 @@ struct pair_unsigned_int_HDRTNetGuide {
   unsigned int first;
   rt::HDRTNetGuide* second;
 };
-struct vec_pair_pair_pair {
+struct vec_pair_unsigned_int_HDRTNetGuide {
   pair_unsigned_int_HDRTNetGuide *vector_begin_0x0;
   pair_unsigned_int_HDRTNetGuide *vector_end_0x8;
   pair_unsigned_int_HDRTNetGuide *vector_cap_end_0x10;
 };
 
 ##########################################################################################
-//Input Type: std::unordered_map<std::map<double, int>, std::HSTVector<rt::nodegraph::Node>>
+//Input Type: std::unordered_map<std::map<double*, int>, std::HSTVector<rt::nodegraph::Node>>
 {
   "std::unordered_map": {
     "std::unordered_map_T1": {
       "std::map": {
-        "std::map_T1": "double",
+        "std::map_T1": "double*",
         "std::map_T2": "int"
       }
     },
@@ -140,11 +146,11 @@ struct mapItr_double_int {
   uint64_t *header_parent_0x8;
   uint64_t *header_left_0x10;
   uint64_t *header_right_0x18;
-  double Key;
+  double* Key;
   int Value;
 };
-struct udmapItr_std::unordered_mapItr_mapItr {
-  udmapItr_std::unordered_mapItr_mapItr *_M_nxt;
+struct udmapItr_mapItr_double_int {
+  udmapItr_mapItr_double_int *_M_nxt;
   mapItr_double_int Key;
   mapItr_double_int Value;
 };
@@ -166,7 +172,7 @@ struct mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
   HSTKeyValIter const ** Key;
   HSTKeyValIterLess Value;
 };
-struct Hmap_mapItr {
+struct HSTMap_mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
   mapItr_HSTKeyValIter_const_HSTKeyValIterLess *inherit__0x0;
 };
 
@@ -179,7 +185,7 @@ struct Hmap_mapItr {
   }
 }
 ------------------------------------------------------
-struct mapItr_uint64_uint64_uint64_uint64 {
+struct mapItr_unsigned_int_double {
   uint64_t *header_color_0x0;
   uint64_t *header_parent_0x8;
   uint64_t *header_left_0x10;
@@ -201,29 +207,43 @@ struct vec_Node {
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct HVec_vec {
+struct HSTVector_vec_Node {
   vec_Node inherit__0x0;
 };
 
 ##########################################################################################
-//Input Type: HSTMap<HASTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>
+//Input Type: HSTMap<HSTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>
 {
   "HSTMap": {
-    "HSTMap_T1": null,
+    "HSTMap_T1": {
+      "HSTSet*": {
+        "HSTSet*_T1": "HSTKeyValIter const **"
+      }
+    },
     "HSTMap_T2": "HSTKeyValIterLess"
   }
 }
 ------------------------------------------------------
-struct mapItr_HSTKeyValIterLess {
+struct setItr_HSTKeyValIter_const {
+  uint64_t *header_color_0x0;
+  setItr_HSTKeyValIter_const *header_parent_0x8;
+  setItr_HSTKeyValIter_const *header_left_0x10;
+  setItr_HSTKeyValIter_const *header_right_0x18;
+  HSTKeyValIter const ** Key;
+};
+struct HSTSet_setItr_HSTKeyValIter_const {
+  setItr_HSTKeyValIter_const inherit__0x0;
+};
+struct mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
   uint64_t *header_color_0x0;
   uint64_t *header_parent_0x8;
   uint64_t *header_left_0x10;
   uint64_t *header_right_0x18;
-   Key;
+  HSTSet_setItr_HSTKeyValIter_const* Key;
   HSTKeyValIterLess Value;
 };
-struct Hmap_mapItr {
-  mapItr_HSTKeyValIterLess *inherit__0x0;
+struct HSTMap_mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
+  mapItr_HSTSet_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *inherit__0x0;
 };
 
 ##########################################################################################
@@ -234,7 +254,7 @@ struct Hmap_mapItr {
   }
 }
 ------------------------------------------------------
-struct vec {
+struct vec_Node {
   rt::nodegraph::Node* *vector_begin_0x0;
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
@@ -257,7 +277,7 @@ struct vec_Node {
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct vec_vec_vec_vec {
+struct vec_vec_Node {
   vec_Node *vector_begin_0x0;
   vec_Node *vector_end_0x8;
   vec_Node *vector_cap_end_0x10;
@@ -271,11 +291,11 @@ struct vec_vec_vec_vec {
   }
 }
 ------------------------------------------------------
-struct setItr_uint64 {
+struct setItr_HSTKeyValIter_const {
   uint64_t *header_color_0x0;
-  setItr_uint64 *header_parent_0x8;
-  setItr_uint64 *header_left_0x10;
-  setItr_uint64 *header_right_0x18;
+  setItr_HSTKeyValIter_const *header_parent_0x8;
+  setItr_HSTKeyValIter_const *header_left_0x10;
+  setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const * Key;
 };
 
@@ -284,8 +304,8 @@ struct setItr_uint64 {
 {
   "std::set": {
     "std::set_T1": {
-      "std::set": {
-        "std::set_T1": "HSTKeyValIter const **"
+      "std::set*": {
+        "std::set*_T1": "HSTKeyValIter const **"
       }
     }
   }
@@ -298,12 +318,12 @@ struct setItr_HSTKeyValIter_const {
   setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct setItr_uint64_setItr {
+struct setItr_setItr_HSTKeyValIter_const {
   uint64_t *header_color_0x0;
-  setItr_uint64_setItr *header_parent_0x8;
-  setItr_uint64_setItr *header_left_0x10;
-  setItr_uint64_setItr *header_right_0x18;
-  setItr_HSTKeyValIter_const Key;
+  setItr_setItr_HSTKeyValIter_const* *header_parent_0x8;
+  setItr_setItr_HSTKeyValIter_const* *header_left_0x10;
+  setItr_setItr_HSTKeyValIter_const* *header_right_0x18;
+  setItr_HSTKeyValIter_const* Key;
 };
 
 ##########################################################################################
@@ -311,8 +331,8 @@ struct setItr_uint64_setItr {
 {
   "std::unordered_set": {
     "std::unordered_set_T1": {
-      "std::set": {
-        "std::set_T1": "HSTKeyValIter const **"
+      "std::set*": {
+        "std::set*_T1": "HSTKeyValIter const **"
       }
     }
   }
@@ -325,8 +345,8 @@ struct setItr_HSTKeyValIter_const {
   setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct udsetItr_std::unordered_int64 {
-  udsetItr_std::unordered_int64 *_M_nxt;
+struct udsetItr_setItr_HSTKeyValIter_const {
+  udsetItr_setItr_HSTKeyValIter_const* *_M_nxt;
   int64_t Key;
 };
 
@@ -335,8 +355,8 @@ struct udsetItr_std::unordered_int64 {
 {
   "std::unordered_map": {
     "std::unordered_map_T1": {
-      "std::set": {
-        "std::set_T1": "HSTKeyValIter const **"
+      "std::set*": {
+        "std::set*_T1": "HSTKeyValIter const **"
       }
     },
     "std::unordered_map_T2": "HSTKeyValIterLess"
@@ -350,9 +370,9 @@ struct setItr_HSTKeyValIter_const {
   setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct udmapItr_std::unordered_setItr {
-  udmapItr_std::unordered_setItr *_M_nxt;
-  setItr_HSTKeyValIter_const Key;
+struct udmapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
+  udmapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *_M_nxt;
+  setItr_HSTKeyValIter_const* Key;
   HSTKeyValIterLess Value;
 };
 
@@ -361,8 +381,8 @@ struct udmapItr_std::unordered_setItr {
 {
   "std::map": {
     "std::map_T1": {
-      "std::set": {
-        "std::set_T1": "HSTKeyValIter const **"
+      "std::set*": {
+        "std::set*_T1": "HSTKeyValIter const **"
       }
     },
     "std::map_T2": "HSTKeyValIterLess"
@@ -376,12 +396,12 @@ struct setItr_HSTKeyValIter_const {
   setItr_HSTKeyValIter_const *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct mapItr_uint64_uint64_uint64_uint64_setItr {
+struct mapItr_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
   uint64_t *header_color_0x0;
   uint64_t *header_parent_0x8;
   uint64_t *header_left_0x10;
   uint64_t *header_right_0x18;
-  setItr_HSTKeyValIter_const Key;
+  setItr_HSTKeyValIter_const* Key;
   HSTKeyValIterLess Value;
 };
 
@@ -395,10 +415,10 @@ struct mapItr_uint64_uint64_uint64_uint64_setItr {
   }
 }
 ------------------------------------------------------
-struct tuple {
-  float Element_1;
+struct tuple_int_unsigned_short_float {
+  int Element_1;
   unsigned short Element_2;
-  int Element_3;
+  float Element_3;
 };
 
 ##########################################################################################
@@ -435,10 +455,10 @@ struct setItr_mapItr_short_int {
   setItr_mapItr_short_int *header_right_0x18;
   mapItr_short_int Key;
 };
-struct tuple_setItr {
-  int Element_1;
+struct tuple_setItr_mapItr_short_int_string_int {
+  setItr_mapItr_short_int Element_1;
   std::string Element_2;
-  setItr_mapItr_short_int Element_3;
+  int Element_3;
 };
 
 ##########################################################################################
@@ -481,11 +501,11 @@ struct setItr_mapItr_short_int {
   mapItr_short_int Key;
 };
 struct tuple_setItr_mapItr_short_int_string_int {
-  int Element_1;
+  setItr_mapItr_short_int Element_1;
   std::string Element_2;
-  setItr_mapItr_short_int Element_3;
+  int Element_3;
 };
-struct mapItr_uint64_uint64_uint64_uint64_tuple {
+struct mapItr_tuple_setItr_mapItr_short_int_string_int_int {
   uint64_t *header_color_0x0;
   uint64_t *header_parent_0x8;
   uint64_t *header_left_0x10;
@@ -511,13 +531,13 @@ struct vec_Node {
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct HVec_vec_Node {
+struct HSTVector_vec_Node {
   vec_Node inherit__0x0;
 };
-struct vec_HVec_HVec_HVec {
-  HVec_vec_Node *vector_begin_0x0;
-  HVec_vec_Node *vector_end_0x8;
-  HVec_vec_Node *vector_cap_end_0x10;
+struct vec_HSTVector_vec_Node {
+  HSTVector_vec_Node *vector_begin_0x0;
+  HSTVector_vec_Node *vector_end_0x8;
+  HSTVector_vec_Node *vector_cap_end_0x10;
 };
 
 ##########################################################################################
@@ -551,13 +571,13 @@ struct vec_Node {
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct HVec_vec_Node {
+struct HSTVector_vec_Node {
   vec_Node inherit__0x0;
 };
-struct udmapItr_std::unordered_mapItr_HVec {
-  udmapItr_std::unordered_mapItr_HVec *_M_nxt;
+struct udmapItr_mapItr_double_int_HSTVector_vec_Node {
+  udmapItr_mapItr_double_int_HSTVector_vec_Node *_M_nxt;
   mapItr_double_int Key;
-  HVec_vec_Node Value;
+  HSTVector_vec_Node Value;
 };
 
 ##########################################################################################
@@ -594,10 +614,10 @@ struct setItr_mapItr_short_int {
   setItr_mapItr_short_int *header_right_0x18;
   mapItr_short_int Key;
 };
-struct tuple_setItr {
-  int Element_1;
+struct tuple_setItr_mapItr_short_int_string_int {
+  setItr_mapItr_short_int Element_1;
   std::string Element_2;
-  setItr_mapItr_short_int Element_3;
+  int Element_3;
 };
 
 ##########################################################################################
@@ -640,11 +660,11 @@ struct setItr_mapItr_short_int {
   mapItr_short_int Key;
 };
 struct tuple_setItr_mapItr_short_int_string_int {
-  int Element_1;
+  setItr_mapItr_short_int Element_1;
   std::string Element_2;
-  setItr_mapItr_short_int Element_3;
+  int Element_3;
 };
-struct mapItr_uint64_uint64_uint64_uint64_tuple {
+struct mapItr_tuple_setItr_mapItr_short_int_string_int_int {
   uint64_t *header_color_0x0;
   uint64_t *header_parent_0x8;
   uint64_t *header_left_0x10;
@@ -663,10 +683,10 @@ struct mapItr_uint64_uint64_uint64_uint64_tuple {
   }
 }
 ------------------------------------------------------
-struct tuple {
-  double Element_1;
+struct tuple_unsigned_int_int_double {
+  unsigned int Element_1;
   int Element_2;
-  unsigned int Element_3;
+  double Element_3;
 };
 
 ##########################################################################################
@@ -700,12 +720,12 @@ struct vec_Node {
   rt::nodegraph::Node *vector_end_0x8;
   rt::nodegraph::Node *vector_cap_end_0x10;
 };
-struct HVec_vec_Node {
+struct HSTVector_vec_Node {
   vec_Node inherit__0x0;
 };
-struct udmapItr_std::unordered_mapItr_HVec {
-  udmapItr_std::unordered_mapItr_HVec *_M_nxt;
+struct udmapItr_mapItr_double_int_HSTVector_vec_Node {
+  udmapItr_mapItr_double_int_HSTVector_vec_Node *_M_nxt;
   mapItr_double_int Key;
-  HVec_vec_Node Value;
+  HSTVector_vec_Node Value;
 };
 
