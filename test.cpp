@@ -1,14 +1,10 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-
-
+#include "utility.h"
 
 int main() {
-    std::string input = "rt::nodegraph::Node****&&&";
-    std::string output = transform_type_name(input);
-    std::cout << "Original: " << input << std::endl;
-    std::cout << "Transformed: " << output << std::endl;
+    for (int v4 = 0;v4 < 200; v4 += 40) {
+        unsigned int t = 0xCCCCCCCDLL * ((v4 * 40) >> 3);
+        cout << t << "   " << v4 << endl;
+    }
 
     return 0;
 }

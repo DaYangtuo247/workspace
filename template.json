@@ -34,7 +34,7 @@
             "inherit__0x0": "T"
         }
     },
-    "std::set": {
+    "std::setItr": {
         "level": 1,
         "abbreviation": "setItr",
         "struct": {
@@ -43,6 +43,19 @@
             "*header_left_0x10": "std::set",
             "*header_right_0x18": "std::set",
             "Key": "T"
+        }
+    },
+    "std::set": {
+        "level": 1,
+        "public" : "std::setItr",
+        "abbreviation": "set",
+        "struct": {
+            "key_compare_0x0": "uint64_t" ,
+            "end_address_0x8": "T" ,
+            "*header_parent_0x10": "T" ,
+            "*header_left_0x18": "T",
+            "*header_right_0x20": "T",
+            "map_size_0x28": "uint64_t"
         }
     },
     "std::unordered_set": {
@@ -61,16 +74,29 @@
             "*inherit__0x0": "T"
         }
     },
-    "std::map": {
+    "std::mapItr": {
         "level": 2,
         "abbreviation": "mapItr",
         "struct": {
             "header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "std::map",
-            "*header_left_0x10": "std::map",
-            "*header_right_0x18": "std::map",
+            "*header_parent_0x8": "std::mapItr",
+            "*header_left_0x10": "std::mapItr",
+            "*header_right_0x18": "std::mapItr",
             "Key": "T1",
             "Value": "T2"
+        }
+    },
+    "std::map": {
+        "level": 2,
+        "public" : "std::mapItr",
+        "abbreviation": "map",
+        "struct": {
+            "key_compare_0x0": "uint64_t" ,
+            "end_address_0x8": "T" ,
+            "*header_parent_0x10": "T" ,
+            "*header_left_0x18": "T",
+            "*header_right_0x20": "T",
+            "map_size_0x28": "uint64_t"
         }
     },
     "HSTPtrHashMap": {
@@ -110,7 +136,7 @@
         "abbreviation": "sharedPtr",
         "struct": {
             "*ptr": "T",
-            "*count": "__int64"
+            "*count": "std::_Sp_counted_ptr"
         }
     }
 }

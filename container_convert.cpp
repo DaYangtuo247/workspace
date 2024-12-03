@@ -1,6 +1,6 @@
 #include "json.hpp"
 #include "utility.h"
-#define DEBUG 1
+#define DEBUG 0
 
 // using json = nlohmann::json; // 无序
 using json = nlohmann::ordered_json;  // 有序
@@ -77,7 +77,7 @@ json parseContainer(std::string str) {
         if (pos != str.size()) {
             containerName += str.substr(pos);
         }
-        cout << containerName << endl;
+
         currentType = trimAndReplace(currentType);
 
         // 最后一个类型
@@ -253,7 +253,7 @@ int main(int argc, char* argv[]) {
     }
     example = json::parse(f);
 
-    std::string output_file = "./container_convert.txt";
+    std::string output_file = "./container_convert.h";
 
     // ./exe "需要解析的结构" "输出文件名"
     // ./exe "需要解析的结构"
@@ -271,12 +271,17 @@ int main(int argc, char* argv[]) {
             file << "//Input Type: " << type << endl;
             file << res.dump(2) << endl;
             file << "------------------------------------------------------\n";
+        } else {
+            file << "// " << type << endl;
+            file << "//------------------------------------------------------\n";
         }
         generate_struct(res);
         file << endl;
+        file << "//------------------------------------------------------\n";
     }
 
-    std::ofstream fd(output_file, std::ios::trunc);
+    // std::ofstream fd(output_file, std::ios::trunc);
+    std::ofstream fd(output_file, std::ios::app);
     fd << file.str();
     fd.close();
 
