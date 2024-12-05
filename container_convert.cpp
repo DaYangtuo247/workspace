@@ -221,11 +221,11 @@ void show_help() {
     std::cout << "Options:\n";
     std::cout << "  -h                           Show this help message\n";
     std::cout << "  -d [output_file]             clean container_convert.h\n";
-    std::cout << "  -e                           example output\n";
+    std::cout << "  -e [output_file]             example output, default output \"./container_convert.h\"\n";
     std::cout << "  container_name [output_file] container convert, default output \"./container_convert.h\"\n";
 }
 
-// 清空文件操作
+// 清空文件，输出结构体正则匹配
 void processFile(const std::string& filename) {
     std::ifstream infile(filename);
     if (!infile.is_open()) {
@@ -261,18 +261,20 @@ void processFile(const std::string& filename) {
 int main(int argc, char* argv[]) {
     vector<string> testCases;
     bool is_example = false; // 是否输出示例
+    std::string output_file = "./container_convert.h";
 
     std::string arg = argc == 1 ? argv[0] : argv[1];
     if (arg == "-h" || argc == 1) {
       show_help(); 
       return 0;
     } else if (arg == "-d") {
-        string output_file = argc > 2 ? argv[2] : "./container_convert.h";
+        output_file = argc > 2 ? argv[2] : "./container_convert.h";
         processFile(output_file);
         return 0;
 
     } else if (arg == "-e") {
         is_example = true;
+        output_file = argc > 2 ? argv[2] : "./container_convert.h";
         testCases = {
             "std::vector<std::pair<int ,int > *>",
             "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
@@ -310,8 +312,6 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
     example = json::parse(f);
-
-    std::string output_file = "./container_convert.h";
 
     // ./exe "需要解析的结构" "输出文件名"
     // ./exe "需要解析的结构"
