@@ -36,8 +36,8 @@ json parseContainer(std::string str) {
 
     // 检查容器是否在映射表中
     if (!example.contains(containerName)) {
-        cout << "Unknown Type: " << containerName << endl;
-        return ans;
+        cout << "Unknown Type: " << containerName << " Place add to template.json" << endl;
+        exit(1);
     }
 
     // 容器是几元组
@@ -216,36 +216,94 @@ string generate_struct(const json& input, int level = 0) {
     return struct_name + is_ptr;
 }
 
-int main(int argc, char* argv[]) {
-    vector<string> testCases = {
-        "std::vector<std::pair<int ,int > *>",
-        "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
-        "std::shared_ptr<int32_t>",
-        "HSTSet<unsigned int>",
-        "std::vector<std::pair<unsigned int,rt::HDRTNetGuide*>>",
-        "std::unordered_map<std::map<double*, int>, std::HSTVector<rt::nodegraph::Node>>",
-        "HSTMap<HSTKeyValIter const &&,HSTKeyValIterLess>",
-        "std::map<unsigned int, double>",
-        "HSTVector<rt::nodegraph::Node*>",
-        "HSTMap<HSTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        "std::vector<rt::nodegraph::Node*>",
-        "std::vector<std::vector<rt::nodegraph::Node*>>",
-        "std::set<HSTKeyValIter const *,HSTKeyValIterLess>",
-        "std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        "std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        "std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        "std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-        "std::tuple<int,unsigned short,float>",
-        "std::tuple<std::set<std::map<short, int>>, std::string, int>",
-        "std::map<std::tuple<std::set<std::map<short,int>>, std::string, int>,int,less>",
-        "std::vector<HSTVector<rt::nodegraph::Node*>>",
-        "std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node*>>",
-        "std::tuple<std::set<std::map<short, int>>, std::string, int>",
-        "std::map<std::tuple<std::set<std::map<short,int>>,std::string,int>,int>",
-        "std::tuple<unsigned int, int, double>",
-        "std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node>>",
-    };
+void show_help() {
+    std::cout << "Usage: container_convert [options]\n";
+    std::cout << "Options:\n";
+    std::cout << "  -h                           Show this help message\n";
+    std::cout << "  -d [output_file]             clean container_convert.h\n";
+    std::cout << "  -e                           example output\n";
+    std::cout << "  container_name [output_file] container convert, default output \"./container_convert.h\"\n";
+}
 
+// 清空文件操作
+void processFile(const std::string& filename) {
+    std::ifstream infile(filename);
+    if (!infile.is_open()) {
+        std::cout << "Unable to open file: " << filename << std::endl;
+        return;
+    }
+
+    std::vector<std::string> structNames;
+
+    std::regex structRegex(R"(struct\s+(.+?)\s*\{)");
+    std::string line;
+
+    while (std::getline(infile, line)) {
+        std::smatch match;
+        if (std::regex_search(line, match, structRegex)) {
+            structNames.push_back(match[1]);
+        }
+    }
+    infile.close();
+
+    cout << "^(";
+    for (auto it = structNames.begin(); it != structNames.end(); ++it) {
+        if (it != structNames.end() - 1)
+            cout << *it << "|";
+        else
+            cout << *it;
+    }
+    cout << ")\n";
+    std::ofstream outfile(filename, std::ios::trunc);
+    outfile.close();
+}
+
+int main(int argc, char* argv[]) {
+    vector<string> testCases;
+    bool is_example = false; // 是否输出示例
+
+    std::string arg = argc == 1 ? argv[0] : argv[1];
+    if (arg == "-h" || argc == 1) {
+      show_help(); 
+      return 0;
+    } else if (arg == "-d") {
+        string output_file = argc > 2 ? argv[2] : "./container_convert.h";
+        processFile(output_file);
+        return 0;
+
+    } else if (arg == "-e") {
+        is_example = true;
+        testCases = {
+            "std::vector<std::pair<int ,int > *>",
+            "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
+            "std::shared_ptr<int32_t>",
+            "HSTSet<unsigned int>",
+            "std::vector<std::pair<unsigned int,rt::HDRTNetGuide*>>",
+            "std::unordered_map<std::map<double*, int>, HSTVector<rt::nodegraph::Node>>",
+            "HSTMap<HSTKeyValIter const &&,HSTKeyValIterLess>",
+            "std::map<unsigned int, double>",
+            "HSTVector<rt::nodegraph::Node*>",
+            "HSTMap<HSTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+            "std::vector<rt::nodegraph::Node*>",
+            "std::vector<std::vector<rt::nodegraph::Node*>>",
+            "std::set<HSTKeyValIter const *,HSTKeyValIterLess>",
+            "std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+            "std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+            "std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+            "std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
+            "std::tuple<int,unsigned short,float>",
+            "std::tuple<std::set<std::map<short, int>>, std::string, int>",
+            "std::map<std::tuple<std::set<std::map<short,int>>, std::string, int>,int,less>",
+            "std::vector<HSTVector<rt::nodegraph::Node*>>",
+            "std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node*>>",
+            "std::tuple<std::set<std::map<short, int>>, std::string, int>",
+            "std::map<std::tuple<std::set<std::map<short,int>>,std::string,int>,int>",
+            "std::tuple<unsigned int, int, double>",
+            "std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node>>",
+        };
+    }
+
+    // 获取模板
     std::ifstream f("./template.json");
     if (!f.is_open()) {
         cout << "Error: template.json not found!!!" << endl;
@@ -257,7 +315,7 @@ int main(int argc, char* argv[]) {
 
     // ./exe "需要解析的结构" "输出文件名"
     // ./exe "需要解析的结构"
-    if (argc == 3 || argc == 2) {
+    if (!is_example && (argc == 3 || argc == 2)) {
         output_file = argc == 3 ? argv[2] : output_file;
         testCases.clear();
         testCases.push_back(argv[1]);
@@ -272,12 +330,11 @@ int main(int argc, char* argv[]) {
             file << res.dump(2) << endl;
             file << "------------------------------------------------------\n";
         } else {
-            file << "// " << type << endl;
             file << "//------------------------------------------------------\n";
+            file << "// " << type << endl;
         }
         generate_struct(res);
         file << endl;
-        file << "//------------------------------------------------------\n";
     }
 
     // std::ofstream fd(output_file, std::ios::trunc);
@@ -285,8 +342,8 @@ int main(int argc, char* argv[]) {
     fd << file.str();
     fd.close();
 
-    cout << file.str();
-    cout << "output Path: " << output_file << endl;
+    cout << file.str().substr(2);
+    cout << "------------------------------------------------------\noutput Path: " << output_file << endl;
 
     return 0;
 }
