@@ -4,7 +4,7 @@ struct pair_int_int {
   int first;
   int second;
 };
-struct vec_pair_int_int {
+struct vec_pair_int_int_p {
   pair_int_int * *vector_begin_0x0;
   pair_int_int * *vector_end_0x8;
   pair_int_int * *vector_cap_end_0x10;
@@ -12,13 +12,13 @@ struct vec_pair_int_int {
 
 //------------------------------------------------------
 // std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>
-struct vec_HARTRouteNetWrapper {
+struct vec_HARTRouteNetWrapper_p {
   rt::HARTRouteNetWrapper* *vector_begin_0x0;
   rt::HARTRouteNetWrapper* *vector_end_0x8;
   rt::HARTRouteNetWrapper* *vector_cap_end_0x10;
 };
-struct HSTVector_vec_HARTRouteNetWrapper {
-  vec_HARTRouteNetWrapper inherit__0x0;
+struct HSTVector_vec_HARTRouteNetWrapper_p {
+  vec_HARTRouteNetWrapper_p inherit__0x0;
 };
 struct sharedPtr_unsigned_int {
   unsigned int *ptr;
@@ -40,8 +40,8 @@ struct map_mapItr_double_int {
   mapItr_double_int *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct tuple_HSTVector_vec_HARTRouteNetWrapper_sharedPtr_unsigned_int_map_mapItr_double_int_int {
-  HSTVector_vec_HARTRouteNetWrapper Element_1;
+struct tuple_HSTVector_vec_HARTRouteNetWrapper_p_sharedPtr_unsigned_int_map_mapItr_double_int_int {
+  HSTVector_vec_HARTRouteNetWrapper_p Element_1;
   sharedPtr_unsigned_int Element_2;
   map_mapItr_double_int Element_3;
   int Element_4;
@@ -58,14 +58,14 @@ struct sharedPtr_int32_t {
 // HSTSet<unsigned int>
 struct setItr_unsigned_int {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_unsigned_int *header_parent_0x8;
+  setItr_unsigned_int *header_left_0x10;
+  setItr_unsigned_int *header_right_0x18;
   unsigned int Key;
 };
 struct set_setItr_unsigned_int {
   uint64_t key_compare_0x0;
-  setItr_unsigned_int end_address_0x8;
+  uint64_t end_address_0x8;
   setItr_unsigned_int *header_parent_0x10;
   setItr_unsigned_int *header_left_0x18;
   setItr_unsigned_int *header_right_0x20;
@@ -77,32 +77,32 @@ struct HSTSet_set_setItr_unsigned_int {
 
 //------------------------------------------------------
 // std::vector<std::pair<unsigned int,rt::HDRTNetGuide*>>
-struct pair_unsigned_int_HDRTNetGuide {
+struct pair_unsigned_int_HDRTNetGuide_p {
   unsigned int first;
   rt::HDRTNetGuide* second;
 };
-struct vec_pair_unsigned_int_HDRTNetGuide {
-  pair_unsigned_int_HDRTNetGuide *vector_begin_0x0;
-  pair_unsigned_int_HDRTNetGuide *vector_end_0x8;
-  pair_unsigned_int_HDRTNetGuide *vector_cap_end_0x10;
+struct vec_pair_unsigned_int_HDRTNetGuide_p {
+  pair_unsigned_int_HDRTNetGuide_p *vector_begin_0x0;
+  pair_unsigned_int_HDRTNetGuide_p *vector_end_0x8;
+  pair_unsigned_int_HDRTNetGuide_p *vector_cap_end_0x10;
 };
 
 //------------------------------------------------------
 // std::unordered_map<std::map<double*, int>, HSTVector<rt::nodegraph::Node>>
-struct mapItr_double_int {
+struct mapItr_double_p_int {
   uint64_t header_color_0x0;
-  mapItr_double_int *header_parent_0x8;
-  mapItr_double_int *header_left_0x10;
-  mapItr_double_int *header_right_0x18;
+  mapItr_double_p_int *header_parent_0x8;
+  mapItr_double_p_int *header_left_0x10;
+  mapItr_double_p_int *header_right_0x18;
   double* Key;
   int Value;
 };
-struct map_mapItr_double_int {
+struct map_mapItr_double_p_int {
   uint64_t key_compare_0x0;
-  mapItr_double_int end_address_0x8;
-  mapItr_double_int *header_parent_0x10;
-  mapItr_double_int *header_left_0x18;
-  mapItr_double_int *header_right_0x20;
+  mapItr_double_p_int end_address_0x8;
+  mapItr_double_p_int *header_parent_0x10;
+  mapItr_double_p_int *header_left_0x18;
+  mapItr_double_p_int *header_right_0x20;
   uint64_t map_size_0x28;
 };
 struct vec_Node {
@@ -113,32 +113,32 @@ struct vec_Node {
 struct HSTVector_vec_Node {
   vec_Node inherit__0x0;
 };
-struct udmapItr_map_mapItr_double_int_HSTVector_vec_Node {
-  udmapItr_map_mapItr_double_int_HSTVector_vec_Node *_M_nxt;
-  map_mapItr_double_int Key;
+struct udmapItr_map_mapItr_double_p_int_HSTVector_vec_Node {
+  udmapItr_map_mapItr_double_p_int_HSTVector_vec_Node *_M_nxt;
+  map_mapItr_double_p_int Key;
   HSTVector_vec_Node Value;
 };
 
 //------------------------------------------------------
 // HSTMap<HSTKeyValIter const &&,HSTKeyValIterLess>
-struct mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
+struct mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess {
   uint64_t header_color_0x0;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_parent_0x8;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_left_0x10;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_right_0x18;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *header_parent_0x8;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *header_left_0x10;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *header_right_0x18;
   HSTKeyValIter const ** Key;
   HSTKeyValIterLess Value;
 };
-struct map_mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
+struct map_mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess {
   uint64_t key_compare_0x0;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess end_address_0x8;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_parent_0x10;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_left_0x18;
-  mapItr_HSTKeyValIter_const_HSTKeyValIterLess *header_right_0x20;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess end_address_0x8;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *header_parent_0x10;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *header_left_0x18;
+  mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct HSTMap_map_mapItr_HSTKeyValIter_const_HSTKeyValIterLess {
-  map_mapItr_HSTKeyValIter_const_HSTKeyValIterLess *inherit__0x0;
+struct HSTMap_map_mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess {
+  map_mapItr_HSTKeyValIter_const_pp_HSTKeyValIterLess *inherit__0x0;
 };
 
 //------------------------------------------------------
@@ -162,58 +162,58 @@ struct map_mapItr_unsigned_int_double {
 
 //------------------------------------------------------
 // HSTVector<rt::nodegraph::Node*>
-struct vec_Node {
+struct vec_Node_p {
   rt::nodegraph::Node* *vector_begin_0x0;
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct HSTVector_vec_Node {
-  vec_Node inherit__0x0;
+struct HSTVector_vec_Node_p {
+  vec_Node_p inherit__0x0;
 };
 
 //------------------------------------------------------
 // HSTMap<HSTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>
-struct setItr_HSTKeyValIter_const {
+struct setItr_HSTKeyValIter_const_pp {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x8;
+  setItr_HSTKeyValIter_const_pp *header_left_0x10;
+  setItr_HSTKeyValIter_const_pp *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct set_setItr_HSTKeyValIter_const {
+struct set_setItr_HSTKeyValIter_const_pp {
   uint64_t key_compare_0x0;
-  setItr_HSTKeyValIter_const end_address_0x8;
-  setItr_HSTKeyValIter_const *header_parent_0x10;
-  setItr_HSTKeyValIter_const *header_left_0x18;
-  setItr_HSTKeyValIter_const *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x10;
+  setItr_HSTKeyValIter_const_pp *header_left_0x18;
+  setItr_HSTKeyValIter_const_pp *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct HSTSet_set_setItr_HSTKeyValIter_const {
-  set_setItr_HSTKeyValIter_const inherit__0x0;
+struct HSTSet_set_setItr_HSTKeyValIter_const_pp {
+  set_setItr_HSTKeyValIter_const_pp inherit__0x0;
 };
-struct mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
+struct mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess {
   uint64_t header_color_0x0;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_parent_0x8;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_left_0x10;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_right_0x18;
-  HSTSet_set_setItr_HSTKeyValIter_const* Key;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_parent_0x8;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_left_0x10;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_right_0x18;
+  HSTSet_set_setItr_HSTKeyValIter_const_pp* Key;
   HSTKeyValIterLess Value;
 };
-struct map_mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
+struct map_mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess {
   uint64_t key_compare_0x0;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess end_address_0x8;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_parent_0x10;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_left_0x18;
-  mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_right_0x20;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess end_address_0x8;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_parent_0x10;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_left_0x18;
+  mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct HSTMap_map_mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
-  map_mapItr_HSTSet_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *inherit__0x0;
+struct HSTMap_map_mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess {
+  map_mapItr_HSTSet_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *inherit__0x0;
 };
 
 //------------------------------------------------------
 // std::vector<rt::nodegraph::Node*>
-struct vec_Node {
+struct vec_Node_p {
   rt::nodegraph::Node* *vector_begin_0x0;
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
@@ -221,144 +221,144 @@ struct vec_Node {
 
 //------------------------------------------------------
 // std::vector<std::vector<rt::nodegraph::Node*>>
-struct vec_Node {
+struct vec_Node_p {
   rt::nodegraph::Node* *vector_begin_0x0;
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct vec_vec_Node {
-  vec_Node *vector_begin_0x0;
-  vec_Node *vector_end_0x8;
-  vec_Node *vector_cap_end_0x10;
+struct vec_vec_Node_p {
+  vec_Node_p *vector_begin_0x0;
+  vec_Node_p *vector_end_0x8;
+  vec_Node_p *vector_cap_end_0x10;
 };
 
 //------------------------------------------------------
 // std::set<HSTKeyValIter const *,HSTKeyValIterLess>
-struct setItr_HSTKeyValIter_const {
+struct setItr_HSTKeyValIter_const_p {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_HSTKeyValIter_const_p *header_parent_0x8;
+  setItr_HSTKeyValIter_const_p *header_left_0x10;
+  setItr_HSTKeyValIter_const_p *header_right_0x18;
   HSTKeyValIter const * Key;
 };
-struct set_setItr_HSTKeyValIter_const {
+struct set_setItr_HSTKeyValIter_const_p {
   uint64_t key_compare_0x0;
-  setItr_HSTKeyValIter_const end_address_0x8;
-  setItr_HSTKeyValIter_const *header_parent_0x10;
-  setItr_HSTKeyValIter_const *header_left_0x18;
-  setItr_HSTKeyValIter_const *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_HSTKeyValIter_const_p *header_parent_0x10;
+  setItr_HSTKeyValIter_const_p *header_left_0x18;
+  setItr_HSTKeyValIter_const_p *header_right_0x20;
   uint64_t map_size_0x28;
 };
 
 //------------------------------------------------------
 // std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
-struct setItr_HSTKeyValIter_const {
+struct setItr_HSTKeyValIter_const_pp {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x8;
+  setItr_HSTKeyValIter_const_pp *header_left_0x10;
+  setItr_HSTKeyValIter_const_pp *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct set_setItr_HSTKeyValIter_const {
+struct set_setItr_HSTKeyValIter_const_pp {
   uint64_t key_compare_0x0;
-  setItr_HSTKeyValIter_const end_address_0x8;
-  setItr_HSTKeyValIter_const *header_parent_0x10;
-  setItr_HSTKeyValIter_const *header_left_0x18;
-  setItr_HSTKeyValIter_const *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x10;
+  setItr_HSTKeyValIter_const_pp *header_left_0x18;
+  setItr_HSTKeyValIter_const_pp *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct setItr_set_setItr_HSTKeyValIter_const {
+struct setItr_set_setItr_HSTKeyValIter_const_pp_p {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
-  set_setItr_HSTKeyValIter_const* Key;
+  setItr_set_setItr_HSTKeyValIter_const_pp_p *header_parent_0x8;
+  setItr_set_setItr_HSTKeyValIter_const_pp_p *header_left_0x10;
+  setItr_set_setItr_HSTKeyValIter_const_pp_p *header_right_0x18;
+  set_setItr_HSTKeyValIter_const_pp* Key;
 };
-struct set_setItr_set_setItr_HSTKeyValIter_const {
+struct set_setItr_set_setItr_HSTKeyValIter_const_pp_p {
   uint64_t key_compare_0x0;
-  setItr_set_setItr_HSTKeyValIter_const* end_address_0x8;
-  setItr_set_setItr_HSTKeyValIter_const* *header_parent_0x10;
-  setItr_set_setItr_HSTKeyValIter_const* *header_left_0x18;
-  setItr_set_setItr_HSTKeyValIter_const* *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_set_setItr_HSTKeyValIter_const_pp_p *header_parent_0x10;
+  setItr_set_setItr_HSTKeyValIter_const_pp_p *header_left_0x18;
+  setItr_set_setItr_HSTKeyValIter_const_pp_p *header_right_0x20;
   uint64_t map_size_0x28;
 };
 
 //------------------------------------------------------
 // std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
-struct setItr_HSTKeyValIter_const {
+struct setItr_HSTKeyValIter_const_pp {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x8;
+  setItr_HSTKeyValIter_const_pp *header_left_0x10;
+  setItr_HSTKeyValIter_const_pp *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct set_setItr_HSTKeyValIter_const {
+struct set_setItr_HSTKeyValIter_const_pp {
   uint64_t key_compare_0x0;
-  setItr_HSTKeyValIter_const end_address_0x8;
-  setItr_HSTKeyValIter_const *header_parent_0x10;
-  setItr_HSTKeyValIter_const *header_left_0x18;
-  setItr_HSTKeyValIter_const *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x10;
+  setItr_HSTKeyValIter_const_pp *header_left_0x18;
+  setItr_HSTKeyValIter_const_pp *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct udsetItr_set_setItr_HSTKeyValIter_const {
-  udsetItr_set_setItr_HSTKeyValIter_const* *_M_nxt;
+struct udsetItr_set_setItr_HSTKeyValIter_const_pp_p {
+  udsetItr_set_setItr_HSTKeyValIter_const_pp_p *_M_nxt;
   int64_t Key;
 };
 
 //------------------------------------------------------
 // std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
-struct setItr_HSTKeyValIter_const {
+struct setItr_HSTKeyValIter_const_pp {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x8;
+  setItr_HSTKeyValIter_const_pp *header_left_0x10;
+  setItr_HSTKeyValIter_const_pp *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct set_setItr_HSTKeyValIter_const {
+struct set_setItr_HSTKeyValIter_const_pp {
   uint64_t key_compare_0x0;
-  setItr_HSTKeyValIter_const end_address_0x8;
-  setItr_HSTKeyValIter_const *header_parent_0x10;
-  setItr_HSTKeyValIter_const *header_left_0x18;
-  setItr_HSTKeyValIter_const *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x10;
+  setItr_HSTKeyValIter_const_pp *header_left_0x18;
+  setItr_HSTKeyValIter_const_pp *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct udmapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
-  udmapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *_M_nxt;
-  set_setItr_HSTKeyValIter_const* Key;
+struct udmapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess {
+  udmapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *_M_nxt;
+  set_setItr_HSTKeyValIter_const_pp* Key;
   HSTKeyValIterLess Value;
 };
 
 //------------------------------------------------------
 // std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>
-struct setItr_HSTKeyValIter_const {
+struct setItr_HSTKeyValIter_const_pp {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x8;
+  setItr_HSTKeyValIter_const_pp *header_left_0x10;
+  setItr_HSTKeyValIter_const_pp *header_right_0x18;
   HSTKeyValIter const ** Key;
 };
-struct set_setItr_HSTKeyValIter_const {
+struct set_setItr_HSTKeyValIter_const_pp {
   uint64_t key_compare_0x0;
-  setItr_HSTKeyValIter_const end_address_0x8;
-  setItr_HSTKeyValIter_const *header_parent_0x10;
-  setItr_HSTKeyValIter_const *header_left_0x18;
-  setItr_HSTKeyValIter_const *header_right_0x20;
+  uint64_t end_address_0x8;
+  setItr_HSTKeyValIter_const_pp *header_parent_0x10;
+  setItr_HSTKeyValIter_const_pp *header_left_0x18;
+  setItr_HSTKeyValIter_const_pp *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
+struct mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess {
   uint64_t header_color_0x0;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_parent_0x8;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_left_0x10;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_right_0x18;
-  set_setItr_HSTKeyValIter_const* Key;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_parent_0x8;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_left_0x10;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_right_0x18;
+  set_setItr_HSTKeyValIter_const_pp* Key;
   HSTKeyValIterLess Value;
 };
-struct map_mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess {
+struct map_mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess {
   uint64_t key_compare_0x0;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess end_address_0x8;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_parent_0x10;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_left_0x18;
-  mapItr_set_setItr_HSTKeyValIter_const*_HSTKeyValIterLess *header_right_0x20;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess end_address_0x8;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_parent_0x10;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_left_0x18;
+  mapItr_set_setItr_HSTKeyValIter_const_pp_p_HSTKeyValIterLess *header_right_0x20;
   uint64_t map_size_0x28;
 };
 
@@ -390,14 +390,14 @@ struct map_mapItr_short_int {
 };
 struct setItr_map_mapItr_short_int {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_map_mapItr_short_int *header_parent_0x8;
+  setItr_map_mapItr_short_int *header_left_0x10;
+  setItr_map_mapItr_short_int *header_right_0x18;
   map_mapItr_short_int Key;
 };
 struct set_setItr_map_mapItr_short_int {
   uint64_t key_compare_0x0;
-  setItr_map_mapItr_short_int end_address_0x8;
+  uint64_t end_address_0x8;
   setItr_map_mapItr_short_int *header_parent_0x10;
   setItr_map_mapItr_short_int *header_left_0x18;
   setItr_map_mapItr_short_int *header_right_0x20;
@@ -429,14 +429,14 @@ struct map_mapItr_short_int {
 };
 struct setItr_map_mapItr_short_int {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_map_mapItr_short_int *header_parent_0x8;
+  setItr_map_mapItr_short_int *header_left_0x10;
+  setItr_map_mapItr_short_int *header_right_0x18;
   map_mapItr_short_int Key;
 };
 struct set_setItr_map_mapItr_short_int {
   uint64_t key_compare_0x0;
-  setItr_map_mapItr_short_int end_address_0x8;
+  uint64_t end_address_0x8;
   setItr_map_mapItr_short_int *header_parent_0x10;
   setItr_map_mapItr_short_int *header_left_0x18;
   setItr_map_mapItr_short_int *header_right_0x20;
@@ -466,18 +466,18 @@ struct map_mapItr_tuple_set_setItr_map_mapItr_short_int_string_int_int {
 
 //------------------------------------------------------
 // std::vector<HSTVector<rt::nodegraph::Node*>>
-struct vec_Node {
+struct vec_Node_p {
   rt::nodegraph::Node* *vector_begin_0x0;
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct HSTVector_vec_Node {
-  vec_Node inherit__0x0;
+struct HSTVector_vec_Node_p {
+  vec_Node_p inherit__0x0;
 };
-struct vec_HSTVector_vec_Node {
-  HSTVector_vec_Node *vector_begin_0x0;
-  HSTVector_vec_Node *vector_end_0x8;
-  HSTVector_vec_Node *vector_cap_end_0x10;
+struct vec_HSTVector_vec_Node_p {
+  HSTVector_vec_Node_p *vector_begin_0x0;
+  HSTVector_vec_Node_p *vector_end_0x8;
+  HSTVector_vec_Node_p *vector_cap_end_0x10;
 };
 
 //------------------------------------------------------
@@ -498,18 +498,18 @@ struct map_mapItr_double_int {
   mapItr_double_int *header_right_0x20;
   uint64_t map_size_0x28;
 };
-struct vec_Node {
+struct vec_Node_p {
   rt::nodegraph::Node* *vector_begin_0x0;
   rt::nodegraph::Node* *vector_end_0x8;
   rt::nodegraph::Node* *vector_cap_end_0x10;
 };
-struct HSTVector_vec_Node {
-  vec_Node inherit__0x0;
+struct HSTVector_vec_Node_p {
+  vec_Node_p inherit__0x0;
 };
-struct udmapItr_map_mapItr_double_int_HSTVector_vec_Node {
-  udmapItr_map_mapItr_double_int_HSTVector_vec_Node *_M_nxt;
+struct udmapItr_map_mapItr_double_int_HSTVector_vec_Node_p {
+  udmapItr_map_mapItr_double_int_HSTVector_vec_Node_p *_M_nxt;
   map_mapItr_double_int Key;
-  HSTVector_vec_Node Value;
+  HSTVector_vec_Node_p Value;
 };
 
 //------------------------------------------------------
@@ -532,14 +532,14 @@ struct map_mapItr_short_int {
 };
 struct setItr_map_mapItr_short_int {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_map_mapItr_short_int *header_parent_0x8;
+  setItr_map_mapItr_short_int *header_left_0x10;
+  setItr_map_mapItr_short_int *header_right_0x18;
   map_mapItr_short_int Key;
 };
 struct set_setItr_map_mapItr_short_int {
   uint64_t key_compare_0x0;
-  setItr_map_mapItr_short_int end_address_0x8;
+  uint64_t end_address_0x8;
   setItr_map_mapItr_short_int *header_parent_0x10;
   setItr_map_mapItr_short_int *header_left_0x18;
   setItr_map_mapItr_short_int *header_right_0x20;
@@ -571,14 +571,14 @@ struct map_mapItr_short_int {
 };
 struct setItr_map_mapItr_short_int {
   uint64_t header_color_0x0;
-  std::set *header_parent_0x8;
-  std::set *header_left_0x10;
-  std::set *header_right_0x18;
+  setItr_map_mapItr_short_int *header_parent_0x8;
+  setItr_map_mapItr_short_int *header_left_0x10;
+  setItr_map_mapItr_short_int *header_right_0x18;
   map_mapItr_short_int Key;
 };
 struct set_setItr_map_mapItr_short_int {
   uint64_t key_compare_0x0;
-  setItr_map_mapItr_short_int end_address_0x8;
+  uint64_t end_address_0x8;
   setItr_map_mapItr_short_int *header_parent_0x10;
   setItr_map_mapItr_short_int *header_left_0x18;
   setItr_map_mapItr_short_int *header_right_0x20;

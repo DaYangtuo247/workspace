@@ -20,10 +20,10 @@ std::string trimAndReplace(std::string str) {
 
 // 获取结构体名称
 string getStructName(string str) {
-    int star = 0; // 统计指针个数
+    int starCount = 0; // 统计指针个数
     // 去除类型
     while (str.back() == '*' || str.back() == ' ') {
-        if(str.back() == '*') star++;
+        if(str.back() == '*') starCount++;
         str.pop_back();
     }
     std::replace(str.begin(), str.end(), ' ', '_');
@@ -33,8 +33,8 @@ string getStructName(string str) {
         str = str.substr(pos + 2);
     
     //添加指针信息
-    if(star)
-        return str + "_" + string(star, 'p');
+    if(starCount)
+        return str + "_" + string(starCount, 'p');
     else
         return str;
 }
@@ -184,19 +184,19 @@ string generateStruct(const json& input) {
             else
                 new_j = {{example[type]["iterator"], value}};
             sub_struct_name = generateStruct(new_j);
-            struct_name += sub_struct_name + "_";
             is_public = true;
         }
         // 容器存储基本类型, 直接输出为 struct
         else if (value_new.is_string()) {
             sub_struct_name = value_new.get<std::string>();
-            struct_name += getStructName(value_new) + "_";
         }
         // 容器存储对象
         else if (value_new.is_object()) {
             sub_struct_name = generateStruct(value_new);
-            struct_name += sub_struct_name + "_";
         }
+        
+        // 当前结构体加上子结构体的名称
+        struct_name += getStructName(sub_struct_name) + "_";
 
         // 修改输出类型
         for (const auto& el : output.items()) {
@@ -220,12 +220,12 @@ string generateStruct(const json& input) {
     }
 
     // 输出结构
-    file << "struct " << struct_name + getStructName(is_ptr) << " {\n";
+    file << "struct " << getStructName(struct_name) << " {\n";
     for (const auto& el : output.items())
         file << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
     file << "};\n";
 
-    return struct_name + getStructName(is_ptr);
+    return struct_name + is_ptr;
 }
 
 // 清空文件，输出结构体正则匹配串
