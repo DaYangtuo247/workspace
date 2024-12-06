@@ -1,8 +1,6 @@
 #include "json.hpp"
 #include "utility.h"
-#define DEBUG 0
 
-// using json = nlohmann::json; // 无序
 using json = nlohmann::ordered_json;  // 有序
 
 json example;       // json模板
@@ -18,6 +16,51 @@ std::string trimAndReplace(std::string str) {
     for (char& ch : str)
         ch = ch == '&' ? '*' : ch;
     return str.substr(left, right - left + 1);
+}
+
+// 获取结构体名称
+string getStructName(string str) {
+    int star = 0; // 统计指针个数
+    // 去除类型
+    while (str.back() == '*' || str.back() == ' ') {
+        if(str.back() == '*') star++;
+        str.pop_back();
+    }
+    std::replace(str.begin(), str.end(), ' ', '_');
+    // 去除作用域
+    size_t pos = str.rfind("::");
+    if (pos != std::string::npos)
+        str = str.substr(pos + 2);
+    
+    //添加指针信息
+    if(star)
+        return str + "_" + string(star, 'p');
+    else
+        return str;
+}
+
+// 判断str是不是为TN，即为T，T1，T2...，输入i用于判断是否 str == "Ti"
+bool isTN(std::string str, int i) {
+    if (str.size() == 1 && str[0] == 'T')
+        return true;
+    if (str.size() == 2 && str[0] == 'T' && isdigit(str[1])) {
+        return str[1] - '0' == i;
+    }
+    return false;
+}
+
+// 获取容器类型外的信息，如指针，子类等
+string getTypeStruct(string & str) {
+    auto it = std::find_if(str.begin(), str.end(), [](char ch) {
+        return !(std::isalnum(ch) || ch == ':' || ch == '_');
+    });
+
+    if (it != str.end()) {
+        std::string result(it, str.end());
+        str = str.substr(0, std::distance(str.begin(), it));
+        return result;
+    }
+    return "";
 }
 
 // 解析输入的字符串为json对象
@@ -96,44 +139,8 @@ json parseContainer(std::string str) {
     return ans;
 }
 
-// 获取结构体名称
-string getStructName(string str) {
-    while (str.back() == '*' || str.back() == '&' || str.back() == ' ')
-        str.pop_back();
-    std::replace(str.begin(), str.end(), ' ', '_');
-    size_t pos = str.rfind("::");
-    if (pos != std::string::npos)
-        str = str.substr(pos + 2);
-    return str;
-}
-
-// 判断str是不是为TN，即为T，T1，T2...，输入i用于判断是否 str == "Ti"
-bool isTN(std::string str, int i) {
-    if (str.size() == 1 && str[0] == 'T')
-        return true;
-    if (str.size() == 2 && str[0] == 'T' && isdigit(str[1])) {
-        return str[1] - '0' == i;
-    }
-    return false;
-}
-
-// 获取容器类型外的信息，如指针，子类等
-string getTypeStruct(string & str) {
-    auto it = std::find_if(str.begin(), str.end(), [](char ch) {
-        return !(std::isalnum(ch) || ch == ':' || ch == '_');
-    });
-
-    if (it != str.end()) {
-        std::string result(it, str.end());
-        str = str.substr(0, std::distance(str.begin(), it));
-        return result;
-    }
-
-    return "";
-}
-
 // json解析为结构体输出
-string generate_struct(const json& input, int level = 0) {
+string generateStruct(const json& input) {
     // 获取类型名（如 "HSTVector"）
     string type = trimAndReplace(input.begin().key());
     
@@ -169,10 +176,14 @@ string generate_struct(const json& input, int level = 0) {
         json value_new = input_el.value();
         
         bool is_public = false;
-        // 存在继承结构, 只执行一次，无需递归
-        if (example[type].contains("public")) {
-            json new_j = {{example[type]["public"], value}};
-            sub_struct_name = generate_struct(new_j, level + 1);
+        // 存在继承（迭代器）, 只执行一次，无需递归
+        if (example[type].contains("public") || example[type].contains("iterator")) {
+            json new_j;
+            if (example[type].contains("public"))
+                new_j = {{example[type]["public"], value}};
+            else
+                new_j = {{example[type]["iterator"], value}};
+            sub_struct_name = generateStruct(new_j);
             struct_name += sub_struct_name + "_";
             is_public = true;
         }
@@ -183,7 +194,7 @@ string generate_struct(const json& input, int level = 0) {
         }
         // 容器存储对象
         else if (value_new.is_object()) {
-            sub_struct_name = generate_struct(value_new, level + 1);
+            sub_struct_name = generateStruct(value_new);
             struct_name += sub_struct_name + "_";
         }
 
@@ -209,31 +220,21 @@ string generate_struct(const json& input, int level = 0) {
     }
 
     // 输出结构
-    file << "struct " << getStructName(struct_name) << " {\n";
+    file << "struct " << struct_name + getStructName(is_ptr) << " {\n";
     for (const auto& el : output.items())
         file << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
     file << "};\n";
 
-    return struct_name + is_ptr;
+    return struct_name + getStructName(is_ptr);
 }
 
-void show_help() {
-    std::cout << "Options:\n";
-    std::cout << "  -h                           Show this help message\n";
-    std::cout << "  -d [output_file]             Generate [output_file].h.bak file, clean [output_file].h\n";
-    std::cout << "  -e [output_file]             example output to [output_file]\n";
-    std::cout << "  container_name [output_file] container convert\n";
-    std::cout << "note: Default output: ./container_convert.h\n";
-}
-
-// 清空文件，输出结构体正则匹配
+// 清空文件，输出结构体正则匹配串
 void processFile(const std::string& filename) {
     std::ifstream infile(filename);
     if (!infile.is_open()) {
-        std::cout << "Unable to open file: " << filename << std::endl;
+        std::cout << "not found: " << filename << std::endl;
         return;
     }
-
     // 备份文件
     std::ofstream backfile(filename + ".bak", std::ios::trunc);
     backfile << infile.rdbuf();
@@ -242,15 +243,13 @@ void processFile(const std::string& filename) {
     infile.seekg(0, std::ios::beg);
 
     std::vector<std::string> structNames;
-
     std::regex structRegex(R"(struct\s+(.+?)\s*\{)");
     std::string line;
 
     while (std::getline(infile, line)) {
         std::smatch match;
-        if (std::regex_search(line, match, structRegex)) {
+        if (std::regex_search(line, match, structRegex))
             structNames.push_back(match[1]);
-        }
     }
     infile.close();
 
@@ -268,26 +267,25 @@ void processFile(const std::string& filename) {
 }
 
 int main(int argc, char* argv[]) {
-    vector<string> testCases;
-    bool is_example = false; // 是否输出示例
-    std::string output_file = "./container_convert.h"; // 默认输出路径
-
+    // 显示帮助信息
     if (argc == 1 || (argc >= 2 && string(argv[1]) == "-h")) {
-      show_help();
+        std::cout << "Options:\n";
+        std::cout << "  -h                           Show this help message\n";
+        std::cout << "  -d [output_file]             Generate [output_file].h.bak, clean [output_file].h\n";
+        std::cout << "  -e [output_file]             example output to [output_file]\n";
+        std::cout << "  container_name [output_file] container convert\n";
+        std::cout << "note: Default output: ./container_convert.h\n";
       return 0;
-
     }
+    vector<string> testCases;
+    std::string output_path; // 默认输出路径
+    output_path = argc == 3 ? argv[2] : "./container_convert.h";
     
     string arg = argv[1];
-
     if (arg == "-d") {
-        output_file = argc == 3 ? argv[2] : "./container_convert.h";
-        processFile(output_file);
+        processFile(output_path);
         return 0;
-
     } else if (arg == "-e") {
-        is_example = true;
-        output_file = argc == 3 ? argv[2] : "./container_convert.h";
         testCases = {
             "std::vector<std::pair<int ,int > *>",
             "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
@@ -326,18 +324,15 @@ int main(int argc, char* argv[]) {
     }
     example = json::parse(f);
 
-    // ./exe "需要解析的结构" "输出文件名"
-    // ./exe "需要解析的结构"
-    if (!is_example && (argc == 3 || argc == 2)) {
-        output_file = argc == 3 ? argv[2] : output_file;
-        testCases.clear();
+    // 获取需要解析的容器
+    if (!testCases.size())
         testCases.push_back(argv[1]);
-    }
 
     // 遍历每个测试案例进行解析
     for (const auto& type : testCases) {
         json res = parseContainer(type);
-        if (DEBUG) {
+        // 输出路径是debug时，打开调试模式
+        if (output_path == "debug") {
             file << "##########################################################################################\n";
             file << "//Input Type: " << type << endl;
             file << res.dump(2) << endl;
@@ -346,17 +341,16 @@ int main(int argc, char* argv[]) {
             file << "//------------------------------------------------------\n";
             file << "// " << type << endl;
         }
-        generate_struct(res);
+        generateStruct(res);
         file << endl;
     }
 
-    // std::ofstream fd(output_file, std::ios::trunc);
-    std::ofstream fd(output_file, std::ios::app);
+    std::ofstream fd(output_path, std::ios::app);
     fd << file.str();
     fd.close();
 
     cout << file.str().substr(2);
-    cout << "------------------------------------------------------\noutput Path: " << output_file << endl;
+    cout << "------------------------------------------------------\noutput Path: " << output_path << endl;
 
     return 0;
 }
