@@ -36,7 +36,7 @@ json parseContainer(std::string str) {
 
     // 检查容器是否在映射表中
     if (!example.contains(containerName)) {
-        cout << "Unknown Type: " << containerName << " Place add to template.json" << endl;
+        cout << "Unknown Type: " << containerName << ", Place add to template.json" << endl;
         exit(1);
     }
 
@@ -117,9 +117,10 @@ bool isTN(std::string str, int i) {
     return false;
 }
 
-string get_is_ptr(string & str) {
+// 获取容器类型外的信息，如指针，子类等
+string getTypeStruct(string & str) {
     auto it = std::find_if(str.begin(), str.end(), [](char ch) {
-        return !(std::isalnum(static_cast<unsigned char>(ch)) || ch == ':' || ch == '_');
+        return !(std::isalnum(ch) || ch == ':' || ch == '_');
     });
 
     if (it != str.end()) {
@@ -137,7 +138,7 @@ string generate_struct(const json& input, int level = 0) {
     string type = trimAndReplace(input.begin().key());
     
     // 判断type是否是指针结构
-    string is_ptr = get_is_ptr(type);
+    string is_ptr = getTypeStruct(type);
 
     // 确保类型在模板中存在
     if (!example.contains(type)) {
@@ -217,12 +218,12 @@ string generate_struct(const json& input, int level = 0) {
 }
 
 void show_help() {
-    std::cout << "Usage: container_convert [options]\n";
     std::cout << "Options:\n";
     std::cout << "  -h                           Show this help message\n";
-    std::cout << "  -d [output_file]             clean container_convert.h\n";
-    std::cout << "  -e [output_file]             example output, default output \"./container_convert.h\"\n";
-    std::cout << "  container_name [output_file] container convert, default output \"./container_convert.h\"\n";
+    std::cout << "  -d [output_file]             Generate [output_file].h.bak file, clean [output_file].h\n";
+    std::cout << "  -e [output_file]             example output to [output_file]\n";
+    std::cout << "  container_name [output_file] container convert\n";
+    std::cout << "note: Default output: ./container_convert.h\n";
 }
 
 // 清空文件，输出结构体正则匹配
@@ -232,6 +233,13 @@ void processFile(const std::string& filename) {
         std::cout << "Unable to open file: " << filename << std::endl;
         return;
     }
+
+    // 备份文件
+    std::ofstream backfile(filename + ".bak", std::ios::trunc);
+    backfile << infile.rdbuf();
+    backfile.close();
+    infile.clear();
+    infile.seekg(0, std::ios::beg);
 
     std::vector<std::string> structNames;
 
@@ -254,6 +262,7 @@ void processFile(const std::string& filename) {
             cout << *it;
     }
     cout << ")\n";
+
     std::ofstream outfile(filename, std::ios::trunc);
     outfile.close();
 }
@@ -261,20 +270,24 @@ void processFile(const std::string& filename) {
 int main(int argc, char* argv[]) {
     vector<string> testCases;
     bool is_example = false; // 是否输出示例
-    std::string output_file = "./container_convert.h";
+    std::string output_file = "./container_convert.h"; // 默认输出路径
 
-    std::string arg = argc == 1 ? argv[0] : argv[1];
-    if (arg == "-h" || argc == 1) {
-      show_help(); 
+    if (argc == 1 || (argc >= 2 && string(argv[1]) == "-h")) {
+      show_help();
       return 0;
-    } else if (arg == "-d") {
-        output_file = argc > 2 ? argv[2] : "./container_convert.h";
+
+    }
+    
+    string arg = argv[1];
+
+    if (arg == "-d") {
+        output_file = argc == 3 ? argv[2] : "./container_convert.h";
         processFile(output_file);
         return 0;
 
     } else if (arg == "-e") {
         is_example = true;
-        output_file = argc > 2 ? argv[2] : "./container_convert.h";
+        output_file = argc == 3 ? argv[2] : "./container_convert.h";
         testCases = {
             "std::vector<std::pair<int ,int > *>",
             "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
