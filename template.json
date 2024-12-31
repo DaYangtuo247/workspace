@@ -7,26 +7,51 @@
             "inherit__0x0": "T"
         }
     },
+    "sta::Vector": {
+        "level": 1,
+        "abbreviation": "staVec",
+        "public": "std::vector",
+        "struct": {
+            "inherit__0x0": "T"
+        }
+    },
     "HST2DVector": {
         "level": 1,
         "abbreviation": "HST2DVector",
         "public": "std::vector",
         "struct": {
-            "*inherit__0x0": "T",
+            "inherit__0x0": "T",
             "csts_vector_row_size_0x18": "int64_t",
             "csts_vector_col_size_0x20": "int64_t"
+        }
+    },
+    "sta::Vector::ConstIterator": {
+        "level": 1,
+        "abbreviation": "staVecCItr",
+        "public": "sta::Vector",
+        "struct": {
+            "*sta_iterator55_vector_p_0x0": "T",
+            "sta_iterator55_int64_p_0x8": "__int64"
         }
     },
     "std::vector": {
         "level": 1,
         "abbreviation": "vec",
         "struct": {
-            "*vector_begin_0x0": "T",
-            "*vector_end_0x8": "T",
-            "*vector_cap_end_0x10": "T"
+            "*begin_0x0": "T",
+            "*end_0x8": "T",
+            "*cap_end_0x10": "T"
         }
     },
     "HSTSet": {
+        "level": 1,
+        "public": "std::set",
+        "abbreviation": "HSTSet",
+        "struct": {
+            "inherit__0x0": "T"
+        }
+    },
+    "sta::Set": {
         "level": 1,
         "public": "std::set",
         "abbreviation": "HSTSet",
@@ -39,31 +64,70 @@
         "abbreviation": "setItr",
         "struct": {
             "header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "std::set",
-            "*header_left_0x10": "std::set",
-            "*header_right_0x18": "std::set",
+            "*header_parent_0x8": "std::setItr",
+            "*header_left_0x10": "std::setItr",
+            "*header_right_0x18": "std::setItr",
             "Key": "T"
         }
     },
     "std::set": {
         "level": 1,
-        "public" : "std::setItr",
+        "iterator": "std::setItr",
         "abbreviation": "set",
         "struct": {
-            "key_compare_0x0": "uint64_t" ,
-            "end_address_0x8": "T" ,
-            "*header_parent_0x10": "T" ,
+            "key_compare_0x0": "uint64_t",
+            "end_address_0x8": "uint64_t",
+            "*header_parent_0x10": "T",
             "*header_left_0x18": "T",
             "*header_right_0x20": "T",
             "map_size_0x28": "uint64_t"
         }
     },
+    "std::mtiSetItr": {
+        "level": 1,
+        "abbreviation": "mtiSetItr",
+        "struct": {
+            "header_color_0x0": "uint64_t",
+            "*header_parent_0x8": "std::mtiSetItr",
+            "*header_left_0x10": "std::mtiSetItr",
+            "*header_right_0x18": "std::mtiSetItr",
+            "Key": "T"
+        }
+    },
+    "std::multiset": {
+        "level": 1,
+        "iterator": "std::mtiSetItr",
+        "abbreviation": "mtiSet",
+        "struct": {
+            "key_compare_0x0": "uint64_t",
+            "end_address_0x8": "uint64_t",
+            "*header_parent_0x10": "T",
+            "*header_left_0x18": "T",
+            "*header_right_0x20": "T",
+            "map_size_0x28": "uint64_t"
+        }
+    },
+    "std::udSetItr": {
+        "level": 1,
+        "abbreviation": "udSetItr",
+        "struct": {
+            "*_M_nxt": "std::udSetItr",
+            "Key": "T",
+            "hash_code": "uint64_t"
+        }
+    },
     "std::unordered_set": {
         "level": 1,
-        "abbreviation": "udsetItr",
+        "abbreviation": "udset",
+        "iterator": "std::udSetItr",
         "struct": {
-            "*_M_nxt": "std::unordered_set",
-            "Key": "int64_t"
+            "M_buckets_0x0": "uint64_t",
+            "M_bucket_count_0x8": "uint64_t",
+            "*M_before_begin_0x10": "T",
+            "M_element_count_0x18": "uint64_t",
+            "M_max_load_factor_0x20": "uint64_t",
+            "M_next_resize_0x28": "uint64_t",
+            "M_single_bucket_0x30": "uint64_t"
         }
     },
     "HSTMap": {
@@ -71,7 +135,7 @@
         "public": "std::map",
         "abbreviation": "HSTMap",
         "struct": {
-            "*inherit__0x0": "T"
+            "inherit__0x0": "T"
         }
     },
     "std::mapItr": {
@@ -88,12 +152,37 @@
     },
     "std::map": {
         "level": 2,
-        "public" : "std::mapItr",
+        "iterator": "std::mapItr",
         "abbreviation": "map",
         "struct": {
-            "key_compare_0x0": "uint64_t" ,
-            "end_address_0x8": "T" ,
-            "*header_parent_0x10": "T" ,
+            "key_compare_0x0": "uint64_t",
+            "end_address_0x8": "uint64_t",
+            "*header_parent_0x10": "T",
+            "*header_left_0x18": "T",
+            "*header_right_0x20": "T",
+            "map_size_0x28": "uint64_t"
+        }
+    },
+    "std::mtiMapItr": {
+        "level": 2,
+        "abbreviation": "mtiMapItr",
+        "struct": {
+            "header_color_0x0": "uint64_t",
+            "*header_parent_0x8": "std::mtiMapItr",
+            "*header_left_0x10": "std::mtiMapItr",
+            "*header_right_0x18": "std::mtiMapItr",
+            "Key": "T1",
+            "Value": "T2"
+        }
+    },
+    "std::multimap": {
+        "level": 2,
+        "iterator": "std::mtiMapItr",
+        "abbreviation": "mtiMap",
+        "struct": {
+            "key_compare_0x0": "uint64_t",
+            "end_address_0x8": "uint64_t",
+            "*header_parent_0x10": "T",
             "*header_left_0x18": "T",
             "*header_right_0x20": "T",
             "map_size_0x28": "uint64_t"
@@ -104,16 +193,39 @@
         "public": "std::unordered_map",
         "abbreviation": "HSTPtrHashMap",
         "struct": {
-            "*inherit__0x0": "T"
+            "inherit__0x0": "T"
+        }
+    },
+    "std::udMapItr": {
+        "level": 2,
+        "abbreviation": "udMapItr",
+        "struct": {
+            "*_M_nxt": "std::udMapItr",
+            "Key": "T1",
+            "Value": "T2",
+            "hash_code": "uint64_t"
         }
     },
     "std::unordered_map": {
         "level": 2,
-        "abbreviation": "udmapItr",
+        "abbreviation": "udmap",
+        "iterator": "std::udMapItr",
         "struct": {
-            "*_M_nxt": "std::unordered_map",
-            "Key": "T1",
-            "Value": "T2"
+            "M_buckets_0x0": "uint64_t",
+            "M_bucket_count_0x8": "uint64_t",
+            "*M_before_begin_0x10": "T",
+            "M_element_count_0x18": "uint64_t",
+            "M_max_load_factor_0x20": "uint64_t",
+            "M_next_resize_0x28": "uint64_t",
+            "M_single_bucket_0x30": "uint64_t"
+        }
+    },
+    "HSTHashMap": {
+        "level": 2,
+        "public": "std::unordered_map",
+        "abbreviation": "HSTHashMap",
+        "struct": {
+            "inherit__0x0": "T"
         }
     },
     "std::pair": {
@@ -131,12 +243,121 @@
             "Element_": "T"
         }
     },
-    "std::shared_ptr" :{
+    "std::listItr": {
+        "level": 1,
+        "abbreviation": "listItr",
+        "struct": {
+            "*next_node_0x0": "std::listItr",
+            "*prev_node_0x8": "std::listItr",
+            "value_0x10": "T"
+        }
+    },
+    "std::list": {
+        "level": 1,
+        "abbreviation": "list",
+        "iterator": "std::listItr",
+        "struct": {
+            "*next_node_0x0": "T",
+            "*prev_node_0x8": "T",
+            "std_list_size_0x10": "int64_t"
+        }
+    },
+    "std::shared_ptr": {
         "level": 1,
         "abbreviation": "sharedPtr",
         "struct": {
             "*ptr": "T",
             "*count": "std::_Sp_counted_ptr"
+        }
+    },
+    "sta::DelayVsta": {
+        "level": 1,
+        "abbreviation": "staDelayVsta",
+        "struct": {
+            "sta_vsta_float_0x0": "T"
+        }
+    },
+    "HDRectangle": {
+        "level": 1,
+        "public": "HDPoint",
+        "abbreviation": "HDRectangle",
+        "struct": {
+            "bottom_right_point": "T",
+            "top_left_point": "T"
+        }
+    },
+    "HDPoint": {
+        "level": 1,
+        "abbreviation": "HDPoint",
+        "struct": {
+            "x": "T",
+            "y": "T"
+        }
+    },
+    "std::deque::iterator": {
+        "level": 1,
+        "abbreviation": "deqItr",
+        "struct": {
+            "*rt_itr2_M_cur_0x0": "T",
+            "*rt_itr2_M_first_0x8": "T",
+            "*rt_itr2_M_last_0x10": "T",
+            "*rt_itr2_M_node_0x18": "T"
+        }
+    },
+    "std::deque": {
+        "level": 1,
+        "abbreviation": "Deq",
+        "iterator": "std::deque::iterator",
+        "struct": {
+            "**deque_map_0x0": "void",
+            "deque_size_0x8": "uint64_t",
+            "dequeItr_begin_0x10": "T",
+            "dequeItr_end_0x30": "T"
+        }
+    },
+    "sta::Deque": {
+        "level": 1,
+        "abbreviation": "staDeq",
+        "public": "std::deque",
+        "struct": {
+            "inherit__0x0": "T"
+        }
+    },
+    "boost::dynamic_bitset": {
+        "level": 1,
+        "abbreviation": "boost_dynamic_bitset",
+        "public": "std::vector",
+        "struct": {
+            "csts_bitset_vector_0x0": "T",
+            "csts_bitset_type_0x18": "size_type"
+        }
+    },
+    "rt::HDRTTree": {
+        "level": 1,
+        "abbreviation": "HDRTTree",
+        "public": "std::vector",
+        "struct": {
+            "rt_tree3_vector_0x0": "T",
+            "rt_tree3_int_0x18": "int",
+            "rt_tree3_int1_0x1c": "int"
+        }
+    },
+    "HDTree::STLIter": {
+        "level": 1,
+        "abbreviation": "HDRTTree_STLIter",
+        "struct": {
+            "dev_iter4_int64_0x0": "std::list<HDTree::HDTreeNode*>::iterator"
+        }
+    },
+    "HDTree": {
+        "level": 1,
+        "abbreviation": "HDRTTree_STLIter",
+        "struct": {
+            "csts_tree4_list_0x0": "std::list<HDTreeNode*>",
+            "csts_tree4_int64_0x18": "__int64",
+            "csts_tree4_int64_1_0x20": "__int64",
+            "csts_tree4_int64_2_0x28": "__int64",
+            "csts_tree4_int64_3_0x30": "__int64"
         }
     }
 }

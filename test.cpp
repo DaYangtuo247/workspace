@@ -3,7 +3,6 @@
 
 int main()
 {
-    std::function<bool(int)> it;
-    system("pause");
+    printf("%x", ~1);
     return 0;
 }

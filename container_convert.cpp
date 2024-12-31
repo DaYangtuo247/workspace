@@ -286,34 +286,15 @@ int main(int argc, char* argv[]) {
         processFile(output_path);
         return 0;
     } else if (arg == "-e") {
-        testCases = {
-            "std::vector<std::pair<int ,int > *>",
-            "std::tuple<HSTVector<rt::HARTRouteNetWrapper*>, std::shared_ptr<unsigned int>, std::map<double, int>, int>",
-            "std::shared_ptr<int32_t>",
-            "HSTSet<unsigned int>",
-            "std::vector<std::pair<unsigned int,rt::HDRTNetGuide*>>",
-            "std::unordered_map<std::map<double*, int>, HSTVector<rt::nodegraph::Node>>",
-            "HSTMap<HSTKeyValIter const &&,HSTKeyValIterLess>",
-            "std::map<unsigned int, double>",
-            "HSTVector<rt::nodegraph::Node*>",
-            "HSTMap<HSTSet<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-            "std::vector<rt::nodegraph::Node*>",
-            "std::vector<std::vector<rt::nodegraph::Node*>>",
-            "std::set<HSTKeyValIter const *,HSTKeyValIterLess>",
-            "std::set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-            "std::unordered_set<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-            "std::unordered_map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-            "std::map<std::set<HSTKeyValIter const &&>*,HSTKeyValIterLess>",
-            "std::tuple<int,unsigned short,float>",
-            "std::tuple<std::set<std::map<short, int>>, std::string, int>",
-            "std::map<std::tuple<std::set<std::map<short,int>>, std::string, int>,int,less>",
-            "std::vector<HSTVector<rt::nodegraph::Node*>>",
-            "std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node*>>",
-            "std::tuple<std::set<std::map<short, int>>, std::string, int>",
-            "std::map<std::tuple<std::set<std::map<short,int>>,std::string,int>,int>",
-            "std::tuple<unsigned int, int, double>",
-            "std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node>>",
-        };
+        testCases = {};
+        std::fstream input("container_input", std::ios::in);
+        if (!input.is_open())
+            assert(0);
+        std::string line;
+        while(getline(input, line)) {
+            testCases.push_back(line);
+        }
+        input.close();
     }
 
     // 获取模板
