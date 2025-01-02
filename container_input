@@ -24,3 +24,16 @@ std::tuple<std::set<std::map<short, int>>, std::string, int>
 std::map<std::tuple<std::set<std::map<short,int>>,std::string,int>,int>
 std::tuple<unsigned int, int, double>
 std::unordered_map<std::map<double, int>, HSTVector<rt::nodegraph::Node>>
+HSTVector<rt::HDRTRouteTask>
+std::vector<rt::dntl::Net>
+std::vector<rt::HDRTConstraintTree::HDRTConstraintTreeNode>
+std::list<double>
+std::shared_ptr<rt::HDRTDeviceData>
+std::vector<uint32_t>
+HDTree<HDDMArcNode const*>::STLIter
+std::vector<rt::HDRTTile>
+std::vector<rt::HDRTTileInfoBase*>
+std::vector<rt::HDRTTileInfo>
+HSTVector<rt::HARTRouteNetWrapper*>
+HDRectangle<unsigned short>
+std::vector<rt::HARTCongMap*>
