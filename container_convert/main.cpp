@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     
     // 备份源文件，并清空 outputFilePath 文件
     if (arg == "-d") {
-        obj.outputClean(outputFilePath);
+        obj.clearFileAndPrintf(outputFilePath);
         return 0;
     
     // 从文件中获取需要解析的容器
