@@ -59,20 +59,20 @@
             "inherit__0x0": "T"
         }
     },
-    "std::setItr": {
+    "std::set::iterator": {
         "level": 1,
         "abbreviation": "setItr",
         "struct": {
             "header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "std::setItr",
-            "*header_left_0x10": "std::setItr",
-            "*header_right_0x18": "std::setItr",
+            "*header_parent_0x8": "std::set::iterator",
+            "*header_left_0x10": "std::set::iterator",
+            "*header_right_0x18": "std::set::iterator",
             "Key": "T"
         }
     },
     "std::set": {
         "level": 1,
-        "iterator": "std::setItr",
+        "iterator": "std::set::iterator",
         "abbreviation": "set",
         "struct": {
             "key_compare_0x0": "uint64_t",
@@ -83,20 +83,20 @@
             "map_size_0x28": "uint64_t"
         }
     },
-    "std::mtiSetItr": {
+    "std::multiset::iterator": {
         "level": 1,
         "abbreviation": "mtiSetItr",
         "struct": {
             "header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "std::mtiSetItr",
-            "*header_left_0x10": "std::mtiSetItr",
-            "*header_right_0x18": "std::mtiSetItr",
+            "*header_parent_0x8": "std::multiset::iterator",
+            "*header_left_0x10": "std::multiset::iterator",
+            "*header_right_0x18": "std::multiset::iterator",
             "Key": "T"
         }
     },
     "std::multiset": {
         "level": 1,
-        "iterator": "std::mtiSetItr",
+        "iterator": "std::multiset::iterator",
         "abbreviation": "mtiSet",
         "struct": {
             "key_compare_0x0": "uint64_t",
@@ -107,11 +107,11 @@
             "map_size_0x28": "uint64_t"
         }
     },
-    "std::udSetItr": {
+    "std::unordered_set::iterator": {
         "level": 1,
         "abbreviation": "udSetItr",
         "struct": {
-            "*_M_nxt": "std::udSetItr",
+            "*_M_nxt": "std::unordered_set::iterator",
             "Key": "T",
             "hash_code": "uint64_t"
         }
@@ -119,7 +119,7 @@
     "std::unordered_set": {
         "level": 1,
         "abbreviation": "udset",
-        "iterator": "std::udSetItr",
+        "iterator": "std::unordered_set::iterator",
         "struct": {
             "M_buckets_0x0": "uint64_t",
             "M_bucket_count_0x8": "uint64_t",
@@ -138,21 +138,21 @@
             "inherit__0x0": "T"
         }
     },
-    "std::mapItr": {
+    "std::map::iterator": {
         "level": 2,
         "abbreviation": "mapItr",
         "struct": {
             "header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "std::mapItr",
-            "*header_left_0x10": "std::mapItr",
-            "*header_right_0x18": "std::mapItr",
+            "*header_parent_0x8": "std::map::iterator",
+            "*header_left_0x10": "std::map::iterator",
+            "*header_right_0x18": "std::map::iterator",
             "Key": "T1",
             "Value": "T2"
         }
     },
     "std::map": {
         "level": 2,
-        "iterator": "std::mapItr",
+        "iterator": "std::map::iterator",
         "abbreviation": "map",
         "struct": {
             "key_compare_0x0": "uint64_t",
@@ -163,21 +163,21 @@
             "map_size_0x28": "uint64_t"
         }
     },
-    "std::mtiMapItr": {
+    "std::multimap::iterator": {
         "level": 2,
         "abbreviation": "mtiMapItr",
         "struct": {
             "header_color_0x0": "uint64_t",
-            "*header_parent_0x8": "std::mtiMapItr",
-            "*header_left_0x10": "std::mtiMapItr",
-            "*header_right_0x18": "std::mtiMapItr",
+            "*header_parent_0x8": "std::multimap::iterator",
+            "*header_left_0x10": "std::multimap::iterator",
+            "*header_right_0x18": "std::multimap::iterator",
             "Key": "T1",
             "Value": "T2"
         }
     },
     "std::multimap": {
         "level": 2,
-        "iterator": "std::mtiMapItr",
+        "iterator": "std::multimap::iterator",
         "abbreviation": "mtiMap",
         "struct": {
             "key_compare_0x0": "uint64_t",
@@ -196,11 +196,11 @@
             "inherit__0x0": "T"
         }
     },
-    "std::udMapItr": {
+    "std::unordered_map::iterator": {
         "level": 2,
         "abbreviation": "udMapItr",
         "struct": {
-            "*_M_nxt": "std::udMapItr",
+            "*_M_nxt": "std::unordered_map::iterator",
             "Key": "T1",
             "Value": "T2",
             "hash_code": "uint64_t"
@@ -209,7 +209,7 @@
     "std::unordered_map": {
         "level": 2,
         "abbreviation": "udmap",
-        "iterator": "std::udMapItr",
+        "iterator": "std::unordered_map::iterator",
         "struct": {
             "M_buckets_0x0": "uint64_t",
             "M_bucket_count_0x8": "uint64_t",
@@ -243,19 +243,19 @@
             "Element_": "T"
         }
     },
-    "std::listItr": {
+    "std::list::iterator": {
         "level": 1,
         "abbreviation": "listItr",
         "struct": {
-            "*next_node_0x0": "std::listItr",
-            "*prev_node_0x8": "std::listItr",
+            "*next_node_0x0": "std::list::iterator",
+            "*prev_node_0x8": "std::list::iterator",
             "value_0x10": "T"
         }
     },
     "std::list": {
         "level": 1,
         "abbreviation": "list",
-        "iterator": "std::listItr",
+        "iterator": "std::list::iterator",
         "struct": {
             "*next_node_0x0": "T",
             "*prev_node_0x8": "T",
@@ -345,6 +345,13 @@
     "HDTree::STLIter": {
         "level": 1,
         "abbreviation": "HDRTTree_STLIter",
+        "struct": {
+            "dev_iter4_int64_0x0": "std::list<HDTree::HDTreeNode*>::iterator"
+        }
+    },
+    "HDTree::STLConstIter": {
+        "level": 1,
+        "abbreviation": "HDRTTree_STLConstIter",
         "struct": {
             "dev_iter4_int64_0x0": "std::list<HDTree::HDTreeNode*>::iterator"
         }
