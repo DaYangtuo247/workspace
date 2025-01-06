@@ -358,13 +358,22 @@
     },
     "HDTree": {
         "level": 1,
-        "abbreviation": "HDRTTree_STLIter",
+        "abbreviation": "HDTree",
         "struct": {
             "csts_tree4_list_0x0": "std::list<HDTreeNode*>",
             "csts_tree4_int64_0x18": "__int64",
             "csts_tree4_int64_1_0x20": "__int64",
             "csts_tree4_int64_2_0x28": "__int64",
             "csts_tree4_int64_3_0x30": "__int64"
+        }
+    },
+    "HDTree::HDTreeNode": {
+        "level": 1,
+        "abbreviation": "HDTree_HDTreeNode",
+        "struct": {
+            "dev_node30_iter_0x0" : "HDTree<T>::STLIter",
+            "dev_node30_list_0x8" : "std::list<HDTreeNode*>",
+            "dev_node30_node_p_0x20" : "T"
         }
     }
 }

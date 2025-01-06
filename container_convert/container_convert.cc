@@ -6,6 +6,7 @@ using json = nlohmann::ordered_json;  // 有序
 class containerConvert {
 private:
     json Template; // 容器模板
+    unordered_map<string, vector<string>> ContainerTypes; // 每个容器中存储的元素类型
 public:
     stringstream result;  // 解析结果
 
@@ -163,6 +164,10 @@ json containerConvert::parseContainer(std::string str) {
         if (currentType.size())
             innerTypes.push_back(currentType);
 
+        // 记录当前容器存储的元素类型
+        ans[containerName]["CurParTypes"] = str;
+        ContainerTypes[str] = innerTypes;
+        
         // 解析 一元组，二元组，tuple容器
         for (uint32_t i = 0; i < innerTypes.size() && i < numParams; ++i) {
             string containerName_new = containerName + "_T" + to_string(i + 1);
@@ -196,7 +201,7 @@ string containerConvert::generateStruct(const json& input) {
     // 如果存储类型是元组
     if (type == "std::tuple") {
         string el_key = Template[type]["struct"].begin().key(), el_value = Template[type]["struct"].begin().value();
-        for (int j = 1; j <= value.size(); j++)
+        for (int j = 1; j < value.size(); j++)
             output[el_key + to_string(j)] = el_value + to_string(j);
     } else {
         output = Template[type]["struct"];
@@ -210,6 +215,8 @@ string containerConvert::generateStruct(const json& input) {
     // 按照template结构处理
     for (const auto& input_el : value.items()) {
         json value_new = input_el.value();
+        if (input_el.key() == "CurParTypes")
+            continue;
         
         bool is_public = false;
         // 存在继承（迭代器）, 只执行一次，无需递归
@@ -236,9 +243,34 @@ string containerConvert::generateStruct(const json& input) {
 
         // 修改输出类型
         for (const auto& el : output.items()) {
+            if (el.key() == "CurParTypes")
+                continue;
+
             // 如果是 T, T1, T2, T3...., 修改为实际存储的类型
             if (isTN(el.value(), i))
                 el.value() = sub_struct_name;
+
+            // output的value存储的也是容器,这种情况需要二次解析
+            else if (el.value().get<string>().find('<') != string::npos) {
+                containerConvert tp("../template.json");
+                string inner_container = el.value();
+
+                // 捕获是第几个模板
+                regex reg("[ _,<]T(|\\d+)[ _,>]");
+                smatch match;
+                if (regex_search(inner_container, match, reg)) {
+                    for(size_t i = 1; i<match.size(); i++) {
+                        int len = max((size_t)1, string(match[i]).size()) + 1;
+                        int pos = match.position(i) - 1;
+                        int target_idx = string(match[i]).size() == 0 ? 0 : stoi(match[i]) - 1;
+                        string target = ContainerTypes[value["CurParTypes"]][target_idx];
+                        inner_container.replace(pos, len, target); // 设置为第几个参数
+                    }
+                }
+                json tt = tp.parseContainer(inner_container);
+                el.value() = tp.generateStruct(tt);
+                this->result << tp.result.str() << endl;
+            }
         }
         if (is_public)
             break;
