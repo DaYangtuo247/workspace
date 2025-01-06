@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
         std::cout << "  -r input_file  [output_file] Retrieve container types from the input_file file.\n";
         std::cout << "  variable_name  [output_file] Container convert\n";
         std::cout << "  container_name [output_file] Container convert\n";
-        std::cout << "note: Default output: ./container_convert.h\n";
+        std::cout << "Default output: ./container_convert.h\n";
       return 0;
     }
 
