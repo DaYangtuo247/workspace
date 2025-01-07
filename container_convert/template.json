@@ -2,25 +2,22 @@
     "HSTVector": {
         "level": 1,
         "abbreviation": "HSTVector",
-        "public": "std::vector",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::vector<T>"
         }
     },
     "sta::Vector": {
         "level": 1,
         "abbreviation": "staVec",
-        "public": "std::vector",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::vector<T>"
         }
     },
     "HST2DVector": {
         "level": 1,
         "abbreviation": "HST2DVector",
-        "public": "std::vector",
         "struct": {
-            "inherit__0x0": "T",
+            "inherit__0x0": "std::vector<T>",
             "csts_vector_row_size_0x18": "int64_t",
             "csts_vector_col_size_0x20": "int64_t"
         }
@@ -28,9 +25,8 @@
     "sta::Vector::ConstIterator": {
         "level": 1,
         "abbreviation": "staVecCItr",
-        "public": "sta::Vector",
         "struct": {
-            "*sta_iterator55_vector_p_0x0": "T",
+            "*sta_iterator55_vector_p_0x0": "sta::Vector<T>",
             "sta_iterator55_int64_p_0x8": "__int64"
         }
     },
@@ -45,18 +41,16 @@
     },
     "HSTSet": {
         "level": 1,
-        "public": "std::set",
         "abbreviation": "HSTSet",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::set<T>"
         }
     },
     "sta::Set": {
         "level": 1,
-        "public": "std::set",
         "abbreviation": "HSTSet",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::set<T>"
         }
     },
     "std::set::iterator": {
@@ -129,10 +123,9 @@
     },
     "HSTMap": {
         "level": 2,
-        "public": "std::map",
         "abbreviation": "HSTMap",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::map<T1, T2>"
         }
     },
     "std::map::iterator": {
@@ -185,10 +178,9 @@
     },
     "HSTPtrHashMap": {
         "level": 2,
-        "public": "std::unordered_map",
         "abbreviation": "HSTPtrHashMap",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::unordered_map<T1, T2>"
         }
     },
     "std::unordered_map::iterator": {
@@ -216,10 +208,9 @@
     },
     "HSTHashMap": {
         "level": 2,
-        "public": "std::unordered_map",
         "abbreviation": "HSTHashMap",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::unordered_map<T1, T2>"
         }
     },
     "std::pair": {
@@ -272,11 +263,10 @@
     },
     "HDRectangle": {
         "level": 1,
-        "public": "HDPoint",
         "abbreviation": "HDRectangle",
         "struct": {
-            "bottom_right_point": "T",
-            "top_left_point": "T"
+            "bottom_right_point": "HDPoint<T>",
+            "top_left_point": "HDPoint<T>"
         }
     },
     "HDPoint": {
@@ -310,26 +300,23 @@
     "sta::Deque": {
         "level": 1,
         "abbreviation": "staDeq",
-        "public": "std::deque",
         "struct": {
-            "inherit__0x0": "T"
+            "inherit__0x0": "std::deque<T>"
         }
     },
     "boost::dynamic_bitset": {
         "level": 1,
         "abbreviation": "boost_dynamic_bitset",
-        "public": "std::vector",
         "struct": {
-            "csts_bitset_vector_0x0": "T",
+            "csts_bitset_vector_0x0": "std::vector<T>",
             "csts_bitset_type_0x18": "size_type"
         }
     },
     "rt::HDRTTree": {
         "level": 1,
         "abbreviation": "HDRTTree",
-        "public": "std::vector",
         "struct": {
-            "rt_tree3_vector_0x0": "T",
+            "rt_tree3_vector_0x0": "std::vector<T>",
             "rt_tree3_int_0x18": "int",
             "rt_tree3_int1_0x1c": "int"
         }
