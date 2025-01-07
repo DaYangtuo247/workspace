@@ -27,7 +27,7 @@
         "abbreviation": "staVecCItr",
         "struct": {
             "*sta_iterator55_vector_p_0x0": "sta::Vector<T>",
-            "sta_iterator55_int64_p_0x8": "__int64"
+            "sta_iterator55_int64_p_0x8": "T"
         }
     },
     "std::vector": {
