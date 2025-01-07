@@ -215,13 +215,13 @@ string containerConvert::generateStruct(const json& input) {
     // 生成的结构体名称
     string struct_name = Template[type]["abbreviation"].get<std::string>() + "_";
     int i = 1; // Ti
-    // 按照template的struct结构处理
+    // 遍历容器解析得到的json树
     for (const auto& input_el : value.items()) {
         json value_new = input_el.value();
         
         if (input_el.key() == "CurParTypes")
             continue;
-
+        
         // 容器存储基本类型, 直接输出为 struct
         if (value_new.is_string()) {
             sub_struct_name = value_new.get<std::string>();
@@ -234,7 +234,7 @@ string containerConvert::generateStruct(const json& input) {
         // 当前结构体加上子结构体的名称
         struct_name += getStructName(sub_struct_name) + "_";
 
-        // 修改输出类型
+        // 按照template的struct结构处理
         for (const auto& el : output.items()) {
             // 如果是 T, T1, T2, T3...., 修改为实际存储的类型
             if (isTN(el.value(), i))
