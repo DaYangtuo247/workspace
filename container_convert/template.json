@@ -72,14 +72,13 @@
     },
     "std::set": {
         "level": 1,
-        "iterator": "std::set::iterator",
         "abbreviation": "set",
         "struct": {
             "key_compare_0x0": "uint64_t",
             "end_address_0x8": "uint64_t",
-            "*header_parent_0x10": "T",
-            "*header_left_0x18": "T",
-            "*header_right_0x20": "T",
+            "*header_parent_0x10": "std::set<T>::iterator",
+            "*header_left_0x18": "std::set<T>::iterator",
+            "*header_right_0x20": "std::set<T>::iterator",
             "map_size_0x28": "uint64_t"
         }
     },
@@ -96,14 +95,13 @@
     },
     "std::multiset": {
         "level": 1,
-        "iterator": "std::multiset::iterator",
         "abbreviation": "mtiSet",
         "struct": {
             "key_compare_0x0": "uint64_t",
             "end_address_0x8": "uint64_t",
-            "*header_parent_0x10": "T",
-            "*header_left_0x18": "T",
-            "*header_right_0x20": "T",
+            "*header_parent_0x10": "std::multiset<T>::iterator",
+            "*header_left_0x18": "std::multiset<T>::iterator",
+            "*header_right_0x20": "std::multiset<T>::iterator",
             "map_size_0x28": "uint64_t"
         }
     },
@@ -119,11 +117,10 @@
     "std::unordered_set": {
         "level": 1,
         "abbreviation": "udset",
-        "iterator": "std::unordered_set::iterator",
         "struct": {
             "M_buckets_0x0": "uint64_t",
             "M_bucket_count_0x8": "uint64_t",
-            "*M_before_begin_0x10": "T",
+            "*M_before_begin_0x10": "std::unordered_set<T>::iterator",
             "M_element_count_0x18": "uint64_t",
             "M_max_load_factor_0x20": "uint64_t",
             "M_next_resize_0x28": "uint64_t",
@@ -152,14 +149,13 @@
     },
     "std::map": {
         "level": 2,
-        "iterator": "std::map::iterator",
         "abbreviation": "map",
         "struct": {
             "key_compare_0x0": "uint64_t",
             "end_address_0x8": "uint64_t",
-            "*header_parent_0x10": "T",
-            "*header_left_0x18": "T",
-            "*header_right_0x20": "T",
+            "*header_parent_0x10": "std::map<T1, T2>::iterator",
+            "*header_left_0x18": "std::map<T1, T2>::iterator",
+            "*header_right_0x20": "std::map<T1, T2>::iterator",
             "map_size_0x28": "uint64_t"
         }
     },
@@ -177,14 +173,13 @@
     },
     "std::multimap": {
         "level": 2,
-        "iterator": "std::multimap::iterator",
         "abbreviation": "mtiMap",
         "struct": {
             "key_compare_0x0": "uint64_t",
             "end_address_0x8": "uint64_t",
-            "*header_parent_0x10": "T",
-            "*header_left_0x18": "T",
-            "*header_right_0x20": "T",
+            "*header_parent_0x10": "std::multimap<T1, T2>::iterator",
+            "*header_left_0x18": "std::multimap<T1, T2>::iterator",
+            "*header_right_0x20": "std::multimap<T1, T2>::iterator",
             "map_size_0x28": "uint64_t"
         }
     },
@@ -209,11 +204,10 @@
     "std::unordered_map": {
         "level": 2,
         "abbreviation": "udmap",
-        "iterator": "std::unordered_map::iterator",
         "struct": {
             "M_buckets_0x0": "uint64_t",
             "M_bucket_count_0x8": "uint64_t",
-            "*M_before_begin_0x10": "T",
+            "*M_before_begin_0x10": "std::unordered_map<T1, T2>::iterator",
             "M_element_count_0x18": "uint64_t",
             "M_max_load_factor_0x20": "uint64_t",
             "M_next_resize_0x28": "uint64_t",
@@ -255,10 +249,9 @@
     "std::list": {
         "level": 1,
         "abbreviation": "list",
-        "iterator": "std::list::iterator",
         "struct": {
-            "*next_node_0x0": "T",
-            "*prev_node_0x8": "T",
+            "*next_node_0x0": "std::list<T>::iterator",
+            "*prev_node_0x8": "std::list<T>::iterator",
             "std_list_size_0x10": "int64_t"
         }
     },
@@ -307,12 +300,11 @@
     "std::deque": {
         "level": 1,
         "abbreviation": "Deq",
-        "iterator": "std::deque::iterator",
         "struct": {
-            "**deque_map_0x0": "void",
+            "**deque_map_0x0": "T",
             "deque_size_0x8": "uint64_t",
-            "dequeItr_begin_0x10": "T",
-            "dequeItr_end_0x30": "T"
+            "dequeItr_begin_0x10": "std::deque<T>::iterator",
+            "dequeItr_end_0x30": "std::deque<T>::iterator"
         }
     },
     "sta::Deque": {

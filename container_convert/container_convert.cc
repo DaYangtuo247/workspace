@@ -7,6 +7,7 @@ class containerConvert {
 private:
     json Template; // 容器模板
     unordered_map<string, vector<string>> ContainerTypes; // 每个容器中存储的元素类型
+    static unordered_set<string> record; // 记录某个结构是否输出过
 public:
     stringstream result;  // 解析结果
 
@@ -32,6 +33,8 @@ public:
     // 清空文件，输出结构体正则匹配串
     void clearFileAndPrintf(const std::string& filename);
 };
+
+unordered_set<string> containerConvert::record{};
 
 containerConvert::containerConvert(string filePath) {
     // 获取模板
@@ -218,16 +221,10 @@ string containerConvert::generateStruct(const json& input) {
         if (input_el.key() == "CurParTypes")
             continue;
         
-        bool is_public = false;
-        // 存在继承（迭代器）, 只执行一次，无需递归
-        if (Template[type].contains("public") || Template[type].contains("iterator")) {
-            json new_j;
-            if (Template[type].contains("public"))
-                new_j = {{Template[type]["public"], value}};
-            else
-                new_j = {{Template[type]["iterator"], value}};
+        // 存在继承
+        if (Template[type].contains("public")) {
+            json new_j = {{Template[type]["public"], value}};
             sub_struct_name = generateStruct(new_j);
-            is_public = true;
         }
         // 容器存储基本类型, 直接输出为 struct
         else if (value_new.is_string()) {
@@ -250,7 +247,7 @@ string containerConvert::generateStruct(const json& input) {
             if (isTN(el.value(), i))
                 el.value() = sub_struct_name;
 
-            // output的value存储的也是容器,这种情况需要二次解析
+            // Template中的struct的value存储的是模板容器, 需要二次解析
             else if (el.value().get<string>().find('<') != string::npos) {
                 containerConvert tp("../template.json");
                 string inner_container = el.value();
@@ -258,22 +255,18 @@ string containerConvert::generateStruct(const json& input) {
                 // 捕获是第几个模板
                 regex reg("[ _,<]T(|\\d+)[ _,>]");
                 smatch match;
-                if (regex_search(inner_container, match, reg)) {
-                    for(size_t i = 1; i<match.size(); i++) {
-                        int len = max((size_t)1, string(match[i]).size()) + 1;
-                        int pos = match.position(i) - 1;
-                        int target_idx = string(match[i]).size() == 0 ? 0 : stoi(match[i]) - 1;
-                        string target = ContainerTypes[value["CurParTypes"]][target_idx];
-                        inner_container.replace(pos, len, target); // 设置为第几个参数
-                    }
+                while (regex_search(inner_container, match, reg)) {
+                    int len = max((size_t)0, string(match[1]).size()) + 1;
+                    int pos = match.position(1) - 1;
+                    int target_idx = string(match[1]).size() == 0 ? 0 : stoi(match[1]) - 1;
+                    string target = ContainerTypes[value["CurParTypes"]][target_idx];
+                    inner_container.replace(pos, len, target);  // 设置为第几个模板
                 }
                 json tt = tp.parseContainer(inner_container);
                 el.value() = tp.generateStruct(tt);
-                this->result << tp.result.str() << endl;
+                this->result << tp.result.str();
             }
         }
-        if (is_public)
-            break;
         i++;
     }
 
@@ -288,11 +281,14 @@ string containerConvert::generateStruct(const json& input) {
     }
 
     // 输出结构
-    result << "struct " << getStructName(struct_name) << " {\n";
-    for (const auto& el : output.items())
-        result << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
-    result << "};\n";
-
+    string output_struct_name = getStructName(struct_name);
+    if (!record.count(output_struct_name)) {
+        record.insert(output_struct_name);
+        result << "struct " << output_struct_name << " {\n";
+        for (const auto& el : output.items())
+            result << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
+        result << "};\n";
+    }
     return struct_name + is_ptr;
 }
 
