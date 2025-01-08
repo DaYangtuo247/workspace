@@ -1,5 +1,5 @@
-#include "../utility.h"
 #include "container_convert.cc"
+#define TEMPLATE_PATH "../template.json"
 
 int main(int argc, char* argv[]) {
     // 显示帮助信息
@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
       return 0;
     }
 
-    containerConvert obj("../template.json");
+    containerConvert obj(TEMPLATE_PATH);
     vector<string> testCases;
 
     // 获取第一个参数

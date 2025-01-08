@@ -5,6 +5,7 @@ using json = nlohmann::ordered_json;  // 有序
 
 class containerConvert {
 private:
+    string TemplatePath; // 模板路径
     json Template; // 容器模板
     unordered_map<string, vector<string>> ContainerTypes; // 每个容器中存储的元素类型
     static unordered_set<string> record; // 记录某个结构是否输出过
@@ -24,9 +25,9 @@ private:
 public:
     containerConvert(string);
 
-    // 解析输入为json对象
+    // 解析str为json解析树
     json parseContainer(std::string str);
-    // json解析为结构体输出
+    // json解析为结构体输出，返回值为输出的结构体名称
     string generateStruct(const json& input);
     // 获取变量的容器名称
     std::string getVariableType(std::string& command);
@@ -44,6 +45,7 @@ containerConvert::containerConvert(string filePath) {
         exit(1);
     }
     Template = json::parse(f);
+    this->TemplatePath = filePath;
 }
 
 // 清理字符串两边空白, 字符 '&' -> '*'
@@ -103,7 +105,7 @@ string containerConvert::getTypeStruct(string & str) {
     return "";
 }
 
-// 解析输入为json对象
+// 解析str为json解析树
 json containerConvert::parseContainer(std::string str) {
     json ans;
     int pos = 0;
@@ -183,7 +185,7 @@ json containerConvert::parseContainer(std::string str) {
     return ans;
 }
 
-// json解析为结构体输出
+// json解析为结构体输出，返回值为输出的结构体名称
 string containerConvert::generateStruct(const json& input) {
     // 获取类型名（如 "HSTVector"）
     string type = trimAndReplace(input.begin().key());
@@ -196,65 +198,68 @@ string containerConvert::generateStruct(const json& input) {
         throw runtime_error(input.dump(2) + "\nType not found in template.json.");
     }
 
-    // 获取存储类型
-    json value = input.begin().value();
+    // 获取容器解析树
+    json container_parse = input.begin().value();
 
-    json output;
+    // 根据Template[struct] 生成struct结构
+    json type_struct;
 
     // 如果存储类型是元组
     if (type == "std::tuple") {
         string el_key = Template[type]["struct"].begin().key(), el_value = Template[type]["struct"].begin().value();
-        for (int j = 1; j < value.size(); j++)
-            output[el_key + to_string(j)] = el_value + to_string(j);
+        for (int j = 1; j < container_parse.size(); j++)
+            type_struct[el_key + to_string(j)] = el_value + to_string(j);
     } else {
-        output = Template[type]["struct"];
+        type_struct = Template[type]["struct"];
     }
 
-    // 容器中指向的结构体名称
-    string sub_struct_name;
     // 生成的结构体名称
     string struct_name = Template[type]["abbreviation"].get<std::string>() + "_";
+    // struct{}中每个变量的类型名称
+    string inner_type_name;
+
     int i = 1; // Ti
-    // 遍历容器解析得到的json树
-    for (const auto& input_el : value.items()) {
-        json value_new = input_el.value();
-        
-        if (input_el.key() == "CurParTypes")
+    // 遍历容器解析树
+    for (const auto& container_parse_it : container_parse.items()) {
+        if (container_parse_it.key() == "CurParTypes")
             continue;
         
-        // 容器存储基本类型, 直接输出为 struct
-        if (value_new.is_string()) {
-            sub_struct_name = value_new.get<std::string>();
+        json sub_type = container_parse_it.value();
+        
+        // 容器存储基本类型
+        if (sub_type.is_string()) {
+            inner_type_name = sub_type.get<string>();
         }
         // 容器存储对象
-        else if (value_new.is_object()) {
-            sub_struct_name = generateStruct(value_new);
+        else if (sub_type.is_object()) {
+            inner_type_name = generateStruct(sub_type);
         }
         
         // 当前结构体加上子结构体的名称
-        struct_name += getStructName(sub_struct_name) + "_";
+        struct_name += getStructName(inner_type_name) + "_";
 
         // 按照template的struct结构处理
-        for (const auto& el : output.items()) {
+        for (const auto& el : type_struct.items()) {
             // 如果是 T, T1, T2, T3...., 修改为实际存储的类型
             if (isTN(el.value(), i))
-                el.value() = sub_struct_name;
+                el.value() = inner_type_name;
 
             // Template中的struct的value存储的是模板容器, 需要二次解析
             else if (el.value().get<string>().find('<') != string::npos) {
-                containerConvert tp("../template.json");
                 string inner_container = el.value();
 
                 // 捕获是第几个模板
                 regex reg("[ _,<]T(|\\d+)[ _,>]");
                 smatch match;
+                // 替换子容器的所有Tn为对应的类型
                 while (regex_search(inner_container, match, reg)) {
                     int len = max((size_t)0, string(match[1]).size()) + 1;
                     int pos = match.position(1) - 1;
                     int target_idx = string(match[1]).size() == 0 ? 0 : stoi(match[1]) - 1;
-                    string target = ContainerTypes[value["CurParTypes"]][target_idx];
-                    inner_container.replace(pos, len, target);  // 设置为第几个模板
+                    string target = ContainerTypes[container_parse["CurParTypes"]][target_idx];
+                    inner_container.replace(pos, len, target);
                 }
+                containerConvert tp(this->TemplatePath);
                 json tt = tp.parseContainer(inner_container);
                 el.value() = tp.generateStruct(tt);
                 this->result << tp.result.str();
@@ -267,7 +272,7 @@ string containerConvert::generateStruct(const json& input) {
     struct_name = struct_name.substr(0, struct_name.size() - 1);
 
     // 修改输出类型
-    for (const auto& el : output.items()) {
+    for (const auto& el : type_struct.items()) {
         // 修改指向自身的指针
         if (el.value() == type)
             el.value() = struct_name;
@@ -278,8 +283,8 @@ string containerConvert::generateStruct(const json& input) {
     if (!record.count(output_struct_name)) {
         record.insert(output_struct_name);
         result << "struct " << output_struct_name << " {\n";
-        for (const auto& el : output.items())
-            result << "  " << el.value().get<std::string>() << " " << el.key() << ";" << endl;
+        for (const auto& el : type_struct.items())
+            result << "  " << el.value().get<string>() << " " << el.key() << ";" << endl;
         result << "};\n";
     }
     return struct_name + is_ptr;
