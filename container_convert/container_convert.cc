@@ -207,7 +207,7 @@ string containerConvert::generateStruct(const json& input) {
     // 如果存储类型是元组
     if (type == "std::tuple") {
         string el_key = Template[type]["struct"].begin().key(), el_value = Template[type]["struct"].begin().value();
-        for (int j = 1; j < container_parse.size(); j++)
+        for (int j = container_parse.size() - 1; j >= 1; j--)
             type_struct[el_key + to_string(j)] = el_value + to_string(j);
     } else {
         type_struct = Template[type]["struct"];
