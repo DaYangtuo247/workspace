@@ -171,7 +171,7 @@ json containerConvert::parseContainer(std::string str) {
 
         // 记录当前容器存储的元素类型
         ans[containerName]["CurParTypes"] = str;
-        ContainerTypes[str] = innerTypes;
+        ContainerTypes[str] = vector<string>(innerTypes.begin(), innerTypes.begin() + numParams + 1);
         
         // 解析 一元组，二元组，tuple容器
         for (uint32_t i = 0; i < innerTypes.size() && i < numParams; ++i) {
@@ -257,6 +257,10 @@ string containerConvert::generateStruct(const json& input) {
                     int len = max((size_t)0, string(match[1]).size()) + 1;
                     int pos = match.position(1) - 1;
                     int target_idx = string(match[1]).size() == 0 ? 0 : stoi(match[1]) - 1;
+                    if (target_idx > ContainerTypes[container_parse["CurParTypes"]].size()) {
+                        cout << "Unknown Type T" << match[1] << ", check " << type << " template.json\n";
+                        exit(0);
+                    }
                     string target = ContainerTypes[container_parse["CurParTypes"]][target_idx];
                     inner_container.replace(pos, len, target);
                 }

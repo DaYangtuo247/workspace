@@ -48,9 +48,9 @@
     },
     "sta::Set": {
         "level": 1,
-        "abbreviation": "HSTSet",
+        "abbreviation": "sta_Set",
         "struct": {
-            "inherit__0x0": "std::set<T>"
+            "sta_set0_set_0x0": "std::set<T>"
         }
     },
     "std::set::iterator": {
@@ -350,9 +350,9 @@
         "level": 1,
         "abbreviation": "HDTree_HDTreeNode",
         "struct": {
-            "dev_node30_iter_0x0" : "HDTree<T>::STLIter",
-            "dev_node30_list_0x8" : "std::list<HDTreeNode*>",
-            "dev_node30_node_p_0x20" : "T"
+            "dev_node30_iter_0x0": "HDTree<T>::STLIter",
+            "dev_node30_list_0x8": "std::list<HDTreeNode*>",
+            "dev_node30_node_p_0x20": "T"
         }
     },
     "rt::dntg::ArcT": {
@@ -361,6 +361,35 @@
         "struct": {
             "rt_arct_uint64_0x0": "uint64_t",
             "rt_arct_arr_0x8[4]": "T"
+        }
+    },
+    "sta::Map": {
+        "level": 2,
+        "abbreviation": "sta_Map",
+        "struct": {
+            "sta_map3_map_0x0": "std::map<T1, T2>"
+        }
+    },
+    "sta::MapNonPtr": {
+        "level": 2,
+        "abbreviation": "sta_MapNonPtr",
+        "struct": {
+            "sta_ptr_map_0x0": "std::map<T1, T2>"
+        }
+    },
+    "sta::SetNonPtr": {
+        "level": 1,
+        "abbreviation": "sta_SetNonPtr",
+        "struct": {
+            "sta_ptr0_set_0x0": "std::Set<T1>"
+        }
+    },
+    "sta::SetNonPtr::Iterator": {
+        "level": 1,
+        "abbreviation": "sta_SetNonPtr_Itr",
+        "struct": {
+            "sta_iterator57_set_p_0x0": "std::set<T1>",
+            "sta_iterator57_iter_0x8": "T"
         }
     }
 }
