@@ -354,5 +354,13 @@
             "dev_node30_list_0x8" : "std::list<HDTreeNode*>",
             "dev_node30_node_p_0x20" : "T"
         }
+    },
+    "rt::dntg::ArcT": {
+        "level": 1,
+        "abbreviation": "ArcT",
+        "struct": {
+            "rt_arct_uint64_0x0": "uint64_t",
+            "rt_arct_arr_0x8[4]": "T"
+        }
     }
 }
