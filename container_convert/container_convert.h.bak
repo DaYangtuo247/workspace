@@ -815,3 +815,4 @@ struct vec_HARTCongMap_p {
   rt::HARTCongMap* *end_0x8;
   rt::HARTCongMap* *cap_end_0x10;
 };
+

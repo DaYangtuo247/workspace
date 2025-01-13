@@ -182,8 +182,6 @@ json containerConvert::parseContainer(std::string str) {
             string containerName_new = containerName + "_T" + to_string(i + 1);
             res[containerName][containerName_new] = parseContainer(innerTypes[i]);
         }
-        cout << "innerTypes size():: " << innerTypes.size() << endl;
-        cout << "containerName size():: " << ContainerTypes[str].size() << endl;
     }
     return res;
 }
@@ -217,8 +215,9 @@ string containerConvert::generateStruct(const json& input) {
         type_struct = Template[type]["struct"];
     }
 
+    string abbreviation = Template[type]["abbreviation"].get<std::string>() + "_";
     // 生成的结构体名称
-    string struct_name = Template[type]["abbreviation"].get<std::string>() + "_";
+    string struct_name;
     // struct{}中每个变量的类型名称
     string inner_type_name;
 
@@ -260,9 +259,8 @@ string containerConvert::generateStruct(const json& input) {
                     int len = max((size_t)0, string(match[1]).size()) + 1;
                     int pos = match.position(1) - 1;
                     int target_idx = string(match[1]).size() == 0 ? 1 : stoi(match[1]);
-                    cout << "target_idx: " << target_idx << "\n, json temp size: " << ContainerTypes[container_parse["CurParTypes"]].size() << endl;
                     if (target_idx > ContainerTypes[container_parse["CurParTypes"]].size()) {
-                        cout << "Unknown Type T" << match[1] << ", Please check if the structure of " << type << " in template.json is correct. \n";
+                        cout << "Unknown Type T" << match[1] << ", Please check if the structure of " << type << " in template.json is correct." << endl;
                         exit(0);
                     }
                     string target = ContainerTypes[container_parse["CurParTypes"]][target_idx - 1];
@@ -284,11 +282,11 @@ string containerConvert::generateStruct(const json& input) {
     for (const auto& el : type_struct.items()) {
         // 修改指向自身的指针
         if (el.value() == type)
-            el.value() = struct_name;
+            el.value() = abbreviation + struct_name;
     }
 
     // 输出结构
-    string output_struct_name = getStructName(struct_name);
+    string output_struct_name = abbreviation + getStructName(struct_name);
     if (!record.count(output_struct_name)) {
         record.insert(output_struct_name);
         result << "struct " << output_struct_name << " {\n";
@@ -296,7 +294,7 @@ string containerConvert::generateStruct(const json& input) {
             result << "  " << el.value().get<string>() << " " << el.key() << ";" << endl;
         result << "};\n";
     }
-    return struct_name + is_ptr;
+    return abbreviation + struct_name + is_ptr;
 }
 
 // 清空文件，输出结构体正则匹配串
@@ -337,7 +335,7 @@ void containerConvert::clearFileAndPrintf(const std::string& filename) {
     outfile.close();
 }
 
-// 获取变量的容器名称
+// 终端执行t工具，获取变量的容器类型
 std::string containerConvert::getVariableType(std::string& command) {
     // 打开管道
     FILE* pipe = popen(command.c_str(), "r");
