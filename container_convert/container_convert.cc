@@ -83,7 +83,7 @@ string containerConvert::getStructName(string str) {
 
 // 判断str是不是为TN，即为T，T1，T2...，输入i用于判断是否 str == "Ti"
 bool containerConvert::isTN(std::string str, int i) {
-    if (str.size() == 1 && str[0] == 'T')
+    if (str.size() == 1 && str[0] == 'T' && i == 1)
         return true;
     if (str.size() == 2 && str[0] == 'T' && isdigit(str[1])) {
         return str[1] - '0' == i;

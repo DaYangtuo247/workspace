@@ -1,5 +1,5 @@
 #include "container_convert.cc"
-#define TEMPLATE_PATH "../template.json"
+#define TEMPLATE_PATH "../container_convert/template.json"
 
 int main(int argc, char* argv[]) {
     // 显示帮助信息
