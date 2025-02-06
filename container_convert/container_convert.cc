@@ -369,7 +369,7 @@ std::string containerConvert::getVariableType(std::string& command) {
     // 获取容器名称
     std::regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
     std::smatch match;
-    if (std::regex_match(result, match, pattern)) 
+    if (std::regex_search(result, match, pattern)) 
         result = match[1];
 
     return result;
