@@ -289,6 +289,8 @@ string containerConvert::generateStruct(const json& input) {
     string output_struct_name = abbreviation + getStructName(struct_name);
     if (!record.count(output_struct_name)) {
         record.insert(output_struct_name);
+        string current_parse_type = container_parse["CurParTypes"];
+        result << "\033[0;32m// " << current_parse_type << "\033[0m" << endl;
         result << "struct " << output_struct_name << " {\n";
         for (const auto& el : type_struct.items())
             result << "  " << el.value().get<string>() << " " << el.key() << ";" << endl;

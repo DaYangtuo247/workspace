@@ -63,12 +63,12 @@ int main(int argc, char* argv[]) {
         // 输出路径是debug时，打开调试模式
         if (outputFilePath == "debug") {
             ss << "##########################################################################################\n";
-            ss << "//Input Type: " << type << endl;
+            ss << "\033[0;32m//Input Type: " << type << "\033[0m" << endl;
             ss << res.dump(2) << endl;
-            ss << "------------------------------------------------------\n";
+            ss << "\033[1;31m------------------------------------------------------\033[0m\n";
         } else {
-            ss << "//------------------------------------------------------\n";
-            ss << "// " << type << endl;
+            ss << "//\033[1;31m------------------------------------------------------\033[0m\n";
+            ss << "\033[0;32m// Input Type: " << type << "\033[0m" << endl;
         }
         obj.generateStruct(res);
         ss << obj.result.str() << endl;
@@ -76,11 +76,13 @@ int main(int argc, char* argv[]) {
     }
 
     std::ofstream fd(outputFilePath, std::ios::app);
-    fd << ss.str();
+    std::regex ansiRegex(R"(\x1B\[[0-9;]*[mHfK])");
+    string fd_text = regex_replace(ss.str(), ansiRegex, "");
+    fd << fd_text;
     fd.close();
 
     cout << ss.str().substr(2);
-    cout << "------------------------------------------------------\noutput Path: " << outputFilePath << endl;
+    cout << "\033[1;31m------------------------------------------------------\033[0m\noutput Path: " << outputFilePath << endl;
 
     return 0;
 }
