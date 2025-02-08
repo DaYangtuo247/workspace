@@ -69,7 +69,7 @@
         "abbreviation": "set",
         "struct": {
             "key_compare_0x0": "uint64_t",
-            "end_address_0x8": "uint64_t",
+            "*end_address_0x8": "std::set<T>::iterator",
             "*header_parent_0x10": "std::set<T>::iterator",
             "*header_left_0x18": "std::set<T>::iterator",
             "*header_right_0x20": "std::set<T>::iterator",
@@ -92,7 +92,7 @@
         "abbreviation": "mtiSet",
         "struct": {
             "key_compare_0x0": "uint64_t",
-            "end_address_0x8": "uint64_t",
+            "*end_address_0x8": "std::multiset<T>::iterator",
             "*header_parent_0x10": "std::multiset<T>::iterator",
             "*header_left_0x18": "std::multiset<T>::iterator",
             "*header_right_0x20": "std::multiset<T>::iterator",
@@ -145,7 +145,7 @@
         "abbreviation": "map",
         "struct": {
             "key_compare_0x0": "uint64_t",
-            "end_address_0x8": "uint64_t",
+            "*end_address_0x8": "std::map<T1, T2>::iterator",
             "*header_parent_0x10": "std::map<T1, T2>::iterator",
             "*header_left_0x18": "std::map<T1, T2>::iterator",
             "*header_right_0x20": "std::map<T1, T2>::iterator",
@@ -169,7 +169,7 @@
         "abbreviation": "mtiMap",
         "struct": {
             "key_compare_0x0": "uint64_t",
-            "end_address_0x8": "uint64_t",
+            "*end_address_0x8": "std::multimap<T1, T2>::iterator",
             "*header_parent_0x10": "std::multimap<T1, T2>::iterator",
             "*header_left_0x18": "std::multimap<T1, T2>::iterator",
             "*header_right_0x20": "std::multimap<T1, T2>::iterator",
@@ -223,7 +223,15 @@
     },
     "std::tuple": {
         "level": -1,
+        "reverse": 1,
         "abbreviation": "tuple",
+        "struct": {
+            "Element_": "T"
+        }
+    },
+    "boost::tuples::tuple" : {
+        "level": -1,
+        "abbreviation": "boost_tuple",
         "struct": {
             "Element_": "T"
         }
@@ -365,31 +373,38 @@
     },
     "sta::Map": {
         "level": 2,
-        "abbreviation": "sta_Map",
+        "abbreviation": "staMap",
         "struct": {
             "sta_map3_map_0x0": "std::map<T1, T2>"
         }
     },
     "sta::MapNonPtr": {
         "level": 2,
-        "abbreviation": "sta_MapNonPtr",
+        "abbreviation": "MapNonPtr",
         "struct": {
             "sta_ptr_map_0x0": "std::map<T1, T2>"
         }
     },
     "sta::SetNonPtr": {
         "level": 1,
-        "abbreviation": "sta_SetNonPtr",
+        "abbreviation": "SetNonPtr",
         "struct": {
             "sta_ptr0_set_0x0": "std::Set<T1>"
         }
     },
     "sta::SetNonPtr::Iterator": {
         "level": 1,
-        "abbreviation": "sta_SetNonPtr_Itr",
+        "abbreviation": "SetNonPtrItr",
         "struct": {
             "sta_iterator57_set_p_0x0": "std::set<T1>",
             "sta_iterator57_iter_0x8": "T"
+        }
+    },
+    "HSTMultiMap": {
+        "level": 2,
+        "abbreviation": "HSTMultiMap",
+        "struct": {
+            "inherit__0x0": "std::multimap<T1, T2>"
         }
     }
 }

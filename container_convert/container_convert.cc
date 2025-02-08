@@ -206,11 +206,17 @@ string containerConvert::generateStruct(const json& input) {
     json type_struct;
 
     // 如果存储类型是元组
-    if (type == "std::tuple") {
+    if (Template[type]["level"] == -1) {
         string el_key = Template[type]["struct"].begin().key(), el_value = Template[type]["struct"].begin().value();
-        // tuple在内存中是逆序的，需要逆序输出
-        for (int j = container_parse.size() - 1; j >= 1; j--)
-            type_struct[el_key + to_string(j)] = el_value + to_string(j);
+        // 需要逆序输出，例如std::tuple
+        if (Template[type].contains("reverse") && Template[type]["reverse"] == 1) {
+            for (int j = container_parse.size() - 1; j >= 1; j--)
+                type_struct[el_key + to_string(j)] = el_value + to_string(j);
+        // 无需逆序, 例如boost::tuples::tuple
+        } else {
+            for (int j = 1; j < container_parse.size(); j++)
+                type_struct[el_key + to_string(j)] = el_value + to_string(j);
+        }
     } else {
         type_struct = Template[type]["struct"];
     }
