@@ -61,8 +61,8 @@ int main(int argc, char* argv[]) {
     for (const auto& type : testCases) {
         json res = obj.parseContainer(type);
         // 输出路径是debug时，打开调试模式
+        ss << "//##########################################################################################\n";
         if (outputFilePath == "debug") {
-            ss << "##########################################################################################\n";
             ss << "\033[0;32m// Input Type: " << type << "\033[0m" << endl;
             ss << res.dump(2) << endl;
         } else {
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
     fd << fd_text;
     fd.close();
 
-    cout << regex_replace(ss.str(), std::regex("//[^ ]"), "");
+    cout << regex_replace(ss.str(), std::regex("(//[^ ]|//#+\n)"), "");
     cout << "\033[1;31m------------------------------------------------------\033[0m\noutput Path: " << outputFilePath << endl;
 
     return 0;
