@@ -73,7 +73,7 @@
             "*header_parent_0x10": "std::set<T>::iterator",
             "*header_left_0x18": "std::set<T>::iterator",
             "*header_right_0x20": "std::set<T>::iterator",
-            "map_size_0x28": "uint64_t"
+            "set_size_0x28": "uint64_t"
         }
     },
     "std::multiset::iterator": {
