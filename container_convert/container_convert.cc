@@ -368,7 +368,7 @@ std::string containerConvert::getVariableType(std::string& command) {
     // 去除第一行
     int pos = result.find('\n');
     result = result.substr(pos + 1);
-    cout << result << endl;
+    cout << result;
 
     // 去除控制字符
     std::regex ansi_escape(R"(\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]))");
