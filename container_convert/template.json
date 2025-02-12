@@ -231,7 +231,7 @@
     },
     "boost::tuples::tuple" : {
         "level": -1,
-        "abbreviation": "boost_tuple",
+        "abbreviation": "boostTuple",
         "struct": {
             "Element_": "T"
         }
