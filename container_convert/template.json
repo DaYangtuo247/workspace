@@ -125,7 +125,7 @@
         "level": 1,
         "abbreviation": "HSTPtrHashSet",
         "struct": {
-            "inherit__0x0": "std::unordered_set<T>"
+            "inherit__0x0": "std::unordered_set<T*>"
         }
     },
     "HSTMap": {
@@ -187,7 +187,7 @@
         "level": 2,
         "abbreviation": "HSTPtrHashMap",
         "struct": {
-            "inherit__0x0": "std::unordered_map<T1, T2>"
+            "inherit__0x0": "std::unordered_map<T1*, T2>"
         }
     },
     "std::unordered_map::iterator": {

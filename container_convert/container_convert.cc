@@ -258,7 +258,7 @@ string containerConvert::generateStruct(const json& input) {
                 string inner_container = el.value();
 
                 // 捕获是第几个模板
-                regex reg("[ _,<]T(|\\d+)[ _,>]");
+                regex reg("[ _,<]T(|\\d+)[ _,>*]+");
                 smatch match;
                 // 替换子容器的所有Tn为对应的类型
                 while (regex_search(inner_container, match, reg)) {
@@ -296,6 +296,14 @@ string containerConvert::generateStruct(const json& input) {
     if (!record.count(output_struct_name)) {
         record.insert(output_struct_name);
         string current_parse_type = container_parse["CurParTypes"];
+        
+        // 输出的结构体名称，不能含有[ *]结尾
+        auto r_iter = current_parse_type.rbegin();
+        while (*r_iter == '*' || *r_iter == ' ') {
+            current_parse_type.pop_back();
+            r_iter = current_parse_type.rbegin();
+        }
+        
         result << "\033[0;32m// " << current_parse_type << "\033[0m" << endl;
         result << "struct " << output_struct_name << " {\n";
         for (const auto& el : type_struct.items())
