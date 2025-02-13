@@ -55,34 +55,34 @@ int main(int args, char *argv[]) {
     printf("\033[1;31mThis text is in red and bold.\033[0m\n");
     printf("\033[0;31mThis text is in red and not bold.\033[0m\n");
 
-    printf("\033[0;36m****一口Linux*****【0;36m】\033[0m\r\n");
-    printf("\033[1;36m****一口Linux*****【1;36m】\033[0m\r\n");
-    printf("\033[4;36m****一口Linux*****【4;36m】\033[0m\r\n");
-    printf("\033[5;36m****一口Linux*****【5;36m】\033[0m\r\n");
-    printf("\033[7;36m****一口Linux*****【7;36m】\033[0m\r\n");
-    printf("\033[8;36m****一口Linux*****【8;36m】\033[0m\r\n");
-    printf("\033[22;36m****一口Linux*****【22;36m】\033[0m\r\n");
-    printf("\033[24;36m****一口Linux*****【24;36m】\033[0m\r\n");
-    printf("\033[25;36m****一口Linux*****【25;36m】\033[0m\r\n");
-    printf("\033[27;36m****一口Linux*****【27;36m】\033[0m\r\n");
+    printf("\033[0;36m****centos Linux*****【0;36m】\033[0m\r\n");
+    printf("\033[1;36m****centos Linux*****【1;36m】\033[0m\r\n");
+    printf("\033[4;36m****centos Linux*****【4;36m】\033[0m\r\n");
+    printf("\033[5;36m****centos Linux*****【5;36m】\033[0m\r\n");
+    printf("\033[7;36m****centos Linux*****【7;36m】\033[0m\r\n");
+    printf("\033[8;36m****centos Linux*****【8;36m】\033[0m\r\n");
+    printf("\033[22;36m****centos Linux*****【22;36m】\033[0m\r\n");
+    printf("\033[24;36m****centos Linux*****【24;36m】\033[0m\r\n");
+    printf("\033[25;36m****centos Linux*****【25;36m】\033[0m\r\n");
+    printf("\033[27;36m****centos Linux*****【27;36m】\033[0m\r\n");
 
-    printf("\033[30m****一口Linux*****【30】\033[0m\r\n");
-    printf("\033[31m****一口Linux*****【31】\033[0m\r\n");
-    printf("\033[32m****一口Linux*****【32】\033[0m\r\n");
-    printf("\033[33m****一口Linux*****【33】\033[0m\r\n");
-    printf("\033[34m****一口Linux*****【34】\033[0m\r\n");
-    printf("\033[35m****一口Linux*****【35】\033[0m\r\n");
-    printf("\033[36m****一口Linux*****【36】\033[0m\r\n");
-    printf("\033[37m****一口Linux*****【37】\033[0m\r\n");
+    printf("\033[30m****centos Linux*****【30】\033[0m\r\n");
+    printf("\033[31m****centos Linux*****【31】\033[0m\r\n");
+    printf("\033[32m****centos Linux*****【32】\033[0m\r\n");
+    printf("\033[33m****centos Linux*****【33】\033[0m\r\n");
+    printf("\033[34m****centos Linux*****【34】\033[0m\r\n");
+    printf("\033[35m****centos Linux*****【35】\033[0m\r\n");
+    printf("\033[36m****centos Linux*****【36】\033[0m\r\n");
+    printf("\033[37m****centos Linux*****【37】\033[0m\r\n");
 
-    printf("\033[40m****一口Linux*****【40】\033[0m\r\n");
-    printf("\033[41m****一口Linux*****【41】\033[0m\r\n");
-    printf("\033[42m****一口Linux*****【42】\033[0m\r\n");
-    printf("\033[43m****一口Linux*****【43】\033[0m\r\n");
-    printf("\033[44m****一口Linux*****【44】\033[0m\r\n");
-    printf("\033[45m****一口Linux*****【45】\033[0m\r\n");
-    printf("\033[46m****一口Linux*****【46】\033[0m\r\n");
-    printf("\033[47m****一口Linux*****【47】\033[0m\r\n");
+    printf("\033[40m****centos Linux*****【40】\033[0m\r\n");
+    printf("\033[41m****centos Linux*****【41】\033[0m\r\n");
+    printf("\033[42m****centos Linux*****【42】\033[0m\r\n");
+    printf("\033[43m****centos Linux*****【43】\033[0m\r\n");
+    printf("\033[44m****centos Linux*****【44】\033[0m\r\n");
+    printf("\033[45m****centos Linux*****【45】\033[0m\r\n");
+    printf("\033[46m****centos Linux*****【46】\033[0m\r\n");
+    printf("\033[47m****centos Linux*****【47】\033[0m\r\n");
 
     return 0;
 }
