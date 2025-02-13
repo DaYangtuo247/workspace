@@ -5,7 +5,7 @@ int main(int argc, char* argv[]) {
     // 显示帮助信息
     if (argc == 1 || (argc >= 2 && string(argv[1]) == "-h")) {
         std::cout << "Options:\n";
-        std::cout << "  -h                           Show this help message\n";
+        std::cout << "  [-h]                         Show this help message\n";
         std::cout << "  -d [output_file]             Generate [output_file].h.bak, clean [output_file].h\n";
         std::cout << "  -r input_file  [output_file] Retrieve container types from the input_file file.\n";
         std::cout << "  variable_name  [output_file] Container convert\n";
