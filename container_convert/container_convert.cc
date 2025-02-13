@@ -298,10 +298,8 @@ string containerConvert::generateStruct(const json& input) {
         string current_parse_type = container_parse["CurParTypes"];
         
         // 输出的结构体名称，不能含有[ *]结尾
-        auto r_iter = current_parse_type.rbegin();
-        while (*r_iter == '*' || *r_iter == ' ') {
+        while (current_parse_type.back() == '*' || current_parse_type.back() == ' ') {
             current_parse_type.pop_back();
-            r_iter = current_parse_type.rbegin();
         }
         
         result << "\033[0;32m// " << current_parse_type << "\033[0m" << endl;
