@@ -121,6 +121,13 @@
             "M_single_bucket_0x30": "uint64_t"
         }
     },
+    "HSTPtrHashSet": {
+        "level": 1,
+        "abbreviation": "HSTPtrHashSet",
+        "struct": {
+            "inherit__0x0": "std::unordered_set<T>"
+        }
+    },
     "HSTMap": {
         "level": 2,
         "abbreviation": "HSTMap",
