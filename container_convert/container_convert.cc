@@ -172,6 +172,12 @@ json containerConvert::parseContainer(std::string str) {
         if (currentType.size())
             innerTypes.push_back(currentType);
 
+        // 修复当输入错误时，没有提示错误，例如输入"std::pair<int>"，应该报错
+        if ((signed int32_t)innerTypes.size() < (signed int32_t)numParams) {
+            cout << "Input error, " << containerName << " lack T" << innerTypes.size() + 1 << " type." << endl;
+            exit(0);
+        }
+
         // 记录当前容器存储的元素类型
         res[containerName]["CurParTypes"] = str;
         
