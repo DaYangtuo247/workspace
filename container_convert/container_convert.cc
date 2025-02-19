@@ -85,8 +85,9 @@ string containerConvert::getStructName(string str) {
 bool containerConvert::isTN(std::string str, int i) {
     if (str.size() == 1 && str[0] == 'T' && i == 1)
         return true;
-    if (str.size() == 2 && str[0] == 'T' && isdigit(str[1])) {
-        return str[1] - '0' == i;
+    if (str.size() >= 2 && str[0] == 'T') {
+        string digit = str.substr(1);
+        return stoi(digit) == i && to_string(stoi(digit)).size() == digit.size();
     }
     return false;
 }
