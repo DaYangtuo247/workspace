@@ -347,7 +347,7 @@
         "level": 1,
         "abbreviation": "HDRTTree_STLConstIter",
         "struct": {
-            "dev_iter4_int64_0x0": "std::list<HDTree::HDTreeNode*>::iterator"
+            "dev_iter11_int64_0x0": "std::list<HDTree::HDTreeNode*>::iterator"
         }
     },
     "HDTree": {
