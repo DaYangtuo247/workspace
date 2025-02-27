@@ -269,6 +269,13 @@
             "*count": "std::_Sp_counted_ptr"
         }
     },
+    "std::unique_ptr": {
+        "level": 1,
+        "abbreviation": "uniquePtr",
+        "struct": {
+            "*ptr": "T"
+        }
+    },
     "sta::DelayVsta": {
         "level": 1,
         "abbreviation": "staDelayVsta",
