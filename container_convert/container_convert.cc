@@ -8,7 +8,7 @@ private:
     string TemplatePath; // 模板路径
     json Template; // 容器模板
     unordered_map<string, vector<string>> ContainerTypes; // 每个容器中存储的元素类型
-    static unordered_set<string> record; // 记录某个结构是否输出过
+    unordered_set<string> record; // 记录某个结构是否输出过
 public:
     stringstream result;  // 解析结果
 
@@ -34,8 +34,6 @@ public:
     // 清空文件，输出结构体正则匹配串
     void clearFileAndPrintf(const std::string& filename);
 };
-
-unordered_set<string> containerConvert::record{};
 
 containerConvert::containerConvert(string filePath) {
     // 获取模板
