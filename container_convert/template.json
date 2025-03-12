@@ -269,6 +269,14 @@
             "*count": "std::_Sp_counted_ptr"
         }
     },
+    "boost::shared_ptr": {
+        "level": 1,
+        "abbreviation": "boostSharedPtr",
+        "struct": {
+            "*ptr": "T",
+            "*count": "boost::detail::sp_counted_impl_p"
+        }
+    },
     "std::unique_ptr": {
         "level": 1,
         "abbreviation": "uniquePtr",

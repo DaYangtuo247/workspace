@@ -6,19 +6,19 @@ using json = nlohmann::ordered_json;  // 有序
 class containerConvert {
 private:
     string TemplatePath; // 模板路径
-    json Template; // 容器模板
     unordered_map<string, vector<string>> ContainerTypes; // 每个容器中存储的元素类型
-    unordered_set<string> record; // 记录某个结构是否输出过
 public:
+    static unordered_set<string> record; // 记录某个结构是否输出过
+    json Template; // 容器模板
     stringstream result;  // 解析结果
 
 private:
     // 清理字符串两边空白, 字符 '&' -> '*'
-    std::string trimAndReplace(std::string str);
+    string trimAndReplace(string str);
     // 获取结构体名称
     string getStructName(string str);
     // 判断str是不是为TN，即为T，T1，T2...，输入i用于判断是否 str == "Ti"
-    bool isTN(std::string str, int i);
+    bool isTN(string str, int i);
     // 获取容器类型外的信息，如指针，子类等
     string getTypeStruct(string & str);
 
@@ -26,28 +26,30 @@ public:
     containerConvert(string);
 
     // 解析str为json解析树
-    json parseContainer(std::string str);
+    json parseContainer(string str);
     // json解析为结构体输出，返回值为输出的结构体名称
     string generateStruct(const json& input);
     // 获取变量的容器名称
-    std::string getVariableType(std::string& command);
+    string getVariableType(string& command);
     // 清空文件，输出结构体正则匹配串
-    void clearFileAndPrintf(const std::string& filename);
+    void clearFileAndPrintf(const string& filename);
 };
+
+unordered_set<string> containerConvert::containerConvert::record = {};
 
 containerConvert::containerConvert(string filePath) {
     // 获取模板
-    std::ifstream f(filePath);
+    ifstream f(filePath);
     if (!f.is_open()) {
-        cout << "Error: template.json not found!!!" << endl;
-        exit(1);
+        // cout << "Error: template.json not found!!!" << endl;
+        throw logic_error("Error: template.json not found!!!");
     }
     Template = json::parse(f);
     this->TemplatePath = filePath;
 }
 
 // 清理字符串两边空白, 字符 '&' -> '*'
-std::string containerConvert::trimAndReplace(std::string str) {
+string containerConvert::trimAndReplace(string str) {
     int left = 0, right = str.size() - 1;
     while (left < str.size() && str[left] == ' ')
         left++;
@@ -66,10 +68,10 @@ string containerConvert::getStructName(string str) {
         if(str.back() == '*') starCount++;
         str.pop_back();
     }
-    std::replace(str.begin(), str.end(), ' ', '_');
+    replace(str.begin(), str.end(), ' ', '_');
     // 去除作用域
     size_t pos = str.rfind("::");
-    if (pos != std::string::npos)
+    if (pos != string::npos)
         str = str.substr(pos + 2);
     
     //添加指针信息
@@ -80,7 +82,7 @@ string containerConvert::getStructName(string str) {
 }
 
 // 判断str是不是为TN，即为T，T1，T2...，输入i用于判断是否 str == "Ti"
-bool containerConvert::isTN(std::string str, int i) {
+bool containerConvert::isTN(string str, int i) {
     if (str.size() == 1 && str[0] == 'T' && i == 1)
         return true;
     if (str.size() >= 2 && str[0] == 'T') {
@@ -92,20 +94,20 @@ bool containerConvert::isTN(std::string str, int i) {
 
 // 获取容器类型外的信息，如指针，子类等
 string containerConvert::getTypeStruct(string & str) {
-    auto it = std::find_if(str.begin(), str.end(), [](char ch) {
-        return !(std::isalnum(ch) || ch == ':' || ch == '_');
+    auto it = find_if(str.begin(), str.end(), [](char ch) {
+        return !(isalnum(ch) || ch == ':' || ch == '_');
     });
 
     if (it != str.end()) {
-        std::string result(it, str.end());
-        str = str.substr(0, std::distance(str.begin(), it));
+        string result(it, str.end());
+        str = str.substr(0, distance(str.begin(), it));
         return result;
     }
     return "";
 }
 
 // 解析str为json解析树
-json containerConvert::parseContainer(std::string str) {
+json containerConvert::parseContainer(string str) {
     // 输入的是基本类型
     if (str.find('<') == string::npos) {
         return str;
@@ -114,7 +116,7 @@ json containerConvert::parseContainer(std::string str) {
     json res;
     int pos = 0;
     // 获取容器名
-    std::string containerName;
+    string containerName;
     while (pos < str.size() && (isalnum(str[pos]) || str[pos] == ':' || str[pos] == '_')) {
         containerName.push_back(str[pos]);
         pos++;
@@ -122,8 +124,10 @@ json containerConvert::parseContainer(std::string str) {
 
     // 检查容器是否在映射表中
     if (!Template.contains(containerName)) {
-        cout << "Unknown Type: " << containerName << ", Place add to template.json" << endl;
-        exit(1);
+        stringstream msg;
+        msg << "Unknown Type: " << containerName << ", Place add to template.json";
+        // cout << msg.str();
+        throw logic_error(msg.str());
     }
 
     // 容器是几元组
@@ -170,10 +174,12 @@ json containerConvert::parseContainer(std::string str) {
         if (currentType.size())
             innerTypes.push_back(currentType);
 
-        // 修复当输入错误时，没有提示错误，例如输入"std::pair<int>"，应该报错
+        // 修复当输入错误时，没有提示错误，例如输入"pair<int>"，应该报错
         if ((signed int32_t)innerTypes.size() < (signed int32_t)numParams) {
-            cout << "Input error, " << containerName << " lack T" << innerTypes.size() + 1 << " type." << endl;
-            exit(0);
+            stringstream msg;
+            msg << "Input error, " << containerName << " lack T" << innerTypes.size() + 1 << " type.";
+            // cout << msg.str();
+            throw logic_error(msg.str());
         }
 
         // 记录当前容器存储的元素类型
@@ -201,7 +207,7 @@ string containerConvert::generateStruct(const json& input) {
 
     // 确保类型在模板中存在
     if (!Template.contains(type)) {
-        throw runtime_error(input.dump(2) + "\nType not found in template.json.");
+        throw logic_error(input.dump(2) + "\nType not found in template.json.");
     }
 
     // 获取容器解析树
@@ -226,7 +232,7 @@ string containerConvert::generateStruct(const json& input) {
         type_struct = Template[type]["struct"];
     }
 
-    string abbreviation = Template[type]["abbreviation"].get<std::string>() + "_";
+    string abbreviation = Template[type]["abbreviation"].get<string>() + "_";
     // 生成的结构体名称
     string struct_name;
     // struct{}中每个变量的类型名称
@@ -271,8 +277,10 @@ string containerConvert::generateStruct(const json& input) {
                     int pos = match.position(1) - 1;
                     int target_idx = string(match[1]).size() == 0 ? 1 : stoi(match[1]);
                     if (target_idx > ContainerTypes[container_parse["CurParTypes"]].size()) {
-                        cout << "Unknown Type T" << match[1] << ", Please check if the structure of " << type << " in template.json is correct." << endl;
-                        exit(0);
+                        stringstream msg;
+                        msg << "Unknown Type T" << match[1] << ", Please check if the structure of " << type << " in template.json is correct.";
+                        // cout << msg.str();
+                        throw logic_error(msg.str());
                     }
                     string target = ContainerTypes[container_parse["CurParTypes"]][target_idx - 1];
                     inner_container.replace(pos, len, target);
@@ -317,26 +325,28 @@ string containerConvert::generateStruct(const json& input) {
 }
 
 // 清空文件，输出结构体正则匹配串
-void containerConvert::clearFileAndPrintf(const std::string& filename) {
-    std::ifstream infile(filename);
+void containerConvert::clearFileAndPrintf(const string& filename) {
+    ifstream infile(filename);
     if (!infile.is_open()) {
-        std::cout << "not found: " << filename << std::endl;
-        return;
+        stringstream msg;
+        msg << "not found: " << filename;
+        // cout << msg.str();
+        throw logic_error(msg.str());
     }
     // 备份文件
-    std::ofstream backfile(filename + ".bak", std::ios::trunc);
+    ofstream backfile(filename + ".bak", ios::trunc);
     backfile << infile.rdbuf();
     backfile.close();
     infile.clear();
-    infile.seekg(0, std::ios::beg);
+    infile.seekg(0, ios::beg);
 
-    std::vector<std::string> structNames;
-    std::regex structRegex(R"(struct\s+(.+?)\s*\{)");
-    std::string line;
+    vector<string> structNames;
+    regex structRegex(R"(struct\s+(.+?)\s*\{)");
+    string line;
 
-    while (std::getline(infile, line)) {
-        std::smatch match;
-        if (std::regex_search(line, match, structRegex))
+    while (getline(infile, line)) {
+        smatch match;
+        if (regex_search(line, match, structRegex))
             structNames.push_back(match[1]);
     }
     infile.close();
@@ -350,20 +360,20 @@ void containerConvert::clearFileAndPrintf(const std::string& filename) {
     }
     cout << "$)\n";
 
-    std::ofstream outfile(filename, std::ios::trunc);
+    ofstream outfile(filename, ios::trunc);
     outfile.close();
 }
 
 // 终端执行t工具，获取变量的容器类型
-std::string containerConvert::getVariableType(std::string& command) {
+string containerConvert::getVariableType(string& command) {
     // 打开管道
     FILE* pipe = popen(command.c_str(), "r");
     if (!pipe) {
-        throw std::runtime_error("popen() failed!");
+        throw logic_error("popen() failed!");
     }
 
     char buffer[256];
-    std::string result;
+    string result;
 
     // 读取命令输出
     while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
@@ -373,7 +383,7 @@ std::string containerConvert::getVariableType(std::string& command) {
     // 关闭管道
     int retCode = pclose(pipe);
     if (retCode != 0) {
-        throw std::runtime_error("Command execution failed with code: " + std::to_string(retCode));
+        throw logic_error("Command execution failed with code: " + to_string(retCode));
     }
 
     // 去除第一行
@@ -382,13 +392,13 @@ std::string containerConvert::getVariableType(std::string& command) {
     cout << result;
 
     // 去除控制字符
-    std::regex ansi_escape(R"(\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]))");
-    result = std::regex_replace(result, ansi_escape, "");
+    regex ansi_escape(R"(\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]))");
+    result = regex_replace(result, ansi_escape, "");
     
     // 获取容器名称
-    std::regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
-    std::smatch match;
-    if (std::regex_search(result, match, pattern)) 
+    regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
+    smatch match;
+    if (regex_search(result, match, pattern)) 
         result = match[1];
 
     return result;
