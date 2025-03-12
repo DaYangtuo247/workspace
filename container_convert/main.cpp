@@ -31,6 +31,8 @@ void solve_IDA_H(string inputFile, vector<string> & testCases) {
                 testCases.push_back(container);
                 json res = obj.parseContainer(container);
                 string container_new = obj.generateStruct(res);
+                if (!regex_match(container_new, regex(R"(^[\w:]+$)")))
+                    continue;
                 lines[i] = string("\t") + container_new + string(" ") + match[2].str() + ";";
             }
         } catch (const exception &e) {
