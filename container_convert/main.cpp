@@ -15,12 +15,13 @@ void solve_IDA_H(string inputFile, vector<string> & testCases) {
     in.close();
     containerConvert obj(TEMPLATE_PATH);
     // 定义正则表达式（示例中采用原 Python 代码中的正则表达式）
-    regex pattern(R"(^\s*(?:const|matable)?\s*([\w:]+)\s([&*\w ]+);\s//(<.*>))");
+    regex pattern(R"(^\s*([\w:]+)([&*\w ]+);\s//(<.*>))");
     
     // 遍历每一行，匹配后进行处理
     for (size_t i = 0; i < lines.size(); ++i) {
         try {
             smatch match;
+            lines[i] = regex_replace(lines[i], regex(R"(^(\s*)const\s+)"), "$1");
             if (regex_search(lines[i], match, pattern)) {
                 string container_name = match[1].str();
                 string container_content = match[3].str();
