@@ -110,6 +110,11 @@ string containerConvert::getTypeStruct(string & str) {
 json containerConvert::parseContainer(string str) {
     // 输入的是基本类型
     if (str.find('<') == string::npos) {
+        // 去除指针后的const，例如 abc const * const
+        smatch match;
+        if (regex_match(str, match, regex(R"(^.+const$)"))) {
+            str.erase(str.size() - 5, 5);
+        }
         return str;
     }
 
@@ -117,9 +122,14 @@ json containerConvert::parseContainer(string str) {
     int pos = 0;
     // 获取容器名
     string containerName;
-    while (pos < str.size() && (isalnum(str[pos]) || str[pos] == ':' || str[pos] == '_')) {
+    while (pos < str.size() && (isalnum(str[pos]) || str[pos] == ':' || str[pos] == '_' || str[pos] == ' ')) {
         containerName.push_back(str[pos]);
         pos++;
+    }
+    // 去除容器的const， 例如 const HSTVector
+    smatch match;
+    if (regex_match(containerName, match, regex(R"(^const [\w:]+$)"))) {
+        containerName = containerName.substr(6);
     }
 
     // 检查容器是否在映射表中
