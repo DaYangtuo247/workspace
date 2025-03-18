@@ -34,8 +34,8 @@
         "level": 1,
         "abbreviation": "vec",
         "struct": {
-            "*begin_0x0": "T",
-            "*end_0x8": "T",
+            "*begin": "T",
+            "*end": "T",
             "*cap_end_0x10": "T"
         }
     },
@@ -61,7 +61,7 @@
             "*header_parent_0x8": "std::set::iterator",
             "*header_left_0x10": "std::set::iterator",
             "*header_right_0x18": "std::set::iterator",
-            "Key": "T"
+            "first": "T"
         }
     },
     "std::set": {
@@ -84,7 +84,7 @@
             "*header_parent_0x8": "std::multiset::iterator",
             "*header_left_0x10": "std::multiset::iterator",
             "*header_right_0x18": "std::multiset::iterator",
-            "Key": "T"
+            "first": "T"
         }
     },
     "std::multiset": {
@@ -104,7 +104,7 @@
         "abbreviation": "udSetItr",
         "struct": {
             "*_M_nxt": "std::unordered_set::iterator",
-            "Key": "T",
+            "first": "T",
             "hash_code": "uint64_t"
         }
     },
@@ -143,8 +143,8 @@
             "*header_parent_0x8": "std::map::iterator",
             "*header_left_0x10": "std::map::iterator",
             "*header_right_0x18": "std::map::iterator",
-            "Key": "T1",
-            "Value": "T2"
+            "first": "T1",
+            "second": "T2"
         }
     },
     "std::map": {
@@ -167,8 +167,8 @@
             "*header_parent_0x8": "std::multimap::iterator",
             "*header_left_0x10": "std::multimap::iterator",
             "*header_right_0x18": "std::multimap::iterator",
-            "Key": "T1",
-            "Value": "T2"
+            "first": "T1",
+            "second": "T2"
         }
     },
     "std::multimap": {
@@ -195,8 +195,8 @@
         "abbreviation": "udMapItr",
         "struct": {
             "*_M_nxt": "std::unordered_map::iterator",
-            "Key": "T1",
-            "Value": "T2",
+            "first": "T1",
+            "second": "T2",
             "hash_code": "uint64_t"
         }
     },
