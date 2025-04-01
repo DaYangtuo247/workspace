@@ -83,11 +83,13 @@ string containerConvert::getStructName(string str) {
 
 // 判断str是不是为TN，即为T，T1，T2...，输入i用于判断是否 str == "Ti"
 bool containerConvert::isTN(string str, int i) {
-    if (str.size() == 1 && str[0] == 'T' && i == 1)
-        return true;
-    if (str.size() >= 2 && str[0] == 'T') {
-        string digit = str.substr(1);
-        return stoi(digit) == i && to_string(stoi(digit)).size() == digit.size();
+    smatch match;
+    regex reg(R"(^T(|\d+)$)");
+    if (regex_search(str, match, reg)) {
+        if (match[1].length() == 0)
+            return i == 1;
+        else
+            return stoi(match[1]) == i;
     }
     return false;
 }
