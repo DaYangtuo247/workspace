@@ -82,12 +82,12 @@ int main(int argc, char** argv) {
     reverse_dot_file(mark_output_file);
 
     // -------------------------------调用 Graphviz 生成图片-------------------------------
-    std::string command1 = "dot -Tpng " + output_file + " -o " + output_file + ".png";
-    std::string command2 = "dot -Tpng " + mark_output_file + " -o " + mark_output_file + ".png";
+    std::string command1 = "dot -Tsvg " + output_file + " -o " + output_file + ".svg";
+    std::string command2 = "dot -Tsvg " + mark_output_file + " -o " + mark_output_file + ".svg";
     int result1 = std::system(command1.c_str());
     int result2 = std::system(command2.c_str());
     if (result1 == 0 && result2 == 0) {
-        std::cout << "Graph images generated: " << output_file << ".png and " << mark_output_file << ".png" << "\n";
+        std::cout << "Graph images generated: " << output_file << ".svg and " << mark_output_file << ".svg" << "\n";
     } else {
         std::cerr << "Failed to generate graph images. Please ensure Graphviz is installed and accessible.\n";
     }
