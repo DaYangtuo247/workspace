@@ -50,14 +50,18 @@ void reverse_dot_file(const string& filepath) {
 }
 
 int main(int argc, char** argv) {
-    if (argc < 3) {
-        std::cerr << "usage: " << argv[0] << " <project Root Dir> <model: true/false>\n";
-        // example: ./main.exe /home/user/project true
+    if (argc <= 2) {
+        std::cerr << "usage: " << argv[0] << " <project Root Dir> [replace]\n";
+        std::cerr << "replace: true to remove redundant includes, false to keep them \n";
+        // example: ./main.exe /home/user/project [replace]
         return 1;
     }
 
     std::string root_dir = argv[1];
-    bool test = (std::string(argv[2]) == "true");
+    bool test = false;
+    if (argc == 3 && std::string(argv[2]) == "replace") {
+        test = true;
+    }
     std::string output_file = "./output.dot";
 
     IncludeGraph graph;
