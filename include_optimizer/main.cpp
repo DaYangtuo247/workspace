@@ -50,19 +50,22 @@ void reverse_dot_file(const string& filepath) {
 }
 
 int main(int argc, char** argv) {
-    if (argc <= 2) {
-        std::cerr << "usage: " << argv[0] << " <project Root Dir> [replace]\n";
-        std::cerr << "replace: true to remove redundant includes, false to keep them \n";
+    if (argc < 3) {
+        std::cerr << "usage: " << argv[0] << " <project Root Dir> outputName [rp]\n";
+        std::cerr << "rp: true to remove redundant includes, false to keep them \n";
         // example: ./main.exe /home/user/project [replace]
         return 1;
     }
 
     std::string root_dir = argv[1];
+
     bool test = false;
-    if (argc == 3 && std::string(argv[2]) == "replace") {
+    if (argc == 4 && std::string(argv[3]) == "rp") {
         test = true;
     }
-    std::string output_file = "./output.dot";
+
+    std::string output_file = string("./") + argv[2] + ".dot";
+    cout << "output file: " << output_file << endl;
 
     IncludeGraph graph;
     graph.build(root_dir); // 构建包含关系图
@@ -98,9 +101,10 @@ int main(int argc, char** argv) {
     
 
     // ------------------------根据结果，去文件路径中删除冗余的头文件引用------------------------
-    if (test) {
+    if (!test) {
         return 0;
     }
+    reverse_dot_file(mark_output_file);
     vector<Removal> removals = parse_dot_file_edge(mark_output_file);
 
     for (const auto& item : removals) {
