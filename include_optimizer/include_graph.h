@@ -8,19 +8,17 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <dirent.h> // For directory traversal
-#include <sys/stat.h> // For file type checking
+#include <dirent.h>
+#include <sys/stat.h>
 
 class IncludeGraph {
 public:
     void build(const std::string& root_dir);
     void generate_dependency_graph(const std::string& output_dot_file);
-    void print_redundant_includes(); // 声明 print_redundant_includes 方法
 
 private:
     void scan_directory(const std::string& path);
     void parse_file(const std::string& filepath);
-    void dfs(const std::string& file, std::unordered_set<std::string>& visited, std::unordered_set<std::string>& result); // 声明 dfs 方法
 
     std::unordered_map<std::string, std::unordered_set<std::string>> include_map;
 };
@@ -90,38 +88,6 @@ void IncludeGraph::parse_file(const std::string& filepath) {
         } catch (const std::regex_error& e) {
             std::cerr << "Regex error in file: " << filepath << " - " << e.what() << "\n";
             return;
-        }
-    }
-}
-
-void IncludeGraph::dfs(const std::string& file, std::unordered_set<std::string>& visited, std::unordered_set<std::string>& result) {
-    if (visited.count(file)) return;
-    visited.insert(file);
-    for (const auto& dep : include_map[file]) {
-        // 深度优先搜索，记录所有间接依赖
-        result.insert(dep);
-        dfs(dep, visited, result);
-    }
-}
-
-void IncludeGraph::print_redundant_includes() {
-    for (const auto& pair : include_map) {
-        const std::string& file = pair.first;
-        const auto& direct_includes = pair.second;
-
-        std::unordered_set<std::string> transitive;
-        for (const auto& inc : direct_includes) {
-            std::unordered_set<std::string> visited;
-            // 查找所有间接依赖
-            dfs(inc, visited, transitive);
-        }
-
-        for (const auto& inc : direct_includes) {
-            if (transitive.count(inc)) {
-                // 输出冗余的 #include
-                std::cout << "The include \"" << inc << "\" in file \"" << file
-                          << "\" is redundant (indirectly included through other includes).\n";
-            }
         }
     }
 }
