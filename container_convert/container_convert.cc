@@ -187,7 +187,7 @@ json containerConvert::parseContainer(string str) {
             innerTypes.push_back(currentType);
 
         // 修复当输入错误时，没有提示错误，例如输入"pair<int>"，应该报错
-        if ((signed int32_t)innerTypes.size() < (signed int32_t)numParams) {
+        if ((signed int)innerTypes.size() < (signed int)numParams) {
             stringstream msg;
             msg << "Input error, " << containerName << " lack T" << innerTypes.size() + 1 << " type.";
             // cout << msg.str();

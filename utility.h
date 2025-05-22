@@ -14,6 +14,9 @@
         #include <stack>
         #include <cmath>
         #include <numeric>
+        #include <regex>
+        #include <sstream>
+        #include <fstream>
     #endif
 #else
     // 如果编译器不支持 __has_include，可以选择直接包含常见的头文件
