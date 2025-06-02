@@ -1,6 +1,6 @@
 #include "utility.h"
 
-NAMESPACE_BEGIN
+namespace galaxcore {
 class abc;
 namespace Neptune { namespace Timing { class Timer; } }
 
@@ -33,5 +33,4 @@ namespace Neptune {
     class PackingMgr;
 }
 
-
-NAMESPACE_END
+} // namespace galaxcore

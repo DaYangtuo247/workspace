@@ -35,6 +35,3 @@
 #endif
 
 using namespace std;
-
-#define NAMESPACE_BEGIN namespace galaxcore {
-#define NAMESPACE_END }
