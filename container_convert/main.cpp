@@ -1,4 +1,4 @@
-#include "container_convert.cc"
+#include "container_convert.h"
 #define TEMPLATE_PATH "../container_convert/template.json"
 
 // 处理 IDA local type的.h文件
