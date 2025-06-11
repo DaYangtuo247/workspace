@@ -30,7 +30,7 @@ public:
     // json解析为结构体输出，返回值为输出的结构体名称
     string generateStruct(const json& input);
     // 获取变量的容器名称
-    string getVariableType(string& command);
+    static string execCommand(string& command);
     // 清空文件，输出结构体正则匹配串
     void clearFileAndPrintf(const string& filename);
 };
@@ -377,7 +377,7 @@ void containerConvert::clearFileAndPrintf(const string& filename) {
 }
 
 // 终端执行t工具，获取变量的容器类型
-string containerConvert::getVariableType(string& command) {
+string containerConvert::execCommand(string& command) {
     // 打开管道
     FILE* pipe = popen(command.c_str(), "r");
     if (!pipe) {
@@ -406,12 +406,5 @@ string containerConvert::getVariableType(string& command) {
     // 去除控制字符
     regex ansi_escape(R"(\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]))");
     result = regex_replace(result, ansi_escape, "");
-    
-    // 获取容器名称
-    regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
-    smatch match;
-    if (regex_search(result, match, pattern)) 
-        result = match[1];
-
     return result;
 }

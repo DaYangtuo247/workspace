@@ -56,6 +56,50 @@ void solve_IDA_H(string inputFile, vector<string> & testCases) {
     cout << "generate newFile: " << outputFile << endl;
 }
 
+void replace_abstract_name_to_container(string file_path, int line_number, string & container_convert_path) {
+    string line, pre;
+    
+    // 查询 container_covert.h 文件， 获取已解析的类型
+    ifstream container_convert_h(container_convert_path, std::ios::in);
+    std::map<string, string> record;
+    regex pattern(R"(^struct (\w+) \{$)");
+    smatch match;
+    while(getline(container_convert_h, line)) {
+        if (regex_match(line, match, pattern))
+            record.insert({match[1], pre.substr(3)});
+        pre = line;
+    }
+    
+    // 读取src源代码
+    ifstream src_file(file_path, std::ios::in | std::ios::out);
+    ofstream output;
+    int i;
+    // 走到指定位置
+    for(i = 1; i <= line_number; i++) {
+        getline(src_file, line);
+        output << line << '\n';
+    }
+
+    int brace_count = 1;
+
+    // 对已写的函数中所有匹配的 抽象名称全部替换为对应的容器类型
+    pattern = regex(R"(\b\w+\b)");
+    for (; brace_count > 0; i++) {
+        getline(src_file, line);
+        brace_count += std::count(line.begin(), line.end(), "{");
+        brace_count -= std::count(line.begin(), line.end(), "}");
+        while (regex_search(line, match, pattern)) {
+            if (record.count(match[1]))
+                regex_replace(line, pattern, record[match[1]]);
+        }
+        output << line << '\n';
+    }
+    while(getline(src_file, line)) {
+        output << line << '\n';
+    }
+    cout << "replace done!" << endl;
+}
+
 int main(int argc, char* argv[]) {
     // 显示帮助信息
     if (argc == 1 || (argc >= 2 && string(argv[1]) == "-h")) {
@@ -66,7 +110,8 @@ int main(int argc, char* argv[]) {
         cout << "  -f file.h      [output_file] The input is the file.h file of IDA local type.\n";
         cout << "  variable_name  [output_file] Container convert\n";
         cout << "  container_name [output_file] Container convert\n";
-        cout << "Default output: ./container_convert.h\n";
+        cout << "  address:model  [input_file]  abstrat nname to contaier name\n";
+        cout << "Default [output_file | input_file]: ./container_convert.h\n";
       return 0;
     }
 
@@ -112,12 +157,33 @@ int main(int argc, char* argv[]) {
     // 输入的是变量
     } else if (regex_match(arg, regex("^[a-zA-Z0-9_]+$"))) {
         string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -hg -in_gvim";
-        string temp = obj.getVariableType(command);
-        testCases.push_back(temp);
+        string result = containerConvert::execCommand(command);
+        // 获取容器名称
+        regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
+        smatch match;
+        if (regex_search(result, match, pattern)) {
+            result = match[1];
+            testCases.push_back(result);
+        } else {
+            cout << "input Error!" << endl;
+        }
 
     // 输入的是容器
-    } else if (regex_match(arg, regex("^.*<.*>.*$"))) {
+    } else if (regex_match(arg, regex(R"(^.*<.*>.*$)"))) {
         testCases.push_back(argv[1]);
+    
+    // 输入的是函数地址
+    } else if (regex_match(arg, regex(R"(^0x\w+:\w+$)"))) {
+        string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -cg -in_gvim";
+        string result = containerConvert::execCommand(command);
+        regex pattern(R"(gvim (.+) \+(\d+).*)");
+        smatch match;
+        if (regex_search(result, match, pattern)) {
+            replace_abstract_name_to_container(match[1].str(), stoi(match[2]), outputFilePath);
+        } else {
+            cout << "input Error!" << endl;
+        }
+
     } else {
         cout << "input error!!!" << endl;
     }
