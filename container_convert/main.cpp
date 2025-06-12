@@ -72,10 +72,10 @@ void replace_abstract_name_to_container(string file_path, int line_number, strin
     
     // 读取src源代码
     ifstream src_file(file_path, std::ios::in | std::ios::out);
-    ofstream output;
+    stringstream output;
     int i;
     // 走到指定位置
-    for(i = 1; i <= line_number; i++) {
+    for(i = 1; i <= line_number + 1; i++) {
         getline(src_file, line);
         output << line << '\n';
     }
@@ -83,21 +83,26 @@ void replace_abstract_name_to_container(string file_path, int line_number, strin
     int brace_count = 1;
 
     // 对已写的函数中所有匹配的 抽象名称全部替换为对应的容器类型
-    pattern = regex(R"(\b\w+\b)");
+    pattern = regex(R"(\b(\w+)\b)");
     for (; brace_count > 0; i++) {
         getline(src_file, line);
-        brace_count += std::count(line.begin(), line.end(), "{");
-        brace_count -= std::count(line.begin(), line.end(), "}");
-        while (regex_search(line, match, pattern)) {
-            if (record.count(match[1]))
-                regex_replace(line, pattern, record[match[1]]);
+        brace_count += std::count(line.begin(), line.end(), '{');
+        brace_count -= std::count(line.begin(), line.end(), '}');
+        smatch match;
+        if (regex_search(line, match, pattern) && record.count(match[1])) {
+            string key = match[1];
+            line.replace(match.position(), match.length(), record[match[1]]);
+            cout << "\033[0;32m+" << i << ":\033[0m " << key << " \033[0;32m->\033[0m " << record[key] << endl;
         }
         output << line << '\n';
     }
     while(getline(src_file, line)) {
         output << line << '\n';
     }
-    cout << "replace done!" << endl;
+    src_file.close();
+    ofstream output_file(file_path, std::ios::out);
+    output_file << output.str();
+    output_file.close();
 }
 
 int main(int argc, char* argv[]) {
@@ -180,6 +185,7 @@ int main(int argc, char* argv[]) {
         smatch match;
         if (regex_search(result, match, pattern)) {
             replace_abstract_name_to_container(match[1].str(), stoi(match[2]), outputFilePath);
+            return 0;
         } else {
             cout << "input Error!" << endl;
         }
