@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
         cout << "  -f file.h      [output_file] The input is the file.h file of IDA local type.\n";
         cout << "  variable_name  [output_file] Container convert\n";
         cout << "  container_name [output_file] Container convert\n";
-        cout << "  address:model  [input_file]  abstrat nname to contaier name\n";
+        cout << "  address        [input_file]  abstrat name to contaier name\n";
         cout << "Default [output_file | input_file]: ./container_convert.h\n";
       return 0;
     }
@@ -178,7 +178,7 @@ int main(int argc, char* argv[]) {
         testCases.push_back(argv[1]);
     
     // 输入的是函数地址
-    } else if (regex_match(arg, regex(R"(^0x\w+:\w+$)"))) {
+    } else if (regex_match(arg, regex(R"(^0x\w+$)"))) {
         string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -cg -in_gvim";
         string result = containerConvert::execCommand(command);
         regex pattern(R"(gvim (.+) \+(\d+).*)");
