@@ -159,24 +159,6 @@ int main(int argc, char* argv[]) {
         outputFilePath = argc == 4 ? argv[3] : "./container_convert.h";
         solve_IDA_H(inputPath, testCases);
     
-    // 输入的是变量
-    } else if (regex_match(arg, regex("^[a-zA-Z0-9_]+$"))) {
-        string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -hg -in_gvim";
-        string result = containerConvert::execCommand(command);
-        // 获取容器名称
-        regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
-        smatch match;
-        if (regex_search(result, match, pattern)) {
-            result = match[1];
-            testCases.push_back(result);
-        } else {
-            cout << "input Error!" << endl;
-        }
-
-    // 输入的是容器
-    } else if (regex_match(arg, regex(R"(^.*<.*>.*$)"))) {
-        testCases.push_back(argv[1]);
-    
     // 输入的是函数地址
     } else if (regex_match(arg, regex(R"(^0x\w+$)"))) {
         string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -cg -in_gvim";
@@ -190,6 +172,23 @@ int main(int argc, char* argv[]) {
             cout << "input Error!" << endl;
         }
 
+    // 输入的是容器
+    } else if (regex_match(arg, regex(R"(^.*<.*>.*$)"))) {
+        testCases.push_back(argv[1]);
+    
+    // 输入的是变量
+    } else if (regex_match(arg, regex("^[a-zA-Z0-9_]+$"))) {
+        string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -hg -in_gvim";
+        string result = containerConvert::execCommand(command);
+        // 获取容器名称
+        regex pattern(R"(gvim\s.*\+\d+\s+(?:mutable|const)?\s+(.*)\s\w+;.*\n)");
+        smatch match;
+        if (regex_search(result, match, pattern)) {
+            result = match[1];
+            testCases.push_back(result);
+        } else {
+            cout << "input Error!" << endl;
+        }
     } else {
         cout << "input error!!!" << endl;
     }
