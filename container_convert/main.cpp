@@ -160,7 +160,7 @@ int main(int argc, char* argv[]) {
         solve_IDA_H(inputPath, testCases);
     
     // 输入的是函数地址
-    } else if (regex_match(arg, regex(R"(^0x\w+$)"))) {
+    } else if (regex_match(arg, regex(R"(^0x\w+(:\w+)?$)"))) {
         string command = "/home/xiaonan/Share/scripts/toolUnified/toolUnified.py " + arg + " -cg -in_gvim";
         string result = containerConvert::execCommand(command);
         regex pattern(R"(gvim (.+) \+(\d+).*)");
