@@ -234,11 +234,11 @@ string containerConvert::generateStruct(const json& input) {
         // 需要逆序输出，例如std::tuple
         if (Template[type].contains("reverse") && Template[type]["reverse"] == 1) {
             for (int j = container_parse.size() - 1; j >= 1; j--)
-                type_struct[el_key + to_string(j)] = el_value + to_string(j);
+                type_struct[el_key + to_string(j - 1)] = el_value + to_string(j);
         // 无需逆序, 例如boost::tuples::tuple
         } else {
             for (int j = 1; j < container_parse.size(); j++)
-                type_struct[el_key + to_string(j)] = el_value + to_string(j);
+                type_struct[el_key + to_string(j - 1)] = el_value + to_string(j);
         }
     } else {
         type_struct = Template[type]["struct"];
