@@ -153,7 +153,7 @@ int main(int argc, char* argv[]) {
     } else if (arg == "-f") {
         if (argc < 3) {
             cout << "input error!!!" << endl;
-            exit(0);
+            exit(1);
         }
         string inputPath = argv[2];
         outputFilePath = argc == 4 ? argv[3] : "./container_convert.h";
@@ -170,6 +170,7 @@ int main(int argc, char* argv[]) {
             return 0;
         } else {
             cout << "input Error!" << endl;
+            exit(1);
         }
 
     // 输入的是容器
@@ -188,9 +189,11 @@ int main(int argc, char* argv[]) {
             testCases.push_back(result);
         } else {
             cout << "input Error!" << endl;
+            exit(1);
         }
     } else {
         cout << "input error!!!" << endl;
+        exit(1);
     }
 
     stringstream ss;
